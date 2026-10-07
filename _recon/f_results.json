@@ -1,0 +1,72 @@
+{
+  "normal_grayscale_jpeg": {
+    "status_code": 200,
+    "body": {
+      "status": "rejected",
+      "is_ood": true,
+      "error_type": "Format/Contrast Error",
+      "reason": "Image is blank, constant, or has insufficient contrast to be a diagnostic X-ray.",
+      "disclaimer": "Decision-support demonstration only. Not a medical diagnosis."
+    }
+  },
+  "rgb_png_1200x900": {
+    "status_code": 200,
+    "body": {
+      "status": "rejected",
+      "is_ood": true,
+      "error_type": "Format/Contrast Error",
+      "reason": "Image is blank, constant, or has insufficient contrast to be a diagnostic X-ray.",
+      "disclaimer": "Decision-support demonstration only. Not a medical diagnosis."
+    }
+  },
+  "rgba_png": {
+    "status_code": 200,
+    "body": {
+      "status": "rejected",
+      "is_ood": true,
+      "error_type": "Format/Contrast Error",
+      "reason": "Image is blank, constant, or has insufficient contrast to be a diagnostic X-ray.",
+      "disclaimer": "Decision-support demonstration only. Not a medical diagnosis."
+    }
+  },
+  "palette_mode_p_png": {
+    "status_code": 200,
+    "body": {
+      "status": "rejected",
+      "is_ood": true,
+      "error_type": "Format/Contrast Error",
+      "reason": "Image is blank, constant, or has insufficient contrast to be a diagnostic X-ray.",
+      "disclaimer": "Decision-support demonstration only. Not a medical diagnosis."
+    }
+  },
+  "16bit_png": {
+    "status_code": 200,
+    "body": {
+      "status": "rejected",
+      "is_ood": true,
+      "error_type": "Format/Contrast Error",
+      "reason": "Image is blank, constant, or has insufficient contrast to be a diagnostic X-ray.",
+      "disclaimer": "Decision-support demonstration only. Not a medical diagnosis."
+    }
+  },
+  "zero_byte_file": {
+    "status_code": 200,
+    "body": {
+      "status": "rejected",
+      "is_ood": true,
+      "error_type": "Format/Contrast Error",
+      "reason": "File is not a valid decodable image file.",
+      "disclaimer": "Decision-support demonstration only. Not a medical diagnosis."
+    }
+  },
+  "text_file_renamed_png": {
+    "status_code": 200,
+    "body": {
+      "status": "rejected",
+      "is_ood": true,
+      "error_type": "Format/Contrast Error",
+      "reason": "File is not a valid decodable image file.",
+      "disclaimer": "Decision-support demonstration only. Not a medical diagnosis."
+    }
+  }
+}

@@ -1,0 +1,3122 @@
+[
+  {
+    "type": "round_start",
+    "data": {
+      "round": 1,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 1,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 1,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 1,
+      "metrics": {
+        "loss": 0.6018,
+        "accuracy": 0.625,
+        "precision": 0.625,
+        "recall": 1.0,
+        "f1": 0.7692
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 0,
+        "round": 1,
+        "client_id": 0,
+        "update_hash": "5e67624672de0242a2dc8dbc01f5d9fd632a03d7661d730f646cf73cd01b645f",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.280604,
+        "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "block_hash": "cf3cb4eb98ebb12d960849100d406a1042342657a683b69b536e31f9710493ec",
+        "tx_hash": "0xdb61ed53b1c0f5d9e94881662da979b2da65024828885b3e72a335fbf4b425db"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 1,
+        "round": 1,
+        "client_id": 1,
+        "update_hash": "3519170757b244e9b2431534bc4716796f853a3ef4a2ccc5f256a138fee4a0b8",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.2821448,
+        "prev_hash": "cf3cb4eb98ebb12d960849100d406a1042342657a683b69b536e31f9710493ec",
+        "block_hash": "add20531bb4d0ad6c081f0d00b61aa3e88bcc2f50a67242851e2fd35210768b6",
+        "tx_hash": "0x18663e7fffb7ef41fca85156112f38551b63b2a1da23e7eb77c7e21704cd79d6"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 2,
+        "round": 1,
+        "client_id": 2,
+        "update_hash": "0c588c5b680ce360dd658d8aff00604f1d1572072f1eccd3cb439c7d3a274257",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.2821448,
+        "prev_hash": "add20531bb4d0ad6c081f0d00b61aa3e88bcc2f50a67242851e2fd35210768b6",
+        "block_hash": "ab8a8d6aecf0e1a80c18acffbcc99c31c3ac64fcbb9448f8bbd24d41b0a6701c",
+        "tx_hash": "0x712213e221f52def6e52d54495f1ab00ae4d377bcfb27256f80cf0878755756f"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 3,
+        "round": 1,
+        "client_id": 3,
+        "update_hash": "5024834c89ff5b0f2b06b0f446ae9b72b3f8cb43471825536d67d9fc9940c320",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.2821448,
+        "prev_hash": "ab8a8d6aecf0e1a80c18acffbcc99c31c3ac64fcbb9448f8bbd24d41b0a6701c",
+        "block_hash": "2a77f58849443b9a06d11b8c78fe40529eaa50353b44d47f9a6c43465cabe14e",
+        "tx_hash": "0x7b8b6bba15c81a9644963e23f4523329fd43e5ec7bfc8cb7f0700047cf82c4d9"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 4,
+        "round": 1,
+        "client_id": 4,
+        "update_hash": "340c20716cfc6942d3a1bc4f0c4e93b5815f338b6d472f1973a80bb231c37b83",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.2837381,
+        "prev_hash": "2a77f58849443b9a06d11b8c78fe40529eaa50353b44d47f9a6c43465cabe14e",
+        "block_hash": "1a72f2dec6b9a4e9d815c5563e8493e2edde5ce7eb0231fc4c174a501872cc08",
+        "tx_hash": "0x096e954fd29060dd014750f6e17640dfc51a1dbd18141d3761ff5588de0ffeec"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 5,
+        "round": 1,
+        "client_id": 5,
+        "update_hash": "275ddd4805e8efa3c9fbee1e262603fb90c4b38c46104ff72e08b819fd205166",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.2837381,
+        "prev_hash": "1a72f2dec6b9a4e9d815c5563e8493e2edde5ce7eb0231fc4c174a501872cc08",
+        "block_hash": "a0d4ace1378dfdd0933a47fa530f05e506c13102cb92e3b3535145f74a26c9f8",
+        "tx_hash": "0x3d59c49ab37d410322afd7bc5cbc8faf98293910c5c2e4636fb924cce7e7ec5c"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 6,
+        "round": 1,
+        "client_id": 6,
+        "update_hash": "3c6ad826203f7276278bfadbf171cf6b46d9c1dc3382f6e77924f956f589b655",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.2837381,
+        "prev_hash": "a0d4ace1378dfdd0933a47fa530f05e506c13102cb92e3b3535145f74a26c9f8",
+        "block_hash": "07e9848557a6b49fd65548f8a1b4eaf227ed4bfc17f98da6a1e48a5a632b04f0",
+        "tx_hash": "0xf33a018a1193471fd4ca51419a2edefda2c6a3d8a27d1891a024df55e93bccaf"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 7,
+        "round": 1,
+        "client_id": 7,
+        "update_hash": "e89c959045591a815a1775e93426dbf1d3a82a3d1867f3dd4814aa64acb18a93",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341137.2837381,
+        "prev_hash": "07e9848557a6b49fd65548f8a1b4eaf227ed4bfc17f98da6a1e48a5a632b04f0",
+        "block_hash": "a27b02036969e50523db9dd59f7008de8a86f746dcdeb35834f0f824595e327c",
+        "tx_hash": "0x7c32c7021805c544460a21aa8a655694da298073053680e7e5c25a19c03c3bf2"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 1,
+      "record": {
+        "round": 1,
+        "accuracy": 0.625,
+        "loss": 0.6018,
+        "precision": 0.625,
+        "recall": 1.0,
+        "f1": 0.7692,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 4.72
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 2,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 2,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 2,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 2,
+      "metrics": {
+        "loss": 0.6023,
+        "accuracy": 0.7308,
+        "precision": 0.9587,
+        "recall": 0.5949,
+        "f1": 0.7342
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 8,
+        "round": 2,
+        "client_id": 0,
+        "update_hash": "1c41848fc952af7b4bbdac2d2de6632dbb66a87dd6d9c7cea685e3ab70dd9686",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0439253,
+        "prev_hash": "a27b02036969e50523db9dd59f7008de8a86f746dcdeb35834f0f824595e327c",
+        "block_hash": "abf923299ed9bf3a83b7394cb2a7921d4c834fb6335547f9b7d7ad1cebf3d7b4",
+        "tx_hash": "0xd6406442ae721d00bf398fee9cbc23b0a0e720182768e281297f367a3382984d"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 9,
+        "round": 2,
+        "client_id": 1,
+        "update_hash": "3d4c441215edf09bf730b033b75b59f61c6662357ec616b87f799a741c1da941",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0439253,
+        "prev_hash": "abf923299ed9bf3a83b7394cb2a7921d4c834fb6335547f9b7d7ad1cebf3d7b4",
+        "block_hash": "2908dba4659cafea2caa5e784521fc3c26dd9005d014c16c6b40c8b7b2510b5a",
+        "tx_hash": "0x1a74a5b6485f2e24d905329061b134dc94229969d055b00922ac3a8f6c93154e"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 10,
+        "round": 2,
+        "client_id": 2,
+        "update_hash": "ce314e5df16906271c4e2ac1c3c93f7e466c9fb3ef06511637d4e1f2a885eb8a",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0439253,
+        "prev_hash": "2908dba4659cafea2caa5e784521fc3c26dd9005d014c16c6b40c8b7b2510b5a",
+        "block_hash": "9a8dd3d00ef4396cf7113bf3c96d1a5852f59aac99d932709e6b4f51dd45d723",
+        "tx_hash": "0x7f534b62c9d7982d1d3a8f7aef3c426a742204a6e901bfe60a3ffbbcdea9e650"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 11,
+        "round": 2,
+        "client_id": 3,
+        "update_hash": "2b97da4f6c2439312c94783f2855b1e6f3c21956a304e9a1ab6723f4ea1b499e",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0455074,
+        "prev_hash": "9a8dd3d00ef4396cf7113bf3c96d1a5852f59aac99d932709e6b4f51dd45d723",
+        "block_hash": "ccf60e233fbe89dc1961e3819236ca1e5fae85c6305216d54b6e8b055ae742f2",
+        "tx_hash": "0xbea0b7c124cb95f6a923dcfb517b32928597e23676b8d2bb66509f68a3c8b244"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 12,
+        "round": 2,
+        "client_id": 4,
+        "update_hash": "5479c5929b7e2e8cd54228a6033e38d001deb5dac75b60fe343381aa03648f82",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0455074,
+        "prev_hash": "ccf60e233fbe89dc1961e3819236ca1e5fae85c6305216d54b6e8b055ae742f2",
+        "block_hash": "2ac7b3d5dd9ca4bb87d4696f58f85f824bbce93e1486aa7864413715d50dd334",
+        "tx_hash": "0x83584c812bf490de646787641328707d2ec31d1391ac64edd810a9ab28ac7b0f"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 13,
+        "round": 2,
+        "client_id": 5,
+        "update_hash": "261b80ea079a96c1c0997a5830508559fb7cc4d6449c7703d8e1f64403d77e02",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0459852,
+        "prev_hash": "2ac7b3d5dd9ca4bb87d4696f58f85f824bbce93e1486aa7864413715d50dd334",
+        "block_hash": "c1762d406f65307407a5a661f3b1dc78d50927a9259a648d35e1fbe1b51aa1f5",
+        "tx_hash": "0x69ea1d296783e07ffa6747b5a9e09ff798391f3f4b403ee1ec2e96812d97879d"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 14,
+        "round": 2,
+        "client_id": 6,
+        "update_hash": "b085745a76c1258133ed42a502f246f1344877725a70ff1818da8f3235ffd619",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0469935,
+        "prev_hash": "c1762d406f65307407a5a661f3b1dc78d50927a9259a648d35e1fbe1b51aa1f5",
+        "block_hash": "e6f3b7ef57b2533abb468f1ecdb729a85943f8edadcbe7e792e86f8976317b8f",
+        "tx_hash": "0xa2551bdbb95a5609824ec64dc2fe32afb301a730c65408c517358f949a94a1c5"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 15,
+        "round": 2,
+        "client_id": 7,
+        "update_hash": "30826dd50a7362b9c18e8e7f8a428f53c9c27653f283aa8ffc32889c7d65c20a",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.0469935,
+        "prev_hash": "e6f3b7ef57b2533abb468f1ecdb729a85943f8edadcbe7e792e86f8976317b8f",
+        "block_hash": "e760999f4701f4020ed71e50d19422ad2d58c920806720cfc5951d361350a3b3",
+        "tx_hash": "0x808a51729d1006c2e5a11051d701c88c2899dff791936c4b1bdc5734a3ea79ad"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 2,
+      "record": {
+        "round": 2,
+        "accuracy": 0.7308,
+        "loss": 0.6023,
+        "precision": 0.9587,
+        "recall": 0.5949,
+        "f1": 0.7342,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 3.07
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 3,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 3,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 3,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 3,
+      "metrics": {
+        "loss": 0.534,
+        "accuracy": 0.7436,
+        "precision": 0.9528,
+        "recall": 0.6205,
+        "f1": 0.7516
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 16,
+        "round": 3,
+        "client_id": 0,
+        "update_hash": "0cd91665f96a1cce3391e75ce436301e69fa3fff541f5dbc7dc7d1a6a6e54f4b",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.80655,
+        "prev_hash": "e760999f4701f4020ed71e50d19422ad2d58c920806720cfc5951d361350a3b3",
+        "block_hash": "e851b403a9301b84e9201f727872be3ee73639c1748b3a6c36f786843451b3ec",
+        "tx_hash": "0xf735affed97ff4d5bd2892e7833280e273edd36673dbc1952a7463744036b414"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 17,
+        "round": 3,
+        "client_id": 1,
+        "update_hash": "dfb2503e946c9cd5c6260323a53f50fbae27d4d192143efab69553ab7d4ace31",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.80655,
+        "prev_hash": "e851b403a9301b84e9201f727872be3ee73639c1748b3a6c36f786843451b3ec",
+        "block_hash": "10ff986c7e6ccb08156432e268a01e01d822697d2416f0a1b1f80ff309cfcb0a",
+        "tx_hash": "0x8c8eb6b480c483cf498635893b622e61a0811e566cb00c0754ca360e2c1ac782"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 18,
+        "round": 3,
+        "client_id": 2,
+        "update_hash": "04c97bdc00e52d0ae6543cc01d3154ece61c137c7eccf01289c49e695d113841",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.80655,
+        "prev_hash": "10ff986c7e6ccb08156432e268a01e01d822697d2416f0a1b1f80ff309cfcb0a",
+        "block_hash": "a6105e2afb9424cd2d25a12f09e626dc6fc8575f48b5e550c791da927409d67b",
+        "tx_hash": "0x7e8702b8d24f490611b39a21c6d4d6c4cd0219c7808e330e25958bb8168332db"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 19,
+        "round": 3,
+        "client_id": 3,
+        "update_hash": "7afa76fd2425d8683ace12dc2f0ac5c5743d81e918dbdbbd59e3d0fd5a230dee",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.8081028,
+        "prev_hash": "a6105e2afb9424cd2d25a12f09e626dc6fc8575f48b5e550c791da927409d67b",
+        "block_hash": "21684002cce97035dc3ec48e34afc86ba235e093d91d53346c63e26ed8e9eabf",
+        "tx_hash": "0xf4a28b16924bcba8dbaf3ae6b468951f99979752ec8708816bc63a9eeadebdf4"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 20,
+        "round": 3,
+        "client_id": 4,
+        "update_hash": "3f7850329d9a6e277de5e739161b46ba642b79366fae84b379ad878e38db3ee6",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.8081028,
+        "prev_hash": "21684002cce97035dc3ec48e34afc86ba235e093d91d53346c63e26ed8e9eabf",
+        "block_hash": "ebbee076eff6ff3151f75957f90a2dd01181cc89acce6feaba6f74d8d58b753f",
+        "tx_hash": "0x96bfae08b69caf3eb8f55bc7b4f27cebb0d321b862ae929e83e4fdbf457cfd99"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 21,
+        "round": 3,
+        "client_id": 5,
+        "update_hash": "60689c8e9dd6a193e117739f092efef74cb8a99937e123617d7e61b20bdcc092",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.8081028,
+        "prev_hash": "ebbee076eff6ff3151f75957f90a2dd01181cc89acce6feaba6f74d8d58b753f",
+        "block_hash": "1d045c45e8447adbcfed847d683d7e6dd146dacb977411e27fac11b1ec60c918",
+        "tx_hash": "0xe188c920705a50d560bbcefabb86de8f8387f41d2001c5059cd3f82a266e2bd4"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 22,
+        "round": 3,
+        "client_id": 6,
+        "update_hash": "cbe6a49fc33da651bd0df7fb0ef934ffe8b8d96bdd0a02019943dfa2cedb0667",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.8096757,
+        "prev_hash": "1d045c45e8447adbcfed847d683d7e6dd146dacb977411e27fac11b1ec60c918",
+        "block_hash": "9d91102d8bde44f1d86ea33b3db294e0b6960ab2f6d0f9bcf8820a068a698500",
+        "tx_hash": "0xc0c94d538b9a5d8edd4f3342314fce10a754b6d8f7bb47d7013ac43f8c767266"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 23,
+        "round": 3,
+        "client_id": 7,
+        "update_hash": "945fa2bdcbe61eac6f710a2538d1fd8b344291682035b3583c0eae63ef58e72d",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341138.8096757,
+        "prev_hash": "9d91102d8bde44f1d86ea33b3db294e0b6960ab2f6d0f9bcf8820a068a698500",
+        "block_hash": "489aaf06b6832781ecf63afe29d21a0bcd302a37347ee09534e6eff34ef72413",
+        "tx_hash": "0x4c349a277224cf1d121f811ecafef1c8dafe289700b0fbcf9ec47d83f4163ef9"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 3,
+      "record": {
+        "round": 3,
+        "accuracy": 0.7436,
+        "loss": 0.534,
+        "precision": 0.9528,
+        "recall": 0.6205,
+        "f1": 0.7516,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 3.13
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 4,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 4,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 4,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 4,
+      "metrics": {
+        "loss": 0.4938,
+        "accuracy": 0.7708,
+        "precision": 0.9458,
+        "recall": 0.6718,
+        "f1": 0.7856
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 24,
+        "round": 4,
+        "client_id": 0,
+        "update_hash": "70f68a52a2dfbbb6cbf7f87ef9f290f9ec34cc7a3e0691f526f89afe2c9c9b67",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.5584872,
+        "prev_hash": "489aaf06b6832781ecf63afe29d21a0bcd302a37347ee09534e6eff34ef72413",
+        "block_hash": "39550b35b0c6e1eee7b606e3cc7947f2a481841fdeccf607b01301e4f8bb5227",
+        "tx_hash": "0x84275da46773f5644f5562bd41ed9146602582a0563bdbe4eb775ddab4fde51c"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 25,
+        "round": 4,
+        "client_id": 1,
+        "update_hash": "2750f3a93a794d3faa83c5b58eb3ba1e999ba5ecfb87385c14bb3aa697ed283f",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.5584872,
+        "prev_hash": "39550b35b0c6e1eee7b606e3cc7947f2a481841fdeccf607b01301e4f8bb5227",
+        "block_hash": "534da140a7144bb57eddf93318b5e00bc6bf657e48c1cee2e3bf14a5bc2200ef",
+        "tx_hash": "0xe32b223cf06a9b3506d0439add465cd9f3ae072777fd79347ef255c2828747c9"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 26,
+        "round": 4,
+        "client_id": 2,
+        "update_hash": "e9684b2b33666d8529071d8f10b44497b4ee64d5f4b17016257734e0557bdc7b",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.5596652,
+        "prev_hash": "534da140a7144bb57eddf93318b5e00bc6bf657e48c1cee2e3bf14a5bc2200ef",
+        "block_hash": "d3b89a1a232bf06503fc42b55cdf96af26c6cdd118348f11f4acac7251a15cba",
+        "tx_hash": "0x918ea095dd2a9f70e1860ae311001946ec161bcc98c90b2aae75fc750992803a"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 27,
+        "round": 4,
+        "client_id": 3,
+        "update_hash": "b59323b687262466a39b4232ca567d801c8662b14563062a637764630a1f3937",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.5596652,
+        "prev_hash": "d3b89a1a232bf06503fc42b55cdf96af26c6cdd118348f11f4acac7251a15cba",
+        "block_hash": "e4ea69b2b1fb4935628a704e37c710fcc0e1b2d1760ac5957febd8fc7d1bbae0",
+        "tx_hash": "0x90e67588273a47d87ef64e4cb1e69866d4290181b85c31e70a604d362858981e"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 28,
+        "round": 4,
+        "client_id": 4,
+        "update_hash": "0e21757b065fc561071f2eb27908d605aed5aab3e1d37dba13fa04ae0eeb8581",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.5612419,
+        "prev_hash": "e4ea69b2b1fb4935628a704e37c710fcc0e1b2d1760ac5957febd8fc7d1bbae0",
+        "block_hash": "b67e8f84472b3f566f8e958d1867b54b65b492c5b83a54a23667b692a0b7d85a",
+        "tx_hash": "0x7b17d2aa3f8b32940b60b75a3c73bdb9762b5d3b34644229368fc78cc28d1022"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 29,
+        "round": 4,
+        "client_id": 5,
+        "update_hash": "302e3b2407f888abd125c6ea80974fd421df53b3e9e937429353fbae789e69fa",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.5612419,
+        "prev_hash": "b67e8f84472b3f566f8e958d1867b54b65b492c5b83a54a23667b692a0b7d85a",
+        "block_hash": "00a452db108f5c91f0dbf7f29e576e0c4539fb45ed5fd1bcc8c6ae1959db16e1",
+        "tx_hash": "0xb5572b32e9c8537c1a3dcac5ef33600d1e0d5d43eb474b67ee13475e37294460"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 30,
+        "round": 4,
+        "client_id": 6,
+        "update_hash": "76a76fa8c295dfece448b018d2ecfc13c8e0e80c6b5849e78e90da268b3e98e3",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.562894,
+        "prev_hash": "00a452db108f5c91f0dbf7f29e576e0c4539fb45ed5fd1bcc8c6ae1959db16e1",
+        "block_hash": "069d9e79c18f2233ecd7f5df4b6b9237c4422eee99cd008baa32f3fe1506225b",
+        "tx_hash": "0x7ff14c5884c8628b871628e027562d002c20f5be539ed5158f30e064538215ee"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 31,
+        "round": 4,
+        "client_id": 7,
+        "update_hash": "575255ebfdd5e05e21e01e7d9a24e912c40008c1ca1c0b90d5f996da0f342bbf",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341139.562894,
+        "prev_hash": "069d9e79c18f2233ecd7f5df4b6b9237c4422eee99cd008baa32f3fe1506225b",
+        "block_hash": "5c458d04ccdd602f1051752e9aaa269660ea4c3138f0576653107e2517f37d95",
+        "tx_hash": "0xa2ee9350c45ae8e8222bdfaf2b0d2faae159b7c4e3e82123957ad291b9ddd45d"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 4,
+      "record": {
+        "round": 4,
+        "accuracy": 0.7708,
+        "loss": 0.4938,
+        "precision": 0.9458,
+        "recall": 0.6718,
+        "f1": 0.7856,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 4.41
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 5,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 5,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 5,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 5,
+      "metrics": {
+        "loss": 0.4928,
+        "accuracy": 0.7692,
+        "precision": 0.9489,
+        "recall": 0.6667,
+        "f1": 0.7831
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 32,
+        "round": 5,
+        "client_id": 0,
+        "update_hash": "03289439531a81ce4302bc39741ade4268b9ef114f58f4ecb0b622b083a8b36a",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.3306327,
+        "prev_hash": "5c458d04ccdd602f1051752e9aaa269660ea4c3138f0576653107e2517f37d95",
+        "block_hash": "53e7ecaaee947357b25fe281d2b0b41478957b6e2b61a9a1d72f3bb11d700f9d",
+        "tx_hash": "0x4c80f475c82a95955c66aebf0970f01d4a30b5bad76d89f169f759f217539f33"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 33,
+        "round": 5,
+        "client_id": 1,
+        "update_hash": "621accad56b824a96332134534b6bd523e5cd4d8270b499232a3df00787d26cd",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.3306327,
+        "prev_hash": "53e7ecaaee947357b25fe281d2b0b41478957b6e2b61a9a1d72f3bb11d700f9d",
+        "block_hash": "cbeb5d33ab9a0c5ae3f249ff6de06b7b9622732cba3f677ab960ab6dc6978ec2",
+        "tx_hash": "0x3f52b662569b89860ee3e3c87c10b688cd18289209d61f897f1c6682b1817cf8"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 34,
+        "round": 5,
+        "client_id": 2,
+        "update_hash": "aa50771ddb54db0a5f7fbc83b57b7247257ccecf18df58a1a66926a29ee14531",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.332215,
+        "prev_hash": "cbeb5d33ab9a0c5ae3f249ff6de06b7b9622732cba3f677ab960ab6dc6978ec2",
+        "block_hash": "13027df2aa88a080246dc2c70e32fe7fd4604cf1b08c5bb1b550edecbf15bdb5",
+        "tx_hash": "0xf4116ad41091582f9cad1dd1d46163130e348593e73a482b860b66a5bd79d6e8"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 35,
+        "round": 5,
+        "client_id": 3,
+        "update_hash": "d38e70650ea10db3b4cf906b5c543cbebf0fcad14a5d779a6e1c7e1d97eb6193",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.332215,
+        "prev_hash": "13027df2aa88a080246dc2c70e32fe7fd4604cf1b08c5bb1b550edecbf15bdb5",
+        "block_hash": "116ec4d36cd8b845e8610914511ea237bc23830683645238d9253e6cf4c0e7f2",
+        "tx_hash": "0xf00a8a0c5bd078087491529819818b3ff9e532a26716a7a50834c09c91228864"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 36,
+        "round": 5,
+        "client_id": 4,
+        "update_hash": "f7a5975268c0cbd6c9640cac957d2bd03665a088d693f8706acfcc1b321fc437",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.3338413,
+        "prev_hash": "116ec4d36cd8b845e8610914511ea237bc23830683645238d9253e6cf4c0e7f2",
+        "block_hash": "d946dd54ef3cc3e0455e13c935b4cd2ad48ab0abd52ce7b77d3d9416e24ff719",
+        "tx_hash": "0x14e9a1e2a662bd205b5f3ceca52e0dd2a889739bad57e73ba0169ebc361fbd9c"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 37,
+        "round": 5,
+        "client_id": 5,
+        "update_hash": "86e105a21eed9a793a6618d2c4675c4bd2386f053887077c4510cfbbfcdce225",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.335179,
+        "prev_hash": "d946dd54ef3cc3e0455e13c935b4cd2ad48ab0abd52ce7b77d3d9416e24ff719",
+        "block_hash": "0aa8d1b782eb9bc2c9688204e1c6abfa51eb1e13404df37dec225278fa2eb8f7",
+        "tx_hash": "0xd9028915d050c80a91ae796f1c043c3437393fe10c8fd11d8a4b13d8a4bcd0b0"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 38,
+        "round": 5,
+        "client_id": 6,
+        "update_hash": "0713e789f0f41bdf881ea3a99a792515b3c52f4d47292275eeeb9c8cba3845a0",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.335179,
+        "prev_hash": "0aa8d1b782eb9bc2c9688204e1c6abfa51eb1e13404df37dec225278fa2eb8f7",
+        "block_hash": "3489656d5fe4e0bff1f49323b887150ed49f67f2683e7f3db7ecb0692901b371",
+        "tx_hash": "0x476b3aa3801a1f48eb88c7b255b20351bec50a4e9e008ac7ee680abd5006633e"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 39,
+        "round": 5,
+        "client_id": 7,
+        "update_hash": "017a67b70b764fc717099be395c205f6f1eb245dbaedb0e9ddaa338eb0c6ecb8",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341140.335179,
+        "prev_hash": "3489656d5fe4e0bff1f49323b887150ed49f67f2683e7f3db7ecb0692901b371",
+        "block_hash": "fa443ce9e0e66f571a2e943cc385729c0aec45b18488baeab2b0953b7c411176",
+        "tx_hash": "0x3292549c12810a1c7509114269a20b023d5eafc2244e219b21a44155cba275af"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 5,
+      "record": {
+        "round": 5,
+        "accuracy": 0.7692,
+        "loss": 0.4928,
+        "precision": 0.9489,
+        "recall": 0.6667,
+        "f1": 0.7831,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 6.55
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 6,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 6,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 6,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 6,
+      "metrics": {
+        "loss": 0.4937,
+        "accuracy": 0.7596,
+        "precision": 0.9412,
+        "recall": 0.6564,
+        "f1": 0.7734
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 40,
+        "round": 6,
+        "client_id": 0,
+        "update_hash": "722f4c665a4696477d0b73499e72b6da0a88258ecec1311ac18c6fda526f1c53",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.0934958,
+        "prev_hash": "fa443ce9e0e66f571a2e943cc385729c0aec45b18488baeab2b0953b7c411176",
+        "block_hash": "f27bc25f981057dde05b610cf8a8245bf0acd4864dd81747e32a4733266bd300",
+        "tx_hash": "0x2f89a7ffb61bbba19293241073f8e3cd18c6ef6ea44293fe0f416db436a017a5"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 41,
+        "round": 6,
+        "client_id": 1,
+        "update_hash": "4321ff12c81415eae188fc1846a6ed6958d0e389e9949c87700576d9e0f14e85",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.0945485,
+        "prev_hash": "f27bc25f981057dde05b610cf8a8245bf0acd4864dd81747e32a4733266bd300",
+        "block_hash": "087e6146b5d4ebc9d1ae014dacd59bb4cf504a12b8f8953638a98b2f59dd81f1",
+        "tx_hash": "0x3cf2fe2e662dd0aa78dd46a5894ac6dd45fcb40124cc08ba3dfef87e9f6dc8e1"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 42,
+        "round": 6,
+        "client_id": 2,
+        "update_hash": "0275a37db62e7fe1bc9d4ca65b52fc9f4ec5aeabf7bc85327f7e3342b5c258e9",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.0953076,
+        "prev_hash": "087e6146b5d4ebc9d1ae014dacd59bb4cf504a12b8f8953638a98b2f59dd81f1",
+        "block_hash": "1f6a29e1a3d991b8c4f1bbc97c6f9356c2d486c3d4ac61e80bcc9fbbbed46825",
+        "tx_hash": "0x3855a38c2d8bd22e3f055ff8883a8e9f890fb5b2632513350f1172aa34c04b50"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 43,
+        "round": 6,
+        "client_id": 3,
+        "update_hash": "748b246053a8e38c398dc7d9b0b9a49feefed424f58b4061b9853c3748118726",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.0953076,
+        "prev_hash": "1f6a29e1a3d991b8c4f1bbc97c6f9356c2d486c3d4ac61e80bcc9fbbbed46825",
+        "block_hash": "ce2a04165a6f2a42348ba8e635a99bdedb8d165aad0adbb78f1a5e28c989a327",
+        "tx_hash": "0x236fb1bb9c05d76431335ef36c0afd6e616f9ce7f8738f1265d8828466086c81"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 44,
+        "round": 6,
+        "client_id": 4,
+        "update_hash": "7646689cc55869e10563bcbb967d1380e0244aaae92ecc6713973343282ca840",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.0971794,
+        "prev_hash": "ce2a04165a6f2a42348ba8e635a99bdedb8d165aad0adbb78f1a5e28c989a327",
+        "block_hash": "c61a3a91abeaa6551f72e349c9e9e9d96d3341c594603d42b5c1102cbc27722f",
+        "tx_hash": "0xec87b29abb90e541f52110f11f378f863e8eeedfd25fd27fa936aff617340f72"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 45,
+        "round": 6,
+        "client_id": 5,
+        "update_hash": "9c09f11343f74226a17012ada9ae2d47fc4b002e963db2f7a912717ad99c0589",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.0971794,
+        "prev_hash": "c61a3a91abeaa6551f72e349c9e9e9d96d3341c594603d42b5c1102cbc27722f",
+        "block_hash": "e62c16062c2e779dce9ed899aa76e3d304696a44cb6e2aa5fafdd9554fd87255",
+        "tx_hash": "0x990cf85d905b6ecebb83565b14b5414e96c14e43a63fa000520755f236d1203c"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 46,
+        "round": 6,
+        "client_id": 6,
+        "update_hash": "0008704ceec062296b3f8621f90fa7d179741d233808e4fcebba7342a22c6c64",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.0987496,
+        "prev_hash": "e62c16062c2e779dce9ed899aa76e3d304696a44cb6e2aa5fafdd9554fd87255",
+        "block_hash": "846bb8eb5795c8f6136f5e88652172f08e1030da12a49845a47872fd036d0abc",
+        "tx_hash": "0x8c85f1d4cd0d2b91f26c9c2d310a9255ffdf1711da2fc2b0c59a7a2b707b25f8"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 47,
+        "round": 6,
+        "client_id": 7,
+        "update_hash": "52af392c188d8c6dae599220971a0a519e8d1fb8a693acaa9d7c5fe47a75aa5f",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.1003563,
+        "prev_hash": "846bb8eb5795c8f6136f5e88652172f08e1030da12a49845a47872fd036d0abc",
+        "block_hash": "8237c2d9178c9708b22e64457388f526753993a8987dd95f9866eabd9411e63d",
+        "tx_hash": "0xfeaaf9ccf6a5341102de8b0a373bd57c9bba14380d50e26f8e1d036b00c65442"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 6,
+      "record": {
+        "round": 6,
+        "accuracy": 0.7596,
+        "loss": 0.4937,
+        "precision": 0.9412,
+        "recall": 0.6564,
+        "f1": 0.7734,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 7.48
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 7,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 7,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 7,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 7,
+      "metrics": {
+        "loss": 0.4658,
+        "accuracy": 0.7885,
+        "precision": 0.9388,
+        "recall": 0.7077,
+        "f1": 0.807
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 48,
+        "round": 7,
+        "client_id": 0,
+        "update_hash": "6df20b39883c5bd92c69fd250feb254f22747913ccee142718050d7e0271afab",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9071116,
+        "prev_hash": "8237c2d9178c9708b22e64457388f526753993a8987dd95f9866eabd9411e63d",
+        "block_hash": "fceb1a918d22c5c59edba467c587e89a328341fd9341d6e577ef460f97b6c831",
+        "tx_hash": "0xf8d723b9295a11b2fa988f67b81a027459ce583114474c4395696445a06c008a"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 49,
+        "round": 7,
+        "client_id": 1,
+        "update_hash": "202017bd248321c2ef4131555f0ac05fce25811cf4fb7ffe5b2a8292e0ba9a45",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9071116,
+        "prev_hash": "fceb1a918d22c5c59edba467c587e89a328341fd9341d6e577ef460f97b6c831",
+        "block_hash": "3e16a157d233d0c01ec19395c41e0734eb6166b35d455172a98bd731a7de5a0a",
+        "tx_hash": "0x99ff661974fcadfa79d4afbd100489576947cd3a68ff4da54d9fa6753584bf67"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 50,
+        "round": 7,
+        "client_id": 2,
+        "update_hash": "5d1c839ece402643d5b3df1a48febb7598ed54d6d771e95e63132204c2634e97",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9071116,
+        "prev_hash": "3e16a157d233d0c01ec19395c41e0734eb6166b35d455172a98bd731a7de5a0a",
+        "block_hash": "88a359b438b08b3395dc67982d90ef398372ee2a0a47d1e9b38d22ebb97545d3",
+        "tx_hash": "0x584ab29db3a55c48a0ddeef0bbea15832feb80232c3c69b8b63d4436de396d54"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 51,
+        "round": 7,
+        "client_id": 3,
+        "update_hash": "aba0d0474338f86863cb9b44b4352693afbc9b6736c2c528e88608729c1693ed",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9071116,
+        "prev_hash": "88a359b438b08b3395dc67982d90ef398372ee2a0a47d1e9b38d22ebb97545d3",
+        "block_hash": "63a07696eed870b28e95bc0f595d0128d10eb84a7b1464499a2bc61a2a067dfb",
+        "tx_hash": "0xa9d1605634754204c8204c0e1824f5e41c5f8f028eaca5e0b3d3766544ad288d"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 52,
+        "round": 7,
+        "client_id": 4,
+        "update_hash": "3d2ec49ea0f3e127632fb3f479e10ef9152ad4bf23366c7620c60508cf53da2d",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9071116,
+        "prev_hash": "63a07696eed870b28e95bc0f595d0128d10eb84a7b1464499a2bc61a2a067dfb",
+        "block_hash": "50818c117dbb5992b8f492b8b7d2ddc64812ebaa7ade98afa183308653a5d71e",
+        "tx_hash": "0x8ef30109008ef889fcf15bfe6d776438177b5e9148e711ccb04a02bdc96f816d"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 53,
+        "round": 7,
+        "client_id": 5,
+        "update_hash": "77b7148a46aac846a4f104c740ceed36482e29e2d6d8025efbeb5b724edc7770",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9071116,
+        "prev_hash": "50818c117dbb5992b8f492b8b7d2ddc64812ebaa7ade98afa183308653a5d71e",
+        "block_hash": "60aabfd7715f4f60cb8bdc67efbea91d178b8abee9dd566187ff38e9af587a47",
+        "tx_hash": "0x20550a25df2401cce1ab34baad4f668cfbdff16bce8da2c9f293b6a335455b8a"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 54,
+        "round": 7,
+        "client_id": 6,
+        "update_hash": "14b88c3b196f43c0a8a53fd149307b250a5b6b71b734e2b338034bde082052dc",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9139018,
+        "prev_hash": "60aabfd7715f4f60cb8bdc67efbea91d178b8abee9dd566187ff38e9af587a47",
+        "block_hash": "ac5fb5a088c261fa343ce61f5ab8e3c8b05d84af1b00e928c545be1908533409",
+        "tx_hash": "0x2a0dcc55c4c249924516312ed329d340845ef4593890904a33079c99817b20ff"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 55,
+        "round": 7,
+        "client_id": 7,
+        "update_hash": "60689c956bd5024bc94d05180252d82ce5df63d37ca0911053414f1b3d5e0b03",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341141.9139018,
+        "prev_hash": "ac5fb5a088c261fa343ce61f5ab8e3c8b05d84af1b00e928c545be1908533409",
+        "block_hash": "49fde40b9fdbcfecc6be520336dd496a0bb227547a1dd84fe23fd2ad4f9bf492",
+        "tx_hash": "0x8e901b7f16a64060a6af7f044afa07409761dbc9e342d7a6dfa2815904b6ca00"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 7,
+      "record": {
+        "round": 7,
+        "accuracy": 0.7885,
+        "loss": 0.4658,
+        "precision": 0.9388,
+        "recall": 0.7077,
+        "f1": 0.807,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 6.79
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 8,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 8,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 8,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 8,
+      "metrics": {
+        "loss": 0.529,
+        "accuracy": 0.7356,
+        "precision": 0.9555,
+        "recall": 0.6051,
+        "f1": 0.741
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 56,
+        "round": 8,
+        "client_id": 0,
+        "update_hash": "6b79fd6698e493ce2fe4ae6ea1f556a93770e1ed4b95a197c635de17351fdc9c",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.6463199,
+        "prev_hash": "49fde40b9fdbcfecc6be520336dd496a0bb227547a1dd84fe23fd2ad4f9bf492",
+        "block_hash": "c41ae296fee2ccf6c86aa1db802dabc74422d597844d48981e1978b747bc37a0",
+        "tx_hash": "0x57773aa477472068b57deecc42e1b71131841aeeafc022bcb290e8ed801aec9b"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 57,
+        "round": 8,
+        "client_id": 1,
+        "update_hash": "b27a8ffbab17a80a41a93e48e3ec2dd68b268e3133c4a5bf809fa6f116c1cd4b",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.649941,
+        "prev_hash": "c41ae296fee2ccf6c86aa1db802dabc74422d597844d48981e1978b747bc37a0",
+        "block_hash": "9803bd08ac189b46e312a4a0b649d1e45e92db130551c61dae09b1d061f523c6",
+        "tx_hash": "0xfe21e707aaadb91e990eb8f4d438517960ac4a87b064f9711ba5400970beecda"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 58,
+        "round": 8,
+        "client_id": 2,
+        "update_hash": "202a4b498db9eaf98e6a4399a487a6df01f9870d0eef1c1946ea06d44528206f",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.649941,
+        "prev_hash": "9803bd08ac189b46e312a4a0b649d1e45e92db130551c61dae09b1d061f523c6",
+        "block_hash": "761b9e121627db1c3ed4600ec54c1b5558a6893301b7e693d618560376166f4a",
+        "tx_hash": "0xa36063fefd597d431c1425c5784ebbf02b6a47622dfdda07e3ed4630bee3a71b"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 59,
+        "round": 8,
+        "client_id": 3,
+        "update_hash": "2205d6777f5cd6658d9fba84ebdd50dcc22f6e2ee7461d8ba810156844a40257",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.649941,
+        "prev_hash": "761b9e121627db1c3ed4600ec54c1b5558a6893301b7e693d618560376166f4a",
+        "block_hash": "1bd2ce1dd3aa0726f958e1a937f3fd776082ceb67bd167b1a6a77c8a04abd587",
+        "tx_hash": "0xcf0108270f5b7bc4e29ab736aeb77ecece4483774a6023fe5e7808095bb98fec"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 60,
+        "round": 8,
+        "client_id": 4,
+        "update_hash": "353bd03285cff40bc06381f038f797960e098e32ec925ea721f75e57a52a292a",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.649941,
+        "prev_hash": "1bd2ce1dd3aa0726f958e1a937f3fd776082ceb67bd167b1a6a77c8a04abd587",
+        "block_hash": "97fc33aed4de6865e1db0d86d8c31184139be21ae4674253197c5ea13f7911ac",
+        "tx_hash": "0x95bf91041dff4c6ae92e442a84c140a0cef9232a30fd99b586b9c96cd62fd000"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 61,
+        "round": 8,
+        "client_id": 5,
+        "update_hash": "39b4d9fdd851b009f39cf91863077eac695904b2d2bfc8092c24f69500182deb",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.649941,
+        "prev_hash": "97fc33aed4de6865e1db0d86d8c31184139be21ae4674253197c5ea13f7911ac",
+        "block_hash": "c7fd9114a2b54056e34c7ed521c0e9ff42d463586361f9d52785fd0a2ec2e48a",
+        "tx_hash": "0x0acaf2cb25d70cdb3cd102d9cb550fe4782c8775b8999f6c0fbad52554c81d49"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 62,
+        "round": 8,
+        "client_id": 6,
+        "update_hash": "f9279219b4230fdfe216acf7ac12ec2ab7f665baf110333a42af07dc296bd5b7",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.649941,
+        "prev_hash": "c7fd9114a2b54056e34c7ed521c0e9ff42d463586361f9d52785fd0a2ec2e48a",
+        "block_hash": "ba200b4b4244136667a2441afea1cf81a81bfa8c2311fdff2c833280e4e27b78",
+        "tx_hash": "0x750c9065131997681fd97e12649832f608fd4a20583cb3e03209319a90fbf870"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 63,
+        "round": 8,
+        "client_id": 7,
+        "update_hash": "9014e6c5f16e83a82d8455c0f470cfd32672fb1a256a92e05d26d59c727b95a8",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341142.6567338,
+        "prev_hash": "ba200b4b4244136667a2441afea1cf81a81bfa8c2311fdff2c833280e4e27b78",
+        "block_hash": "3078dc5697c51d0200991f46b355e4c45622f5dfa6790ff71d03bd1a00bfd92a",
+        "tx_hash": "0x8613676a6d6b416dfae3097f772297af0d0200f763f70712028735141d42ff18"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 8,
+      "record": {
+        "round": 8,
+        "accuracy": 0.7356,
+        "loss": 0.529,
+        "precision": 0.9555,
+        "recall": 0.6051,
+        "f1": 0.741,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 10.41
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 9,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 9,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 9,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 9,
+      "metrics": {
+        "loss": 0.5115,
+        "accuracy": 0.7516,
+        "precision": 0.9468,
+        "recall": 0.6385,
+        "f1": 0.7626
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 64,
+        "round": 9,
+        "client_id": 0,
+        "update_hash": "b860cc49b2aeba37b221cfc15db0402f83cb0833ce147e9dfd7f6ac7a6e6adfe",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.3997555,
+        "prev_hash": "3078dc5697c51d0200991f46b355e4c45622f5dfa6790ff71d03bd1a00bfd92a",
+        "block_hash": "ac1859a0fea13875ed4f14e65247dca26e4b094cbef18b878bd675cdef0195ff",
+        "tx_hash": "0xb6fc9c3a2036671391274ec6f17d7a25b77db3c49c33daf3dd5d93085d488b56"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 65,
+        "round": 9,
+        "client_id": 1,
+        "update_hash": "634f294a8757c1b4c02346bdd5b74ec2b5e0799771639dd62a314fa4b52de443",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.3997555,
+        "prev_hash": "ac1859a0fea13875ed4f14e65247dca26e4b094cbef18b878bd675cdef0195ff",
+        "block_hash": "e4b334a4f9d7ae9259dce59de9c51385ee54cbf22d6d119d99dd8dcd3a3dae73",
+        "tx_hash": "0xbedffbf8ba3c4ed0e2ab671765a67e7d70fa04e3ccb67f5e0b0a985433726e44"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 66,
+        "round": 9,
+        "client_id": 2,
+        "update_hash": "bbedd1ce34822a715b7df4928c2fec7d1abfae8c0bdaf57cc052e51a4b3605d1",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.4062295,
+        "prev_hash": "e4b334a4f9d7ae9259dce59de9c51385ee54cbf22d6d119d99dd8dcd3a3dae73",
+        "block_hash": "1fb7b422bb4f31f2b41f5351c734545334a44d6934e85d9a3149af6eddf7eca2",
+        "tx_hash": "0xcc622ea2799770ee7c6375b9ea7736e3d38840c9dfe77a885b7aa7da4941b4c2"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 67,
+        "round": 9,
+        "client_id": 3,
+        "update_hash": "7a687f7b92b3129e1d6b9fda4f4f95bfee0e0e810ba0afd71fefcd8e5d8a8279",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.406587,
+        "prev_hash": "1fb7b422bb4f31f2b41f5351c734545334a44d6934e85d9a3149af6eddf7eca2",
+        "block_hash": "98d2be51de756a442405a70f7c3c163024b6c7990cafb6e51f8711d995ccc764",
+        "tx_hash": "0xb4d1fe1f88fc9c7dea5723a57739550294bc6afc80739edd8012d08fc7751856"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 68,
+        "round": 9,
+        "client_id": 4,
+        "update_hash": "aa4fd6d79a0198f0cc5174aaadef847f96bbe9fbaaafebc44c24e3c1080c2ffc",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.406587,
+        "prev_hash": "98d2be51de756a442405a70f7c3c163024b6c7990cafb6e51f8711d995ccc764",
+        "block_hash": "5acc294558aecd92e3d660d550f2aba6c6fc633a3c38c9fa5e16b6c86f40b4a5",
+        "tx_hash": "0x80a265324b32523102ca6da9ec90780fc7d50c23279bec69333bb90014b99527"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 69,
+        "round": 9,
+        "client_id": 5,
+        "update_hash": "35e5413f364ddcc4bc464d3ead238ace4c0004e2174e69163f20eda964c184da",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.406587,
+        "prev_hash": "5acc294558aecd92e3d660d550f2aba6c6fc633a3c38c9fa5e16b6c86f40b4a5",
+        "block_hash": "b319696557ae6f4f2e7bf3677a102011fcc0fba3c0199a899b29fed7ccd151e2",
+        "tx_hash": "0x3b84e99af99aa91ae51625d48592ce881bc8079d92a00fce6df26d62c51079a4"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 70,
+        "round": 9,
+        "client_id": 6,
+        "update_hash": "c345a5a8ec02f4d38fed24fc73922491e44b2f7bf7ae8783baa0bfd1d02d7197",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.406587,
+        "prev_hash": "b319696557ae6f4f2e7bf3677a102011fcc0fba3c0199a899b29fed7ccd151e2",
+        "block_hash": "6fac2d0a6971dad453f21e5315196cf9eeae95530f04fa883e3ebf80c016108f",
+        "tx_hash": "0xf8dfcfa5adaf6c920d2c834308477631a05a883df950c11ed59d5c17263e95f6"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 71,
+        "round": 9,
+        "client_id": 7,
+        "update_hash": "0b2db5b373da297f452d05b59422da9788382e597b0f4b7f9ee23f7a3acf41c4",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341143.406587,
+        "prev_hash": "6fac2d0a6971dad453f21e5315196cf9eeae95530f04fa883e3ebf80c016108f",
+        "block_hash": "ce4d63d3021360425b4dc228da16d358716a74aa4c12b072aa82190b6ad85216",
+        "tx_hash": "0x5ffa6e728da8205c0423f7299bd019628afbbfbeb59afceb700103e0d55d7e0d"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 9,
+      "record": {
+        "round": 9,
+        "accuracy": 0.7516,
+        "loss": 0.5115,
+        "precision": 0.9468,
+        "recall": 0.6385,
+        "f1": 0.7626,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 13.76
+      }
+    }
+  },
+  {
+    "type": "round_start",
+    "data": {
+      "round": 10,
+      "total_rounds": 10,
+      "scenario": "attacked"
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Training",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "client_status_batch",
+    "data": {
+      "status": "Sent",
+      "cids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 0,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 1,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 2,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 3,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 4,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 5,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 6,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "similarity",
+    "data": {
+      "round": 10,
+      "client_id": 7,
+      "similarity": 1.0,
+      "robust_z": 0.0,
+      "status": "ACCEPTED"
+    }
+  },
+  {
+    "type": "aggregate",
+    "data": {
+      "round": 10,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "trusted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "type": "metrics",
+    "data": {
+      "round": 10,
+      "metrics": {
+        "loss": 0.4711,
+        "accuracy": 0.7821,
+        "precision": 0.9441,
+        "recall": 0.6923,
+        "f1": 0.7988
+      }
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 72,
+        "round": 10,
+        "client_id": 0,
+        "update_hash": "07a7806a615b1b2e96baa83106be755440261ef4eee212e01c32b275958ab17e",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.1776173,
+        "prev_hash": "ce4d63d3021360425b4dc228da16d358716a74aa4c12b072aa82190b6ad85216",
+        "block_hash": "a14b968be008b159a45e316f254b540fe68d6d5f7d1067ba9c3cb907c9f74450",
+        "tx_hash": "0x869b7e7d9a7b5550785a2c66258dff04a5eb141a83e5e3ca486907f215d2aeaf"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 73,
+        "round": 10,
+        "client_id": 1,
+        "update_hash": "49602e681998ea12269e515ba41a69de882fff6ff4fd95260dd0ccf0f9d464d7",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.1776173,
+        "prev_hash": "a14b968be008b159a45e316f254b540fe68d6d5f7d1067ba9c3cb907c9f74450",
+        "block_hash": "5f19011de1d3125b70827c25ad60cd1f95823dd7106b59ab6dbaf1daa1d44f7b",
+        "tx_hash": "0xdc9cddcc8acce98313a71cf5512f114361686d9bd688f25dabf115a8d92cb290"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 74,
+        "round": 10,
+        "client_id": 2,
+        "update_hash": "b3ba1bd41ecefe54448f6594888888adb537f33764be3d32210b9cd0d41b5772",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.183978,
+        "prev_hash": "5f19011de1d3125b70827c25ad60cd1f95823dd7106b59ab6dbaf1daa1d44f7b",
+        "block_hash": "b17d767cf7afc342e50882afc8a87bf795bcc595c620d1f93176df76a7f4f598",
+        "tx_hash": "0xe6ba63dbb4975bfb17d0686869fad59726666703c00ed3e98421ab798f61ecbc"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 75,
+        "round": 10,
+        "client_id": 3,
+        "update_hash": "ce24458b74dd32f65b5be2d0c24bd0cb238bcb36ad1077bc702d21df31748919",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.184395,
+        "prev_hash": "b17d767cf7afc342e50882afc8a87bf795bcc595c620d1f93176df76a7f4f598",
+        "block_hash": "14e4f810af1c18a601072d2a940f97352ec08026e4cd90d01330da89b22b7b5c",
+        "tx_hash": "0xa379ed8d02b7a2b559559d98b7c1f015da1b3465b8e1d0aa4b38c512299a77fa"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 76,
+        "round": 10,
+        "client_id": 4,
+        "update_hash": "f99a7d664f9276421637b4abda834af0449fc008866cc49469da563a763e5047",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.184395,
+        "prev_hash": "14e4f810af1c18a601072d2a940f97352ec08026e4cd90d01330da89b22b7b5c",
+        "block_hash": "e4c33ca33de1daeae40255be4d44ff232dc506cf47d888f4ecd1a5dfd1826b64",
+        "tx_hash": "0xbeac2e191e43872605dd4fdfae6f6538d8a473b54c11aecb9a909453c26e0640"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 77,
+        "round": 10,
+        "client_id": 5,
+        "update_hash": "07e4f4a08f1fd5ec3f7040dfc58f6f55c28a9d1bd4c135a0dcff78c13c1efb11",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.184395,
+        "prev_hash": "e4c33ca33de1daeae40255be4d44ff232dc506cf47d888f4ecd1a5dfd1826b64",
+        "block_hash": "adf46e2d0e3a02e040a5fc9c1bf4894d955f372737007a558158e896a2a4c0f1",
+        "tx_hash": "0xe18b9d5b17109be02c586e5b99455956dbffbcd4c82a594317cd058e335f4e5c"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 78,
+        "round": 10,
+        "client_id": 6,
+        "update_hash": "e8fad6eedc91e6ccf8a4f27422abb683a4f8d7fe0119d54faa650c8fc1475187",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.184395,
+        "prev_hash": "adf46e2d0e3a02e040a5fc9c1bf4894d955f372737007a558158e896a2a4c0f1",
+        "block_hash": "4bdbe0c87437d23d417fcf66d4023972838f6a9047d88cb0a851bdd9c9dd79e7",
+        "tx_hash": "0xbf27f057f040fcffc05985537c9b11ad225a0b2caf39b414d92dcea5d9b03246"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "chain_write",
+    "data": {
+      "entry": {
+        "index": 79,
+        "round": 10,
+        "client_id": 7,
+        "update_hash": "d77f222c6dc3abd9f8187992aa8aee3bd60e290081a4feca6d2e1b2ed34b2ce8",
+        "status": "ACCEPTED",
+        "similarity": 1.0,
+        "timestamp": 1791341144.184395,
+        "prev_hash": "4bdbe0c87437d23d417fcf66d4023972838f6a9047d88cb0a851bdd9c9dd79e7",
+        "block_hash": "f0c6e1aee203c1dada44f91bbeda6a2c16de129e3d18ed713e4e710d7ac9d932",
+        "tx_hash": "0x10fa9eb6d9e0e0fe777f2912dd098b2b3c07576ff6ab02d387c6c3582a517667"
+      },
+      "mode": "mock"
+    }
+  },
+  {
+    "type": "round_end",
+    "data": {
+      "round": 10,
+      "record": {
+        "round": 10,
+        "accuracy": 0.7821,
+        "loss": 0.4711,
+        "precision": 0.9441,
+        "recall": 0.6923,
+        "f1": 0.7988,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 13.68
+      }
+    }
+  }
+]

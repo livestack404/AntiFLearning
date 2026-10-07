@@ -1,0 +1,143 @@
+{
+  "scenario": "defended",
+  "config": {
+    "scenario": "defended",
+    "num_clients": 8,
+    "malicious_ids": [
+      3,
+      7
+    ],
+    "detection": true,
+    "attack_type": "label_flip",
+    "rounds": 10,
+    "local_epochs": 1,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "speed_ms": 100,
+    "seed": 42
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "accuracy": 0.8061,
+      "loss": 0.5855,
+      "precision": 0.8064,
+      "recall": 0.9077,
+      "f1": 0.854,
+      "trusted_clients": 6,
+      "excluded_clients": 2,
+      "blockchain_ms": 20.58
+    },
+    {
+      "round": 2,
+      "accuracy": 0.8686,
+      "loss": 0.4057,
+      "precision": 0.8869,
+      "recall": 0.9051,
+      "f1": 0.8959,
+      "trusted_clients": 6,
+      "excluded_clients": 2,
+      "blockchain_ms": 17.15
+    },
+    {
+      "round": 3,
+      "accuracy": 0.8766,
+      "loss": 0.3935,
+      "precision": 0.8982,
+      "recall": 0.9051,
+      "f1": 0.9017,
+      "trusted_clients": 6,
+      "excluded_clients": 2,
+      "blockchain_ms": 16.02
+    },
+    {
+      "round": 4,
+      "accuracy": 0.8413,
+      "loss": 0.585,
+      "precision": 0.8143,
+      "recall": 0.9667,
+      "f1": 0.8839,
+      "trusted_clients": 6,
+      "excluded_clients": 2,
+      "blockchain_ms": 24.23
+    },
+    {
+      "round": 5,
+      "accuracy": 0.7372,
+      "loss": 0.4032,
+      "precision": 0.9484,
+      "recall": 0.6128,
+      "f1": 0.7445,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 37.34
+    },
+    {
+      "round": 6,
+      "accuracy": 0.859,
+      "loss": 0.5064,
+      "precision": 0.8545,
+      "recall": 0.9333,
+      "f1": 0.8922,
+      "trusted_clients": 6,
+      "excluded_clients": 2,
+      "blockchain_ms": 31.95
+    },
+    {
+      "round": 7,
+      "accuracy": 0.8061,
+      "loss": 0.3659,
+      "precision": 0.9439,
+      "recall": 0.7333,
+      "f1": 0.8254,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 42.34
+    },
+    {
+      "round": 8,
+      "accuracy": 0.8686,
+      "loss": 0.4485,
+      "precision": 0.8909,
+      "recall": 0.9,
+      "f1": 0.8954,
+      "trusted_clients": 6,
+      "excluded_clients": 2,
+      "blockchain_ms": 42.51
+    },
+    {
+      "round": 9,
+      "accuracy": 0.75,
+      "loss": 0.3888,
+      "precision": 0.9398,
+      "recall": 0.641,
+      "f1": 0.7622,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 42.14
+    },
+    {
+      "round": 10,
+      "accuracy": 0.867,
+      "loss": 0.565,
+      "precision": 0.8561,
+      "recall": 0.9462,
+      "f1": 0.8989,
+      "trusted_clients": 6,
+      "excluded_clients": 2,
+      "blockchain_ms": 61.12
+    }
+  ],
+  "elapsed_seconds": 74.78,
+  "final_metrics": {
+    "round": 10,
+    "accuracy": 0.867,
+    "loss": 0.565,
+    "precision": 0.8561,
+    "recall": 0.9462,
+    "f1": 0.8989,
+    "trusted_clients": 6,
+    "excluded_clients": 2,
+    "blockchain_ms": 61.12
+  }
+}

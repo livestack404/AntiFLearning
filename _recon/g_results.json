@@ -1,0 +1,60 @@
+{
+  "ganache_running": false,
+  "api_status_mode": "mock",
+  "total_entries": 16,
+  "has_run_id": false,
+  "sample_entry_keys": [
+    "index",
+    "round",
+    "client_id",
+    "update_hash",
+    "status",
+    "similarity",
+    "timestamp",
+    "prev_hash",
+    "block_hash",
+    "tx_hash"
+  ],
+  "sample_entry": {
+    "index": 0,
+    "round": 1,
+    "client_id": 0,
+    "update_hash": "90b941aa11d765171eba7505b5a6c4d0ec7bf4d0e66ec868b42a53068b2e529f",
+    "status": "ACCEPTED",
+    "similarity": 0.7923,
+    "timestamp": 1791347854.4878607,
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "block_hash": "9d9d625dd4c56ce36e57e5c6a414a1bea3fb3196765fbb6539e030595ff13535",
+    "tx_hash": "0xafee696f59fc415877cd31832f68b6be48d3a633b190c8bf54d48ed9832c2f1c"
+  },
+  "verify_before": {
+    "valid": true,
+    "message": "All cryptographic block hashes and chain links verified successfully",
+    "total_entries": 16,
+    "latest_block_hash": "29d0b378ef2db87bc1a354643f6c3b20adebd53c515b1a7a67711ac7d0a8231a",
+    "mode": "mock",
+    "mode_display": "Local hash-chain (Ganache not connected)"
+  },
+  "tamper_resp": {
+    "success": true,
+    "mode": "mock",
+    "message": "Tampered entry #2 status. Run integrity verification to detect!",
+    "detail": {
+      "success": true,
+      "tampered_index": 2,
+      "original_status": "ACCEPTED",
+      "tampered_status": "EXCLUDED",
+      "message": "Entry #2 status forcibly overwritten to 'EXCLUDED' on disk without updating hashes."
+    }
+  },
+  "verify_after": {
+    "valid": false,
+    "tampered_index": 2,
+    "reason": "Block content does not match cryptographic hash",
+    "expected_block_hash": "33b005cd917fa5e7461373913471deec3e53fccfc25b6c9d74c5eaed9e404c23",
+    "actual_block_hash": "3dfeffc270a04f4c60f50eb2cf15a9b15b039d979a9031db60da8277922a696d",
+    "total_entries": 16,
+    "mode": "mock",
+    "mode_display": "Local hash-chain (Ganache not connected)"
+  }
+}
