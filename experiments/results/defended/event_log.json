@@ -444,7 +444,7 @@
         "f1": 0.8521,
         "trusted_clients": 6,
         "excluded_clients": 2,
-        "blockchain_ms": 13.3
+        "blockchain_ms": 7.34
       }
     }
   },
@@ -893,7 +893,7 @@
         "f1": 0.8555,
         "trusted_clients": 7,
         "excluded_clients": 1,
-        "blockchain_ms": 14.37
+        "blockchain_ms": 17.16
       }
     }
   },
@@ -1342,7 +1342,7 @@
         "f1": 0.9292,
         "trusted_clients": 6,
         "excluded_clients": 2,
-        "blockchain_ms": 13.54
+        "blockchain_ms": 25.9
       }
     }
   },
@@ -1791,7 +1791,7 @@
         "f1": 0.9558,
         "trusted_clients": 6,
         "excluded_clients": 2,
-        "blockchain_ms": 14.44
+        "blockchain_ms": 27.2
       }
     }
   },
@@ -2240,7 +2240,7 @@
         "f1": 0.9632,
         "trusted_clients": 6,
         "excluded_clients": 2,
-        "blockchain_ms": 27.28
+        "blockchain_ms": 33.56
       }
     }
   },
@@ -2689,7 +2689,7 @@
         "f1": 0.8951,
         "trusted_clients": 8,
         "excluded_clients": 0,
-        "blockchain_ms": 30.06
+        "blockchain_ms": 41.37
       }
     }
   },
@@ -3138,7 +3138,7 @@
         "f1": 0.9652,
         "trusted_clients": 6,
         "excluded_clients": 2,
-        "blockchain_ms": 36.64
+        "blockchain_ms": 33.82
       }
     }
   },
@@ -3587,7 +3587,7 @@
         "f1": 0.9585,
         "trusted_clients": 6,
         "excluded_clients": 2,
-        "blockchain_ms": 30.58
+        "blockchain_ms": 46.35
       }
     }
   },
@@ -4036,7 +4036,7 @@
         "f1": 0.9328,
         "trusted_clients": 5,
         "excluded_clients": 3,
-        "blockchain_ms": 34.61
+        "blockchain_ms": 55.73
       }
     }
   },
@@ -4485,7 +4485,7 @@
         "f1": 0.9086,
         "trusted_clients": 7,
         "excluded_clients": 1,
-        "blockchain_ms": 49.18
+        "blockchain_ms": 66.14
       }
     }
   }
