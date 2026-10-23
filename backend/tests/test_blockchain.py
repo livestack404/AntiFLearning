@@ -11,8 +11,8 @@ from pathlib import Path
 import tempfile
 import pytest
 
-from backend.app.blockchain.logger import BlockchainLogger
-from backend.app.blockchain.mock_ledger import LocalRecordStore, canonical_fingerprint
+from app.blockchain.logger import BlockchainLogger
+from app.blockchain.mock_ledger import LocalRecordStore, canonical_fingerprint
 
 
 def test_clean_ledger_passes_verify():
@@ -84,3 +84,4 @@ def test_tamper_and_restore():
         verify_pass = logger.verify_integrity()
         assert verify_pass["valid"] is True
         assert "All 3 entries intact" in verify_pass["message"]
+

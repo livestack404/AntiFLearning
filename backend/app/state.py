@@ -14,6 +14,7 @@ class TrainingState:
         self.is_running: bool = False
         self.is_paused: bool = False
         self.should_stop: bool = False
+        self.step_requested: bool = False
         self.current_round: int = 0
         self.total_rounds: int = 0
         self.current_scenario: str = "clean"
@@ -58,17 +59,24 @@ class TrainingState:
     def resume(self):
         self.is_paused = False
 
+    def step(self):
+        self.is_paused = True
+        self.step_requested = True
+
     def stop(self):
         self.should_stop = True
         self.is_running = False
         self.is_paused = False
+        self.step_requested = False
 
     def reset(self):
         self.is_running = False
         self.is_paused = False
         self.should_stop = False
+        self.step_requested = False
         self.current_round = 0
         self.total_rounds = 0
         self.current_run_events.clear()
 
 training_state = TrainingState()
+

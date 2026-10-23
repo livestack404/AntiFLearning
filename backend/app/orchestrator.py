@@ -17,17 +17,17 @@ from typing import Callable, Dict, List, Optional, Tuple
 import numpy as np
 import torch
 
-from backend.app import config
-from backend.app.state import training_state
-from backend.app.data.loader import get_val_loader, get_test_loader, load_medmnist_raw, MedMNISTDataset
-from backend.app.data.partition import partition_data
-from backend.app.fl import (
+from app import config
+from app.state import training_state
+from app.data.loader import get_val_loader, get_test_loader, load_medmnist_raw, MedMNISTDataset
+from app.data.partition import partition_data
+from app.fl import (
     HospitalClient,
     FLServer,
     compute_update_hash,
 )
-from backend.app.detection import PoisonDetector
-from backend.app.blockchain import BlockchainLogger
+from app.detection import PoisonDetector
+from app.blockchain import BlockchainLogger
 
 logger = logging.getLogger(__name__)
 
@@ -42,60 +42,16 @@ class FLOrchestrator:
             warmup_rounds=config.WARMUP_ROUNDS,
         )
 
-    def _save_ood_statistics(self, model: torch.nn.Module, target_dir: Path):
-        """Computes and saves penultimate feature space class means & shared covariance for Mahalanobis OOD."""
-        (train_imgs, train_lbls), _, _ = load_medmnist_raw()
-        dataset = MedMNISTDataset(train_imgs, train_lbls)
-        # Use subset for fast robust covariance estimate
-        loader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=False)
-        
-        model.eval()
-        features_list = []
-        labels_list = []
 
-        with torch.no_grad():
-            for imgs, lbls in loader:
-                feats = model.extract_features(imgs)
-                features_list.append(feats.cpu().numpy())
-                labels_list.append(lbls.cpu().numpy())
-
-        X = np.concatenate(features_list, axis=0)  # (N, 64)
-        y = np.concatenate(labels_list, axis=0)   # (N,)
-
-        class_means = {}
-        for c in [0, 1]:
-            class_means[c] = np.mean(X[y == c], axis=0)
-
-        # Centered residuals for shared pooled covariance
-        centered = np.zeros_like(X)
-        for c in [0, 1]:
-            mask = (y == c)
-            centered[mask] = X[mask] - class_means[c]
-
-        cov = np.cov(centered, rowvar=False) + np.eye(X.shape[1]) * 1e-4
-        inv_cov = np.linalg.pinv(cov)
-
-        # Compute empirical Mahalanobis distances on training samples to find 99th percentile threshold
-        dists = []
-        for i in range(len(X)):
-            c = y[i]
-            diff = X[i] - class_means[c]
-            d = np.sqrt(diff.dot(inv_cov).dot(diff))
-            dists.append(d)
-
-        threshold_99 = float(np.percentile(dists, config.OOD_DISTANCE_PERCENTILE))
-
-        ood_data = {
-            "class_0_mean": class_means[0].tolist(),
-            "class_1_mean": class_means[1].tolist(),
-            "inv_covariance": inv_cov.tolist(),
-            "mahalanobis_threshold": round(threshold_99, 4),
-            "num_samples": len(X),
-        }
-
-        with open(target_dir / "ood_stats.json", "w", encoding="utf-8") as f:
-            json.dump(ood_data, f, indent=2)
-        logger.info(f"OOD statistics saved to {target_dir / 'ood_stats.json'} (threshold: {threshold_99:.3f})")
+    async def _wait_for_step_or_resume(self):
+        """Allows stepping through the 6 simulation phases one at a time while paused."""
+        while training_state.is_paused:
+            if training_state.should_stop:
+                break
+            if training_state.step_requested:
+                training_state.step_requested = False
+                break
+            await asyncio.sleep(0.05)
 
     async def run_simulation(
         self,
@@ -161,10 +117,7 @@ class FLOrchestrator:
                     logger.info("Simulation run stopped by user request.")
                     break
 
-                while training_state.is_paused:
-                    if training_state.should_stop:
-                        break
-                    await asyncio.sleep(0.2)
+                await self._wait_for_step_or_resume()
 
                 training_state.current_round = round_no
 
@@ -175,16 +128,16 @@ class FLOrchestrator:
                     "scenario": run_config.scenario,
                 })
 
-                # Server distributes global weights
+                # Step 1: global_model_broadcast
+                await self._wait_for_step_or_resume()
                 global_weights = server.get_global_weights()
-
-                # Event 2: global_model_broadcast (NEW)
                 await training_state.emit_event("global_model_broadcast", {
                     "round": round_no,
                     "message": "Server sends the current model to every hospital",
                 })
 
-                # Event 3: client_training (per hospital)
+                # Step 2: client_training (per hospital)
+                await self._wait_for_step_or_resume()
                 for cid in sorted(clients.keys()):
                     await training_state.emit_event("client_training", {
                         "round": round_no,
@@ -210,7 +163,9 @@ class FLOrchestrator:
                     sample_counts[cid] = count
                     update_hashes[cid] = compute_update_hash(delta)
 
-                    # Event 4: client_update_sent (per hospital)
+                # Step 3: client_update_sent (per hospital)
+                await self._wait_for_step_or_resume()
+                for cid in sorted(clients.keys()):
                     await training_state.emit_event("client_update_sent", {
                         "round": round_no,
                         "client_id": cid,
@@ -219,6 +174,7 @@ class FLOrchestrator:
                     })
 
                 # Step 4: Detection
+                await self._wait_for_step_or_resume()
                 verdicts, trusted_ids = self.detector.evaluate_round(
                     round_no=round_no,
                     client_updates=client_updates,
@@ -244,6 +200,7 @@ class FLOrchestrator:
                 })
 
                 # Step 5: FedAvg aggregation over trusted updates (skip if quorum not met)
+                await self._wait_for_step_or_resume()
                 if trusted_ids:
                     trusted_tuples = [
                         (client_updates[cid], sample_counts[cid])
@@ -270,6 +227,7 @@ class FLOrchestrator:
                 })
 
                 # Step 6: Log decision records to ledger
+                await self._wait_for_step_or_resume()
                 chain_time_start = time.time()
                 logged_entries = []
                 for cid in sorted(clients.keys()):
@@ -312,7 +270,6 @@ class FLOrchestrator:
                         best_accuracy = val_metrics["accuracy"]
                         best_path = config.CHECKPOINTS_DIR / "best_model.pth"
                         torch.save(server.global_model.state_dict(), best_path)
-                        self._save_ood_statistics(server.global_model, config.CHECKPOINTS_DIR)
                         with open(best_model_meta_file, "w") as f:
                             json.dump({
                                 "accuracy": best_accuracy,
@@ -415,3 +372,4 @@ class FLOrchestrator:
             json.dump(training_state.current_run_events, f, indent=2)
 
 orchestrator = FLOrchestrator()
+

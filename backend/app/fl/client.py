@@ -11,10 +11,10 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from typing import Dict, List, Optional, Tuple
 
-from backend.app import config
-from backend.app.fl.model import PneumoniaCNN
-from backend.app.fl.attack import apply_label_flip, apply_sign_flip
-from backend.app.fl.utils import (
+from app import config
+from app.fl.model import PneumoniaCNN
+from app.fl.attack import apply_label_flip, apply_sign_flip
+from app.fl.utils import (
     get_model_weights,
     set_model_weights,
     flatten_weights,
@@ -28,6 +28,7 @@ class HospitalClient:
         device: Optional[torch.device] = None,
         conv1_channels: int = 16,
         conv2_channels: int = 32,
+        resolution: int = 28,
     ):
         self.client_id = client_id
         self.data_loader = data_loader
@@ -40,6 +41,7 @@ class HospitalClient:
             num_classes=config.NUM_CLASSES,
             conv1_channels=conv1_channels,
             conv2_channels=conv2_channels,
+            resolution=resolution,
         ).to(self.device)
 
         class_weights = torch.tensor([1.939, 0.674], dtype=torch.float32).to(self.device)
@@ -108,3 +110,4 @@ class HospitalClient:
             update_delta = apply_sign_flip(update_delta, scale=config.SIGN_FLIP_SCALE)
 
         return update_delta, total_samples, avg_loss
+

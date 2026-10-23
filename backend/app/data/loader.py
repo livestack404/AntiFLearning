@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Tuple, Optional
 import os
 
-from backend.app import config
+from app import config
 
 class MedMNISTDataset(Dataset):
     """Custom PyTorch Dataset for MedMNIST npz arrays with standard preprocessing."""
@@ -81,3 +81,4 @@ def get_test_loader(batch_size: int = config.BATCH_SIZE, size: int = config.IMAG
     _, _, (test_imgs, test_lbls) = load_medmnist_raw(size=size)
     dataset = MedMNISTDataset(test_imgs, test_lbls)
     return DataLoader(dataset, batch_size=batch_size, shuffle=False)
+

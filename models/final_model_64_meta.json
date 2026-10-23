@@ -1,0 +1,41 @@
+{
+  "resolution": 64,
+  "rounds_run": 2,
+  "best_round": 1,
+  "validation_accuracy": 0.9008,
+  "test_accuracy": 0.7821,
+  "sensitivity": 0.9846,
+  "specificity": 0.4444,
+  "precision": 0.7471,
+  "f1": 0.8496,
+  "auc": 0.9036,
+  "confusion_matrix": [
+    [
+      104,
+      130
+    ],
+    [
+      6,
+      384
+    ]
+  ],
+  "attack_and_protection_config": {
+    "attack_enabled": true,
+    "attack_type": "label_flip",
+    "malicious_clients": [
+      3,
+      7
+    ],
+    "protection_enabled": true,
+    "detector": "cosine_mad"
+  },
+  "detection_stats": {
+    "total_checks": 16,
+    "total_accepted": 14,
+    "total_rejected": 2,
+    "total_excluded": 0,
+    "malicious_rejected": 2,
+    "honest_rejected": 0
+  },
+  "timestamp": "2026-10-23T09:39:59.129303+00:00"
+}

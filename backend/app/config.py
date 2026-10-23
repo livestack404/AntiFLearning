@@ -23,10 +23,62 @@ CONTRACT_PATH = BLOCKCHAIN_DIR / "contracts" / "AuditLog.sol"
 MOCK_LEDGER_PATH = BLOCKCHAIN_DIR / "mock_ledger.json"
 
 MODELS_DIR = BASE_DIR / "models"
-FINAL_MODEL_PATH = MODELS_DIR / "final_model_64.pth"
+SAMPLES_DIR = BASE_DIR / "samples"
+SAMPLES_MANIFEST_PATH = SAMPLES_DIR / "manifest.json"
+
+def get_selected_final_model():
+    """Selects whichever model has higher validation accuracy read from meta JSONs.
+    If only one exists, use it. If none exist, returns (None, None).
+    """
+    import json
+    candidates = []
+    if MODELS_DIR.exists():
+        for meta_file in MODELS_DIR.glob("final_model_*_meta.json"):
+            try:
+                with open(meta_file, "r", encoding="utf-8") as f:
+                    meta = json.load(f)
+                res = meta.get("resolution")
+                pth_file = MODELS_DIR / f"final_model_{res}.pth"
+                if not pth_file.exists():
+                    stem = meta_file.name.replace("_meta.json", ".pth")
+                    pth_file = MODELS_DIR / stem
+                if pth_file.exists():
+                    val_acc = float(meta.get("validation_accuracy", meta.get("val_accuracy", 0.0)))
+                    candidates.append((val_acc, pth_file, meta))
+            except Exception:
+                continue
+
+    if not candidates:
+        return None, None
+
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    return candidates[0][1], candidates[0][2]
+
+class _FinalModelPathProxy:
+    @property
+    def _path(self) -> Path:
+        best_path, _ = get_selected_final_model()
+        if best_path is not None:
+            return best_path
+        return MODELS_DIR / "final_model_64.pth"
+
+    def __getattr__(self, name):
+        return getattr(self._path, name)
+
+    def __str__(self):
+        return str(self._path)
+
+    def __fspath__(self):
+        return str(self._path)
+
+    def exists(self) -> bool:
+        best_path, _ = get_selected_final_model()
+        return best_path is not None and best_path.exists()
+
+FINAL_MODEL_PATH = _FinalModelPathProxy()
 
 # Ensure all essential directories exist
-for p in [DATA_DIR, RESULTS_DIR, CHECKPOINTS_DIR, SAMPLE_IMAGES_DIR, BLOCKCHAIN_DIR, MODELS_DIR]:
+for p in [DATA_DIR, RESULTS_DIR, CHECKPOINTS_DIR, SAMPLE_IMAGES_DIR, BLOCKCHAIN_DIR, MODELS_DIR, SAMPLES_DIR]:
     p.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
@@ -66,7 +118,7 @@ WARMUP_ROUNDS: int = 2              # Warmup rounds before exclusion triggers
 CONFIDENCE_THRESHOLD: float = 0.70  # Min softmax probability required to accept diagnosis
 MIN_IMAGE_STD: float = 0.05         # Low contrast/blank image rejection
 MAX_COLOR_DIFF: float = 0.15        # Rejects color photos with high channel variance
-OOD_DISTANCE_PERCENTILE: float = 99.0  # Mahalanobis distance rejection ceiling
+XAI_ENABLED: bool = True            # Enable PyTorch Grad-CAM explainability overlay
 
 # ---------------------------------------------------------------------------
 # Blockchain Settings
@@ -122,3 +174,4 @@ class RunConfig(BaseModel):
     learning_rate: float = Field(default=LEARNING_RATE, gt=0, le=0.1)
     speed_ms: int = Field(default=100, ge=0, le=2000)  # Delay between rounds for animation
     seed: int = SEED
+

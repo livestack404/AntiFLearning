@@ -4,13 +4,13 @@
     "scenario": "clean",
     "num_clients": 8,
     "malicious_ids": [],
-    "detection": true,
+    "detection": false,
     "attack_type": "label_flip",
     "rounds": 10,
     "local_epochs": 1,
     "batch_size": 32,
     "learning_rate": 0.001,
-    "speed_ms": 0,
+    "speed_ms": 100,
     "seed": 42
   },
   "rounds": [
@@ -23,7 +23,7 @@
       "f1": 0.9055,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 8.2
+      "blockchain_ms": 40.16
     },
     {
       "round": 2,
@@ -34,7 +34,7 @@
       "f1": 0.9532,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 15.71
+      "blockchain_ms": 47.99
     },
     {
       "round": 3,
@@ -45,7 +45,7 @@
       "f1": 0.9497,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 21.21
+      "blockchain_ms": 68.74
     },
     {
       "round": 4,
@@ -56,7 +56,7 @@
       "f1": 0.9557,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 22.8
+      "blockchain_ms": 78.88
     },
     {
       "round": 5,
@@ -67,7 +67,7 @@
       "f1": 0.968,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 27.48
+      "blockchain_ms": 98.42
     },
     {
       "round": 6,
@@ -78,7 +78,7 @@
       "f1": 0.9639,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 24.51
+      "blockchain_ms": 100.39
     },
     {
       "round": 7,
@@ -89,7 +89,7 @@
       "f1": 0.9569,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 39.12
+      "blockchain_ms": 114.99
     },
     {
       "round": 8,
@@ -100,7 +100,7 @@
       "f1": 0.9609,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 31.83
+      "blockchain_ms": 127.56
     },
     {
       "round": 9,
@@ -111,7 +111,7 @@
       "f1": 0.9638,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 37.06
+      "blockchain_ms": 144.75
     },
     {
       "round": 10,
@@ -122,10 +122,10 @@
       "f1": 0.9638,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 45.69
+      "blockchain_ms": 157.58
     }
   ],
-  "elapsed_seconds": 12.46,
+  "elapsed_seconds": 79.25,
   "final_metrics": {
     "round": 10,
     "accuracy": 0.9466,
@@ -135,7 +135,7 @@
     "f1": 0.9638,
     "trusted_clients": 8,
     "excluded_clients": 0,
-    "blockchain_ms": 45.69
+    "blockchain_ms": 157.58
   },
   "final_test_metrics": {
     "loss": 0.6822,

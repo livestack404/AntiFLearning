@@ -17,7 +17,7 @@ import time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from backend.app import config
+from app import config
 
 # Status code mappings for blockchain storage (uint8)
 STATUS_TO_CODE = {
@@ -184,3 +184,4 @@ class LocalRecordStore:
             self.storage_path.unlink()
         if self.backup_path.exists():
             self.backup_path.unlink()
+

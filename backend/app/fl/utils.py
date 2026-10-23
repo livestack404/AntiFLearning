@@ -48,3 +48,4 @@ def cosine_similarity(v1: np.ndarray, v2: np.ndarray, eps: float = 1e-9) -> floa
     dot = np.dot(v1, v2)
     sim = dot / (norm1 * norm2)
     return float(np.clip(sim, -1.0, 1.0))
+

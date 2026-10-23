@@ -13,9 +13,9 @@ from sklearn.metrics import (
     confusion_matrix,
 )
 
-from backend.app import config
-from backend.app.fl.model import PneumoniaCNN
-from backend.app.fl.utils import (
+from app import config
+from app.fl.model import PneumoniaCNN
+from app.fl.utils import (
     get_model_weights,
     set_model_weights,
     flatten_weights,
@@ -28,6 +28,7 @@ class FLServer:
         device: Optional[torch.device] = None,
         conv1_channels: int = 16,
         conv2_channels: int = 32,
+        resolution: int = 28,
     ):
         if device is None:
             self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -38,6 +39,7 @@ class FLServer:
             num_classes=config.NUM_CLASSES,
             conv1_channels=conv1_channels,
             conv2_channels=conv2_channels,
+            resolution=resolution,
         ).to(self.device)
         
         # Class weights for PneumoniaMNIST (~26% normal, ~74% pneumonia)
@@ -149,3 +151,4 @@ class FLServer:
             "f1": round(float(f1), 4),
             "confusion_matrix": cm.tolist(),
         }
+

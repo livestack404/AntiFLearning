@@ -8,10 +8,10 @@ import numpy as np
 import torch
 import pytest
 
-from backend.app.fl.model import PneumoniaCNN
-from backend.app.fl.attack import apply_label_flip, apply_sign_flip
-from backend.app.fl.server import FLServer
-from backend.app.fl.utils import get_model_weights, flatten_weights
+from app.fl.model import PneumoniaCNN
+from app.fl.attack import apply_label_flip, apply_sign_flip
+from app.fl.server import FLServer
+from app.fl.utils import get_model_weights, flatten_weights
 
 def test_model_forward_and_feature_extraction():
     model = PneumoniaCNN(num_classes=2)
@@ -61,3 +61,4 @@ def test_fedavg_aggregation():
 
     # Weighted avg delta should be (0.1 + 0.3) / 2 = 0.2
     assert np.allclose(flat_new - flat_init, 0.2, atol=1e-5)
+

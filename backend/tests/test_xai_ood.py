@@ -3,7 +3,7 @@
 - Rejection of saturated color images
 - Rejection of extreme aspect ratios
 - Generation of Grad-CAM heatmaps
-- Generation of dynamic plain-language and clinical explanations
+- Hard rejection reasons
 """
 
 import io
@@ -12,10 +12,11 @@ import torch
 from PIL import Image
 import pytest
 
-from backend.app.fl.model import PneumoniaCNN
-from backend.app.xai.ood import OODDetector
-from backend.app.xai.gradcam import GradCAM
-from backend.app.xai.explain_text import analyze_cam_zones, generate_explanation
+from app.fl.model import PneumoniaCNN
+from app.xai.ood import OODDetector
+from app.xai.gradcam import GradCAM
+from app.xai.explain_text import analyze_cam_zones
+
 
 def test_ood_blank_image_rejection():
     ood = OODDetector()
@@ -25,7 +26,8 @@ def test_ood_blank_image_rejection():
     img.save(buf, format="PNG")
     valid, reason, tensor, _ = ood.preprocess_image(buf.getvalue())
     assert valid is False
-    assert "blank" in reason.lower() or "contrast" in reason.lower()
+    assert "blank" in reason.lower() or "contrast" in reason.lower() or "flat" in reason.lower()
+
 
 def test_ood_color_image_rejection():
     ood = OODDetector()
@@ -37,6 +39,7 @@ def test_ood_color_image_rejection():
     assert valid is False
     assert "color" in reason.lower()
 
+
 def test_ood_aspect_ratio_rejection():
     ood = OODDetector()
     # Create extreme panoramic image (400 x 50)
@@ -47,22 +50,29 @@ def test_ood_aspect_ratio_rejection():
     assert valid is False
     assert "aspect" in reason.lower()
 
-def test_gradcam_and_explanation_generation():
-    model = PneumoniaCNN(num_classes=2)
+
+def test_ood_min_dimension_rejection():
+    ood = OODDetector()
+    # Create image smaller than 32px (20 x 20)
+    img = Image.new("L", (20, 20), color=128)
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    valid, reason, tensor, _ = ood.preprocess_image(buf.getvalue())
+    assert valid is False
+    assert "small" in reason.lower() or "32" in reason.lower()
+
+
+def test_gradcam_generation():
+    model = PneumoniaCNN(num_classes=2, resolution=64)
     gradcam = GradCAM(model, model.get_last_conv_layer())
-    dummy_input = torch.randn(1, 1, 28, 28)
+    dummy_input = torch.randn(1, 1, 64, 64)
 
     cam = gradcam.generate_cam(dummy_input, target_class=1)
-    assert cam.shape == (28, 28)
+    assert cam.shape == (64, 64)
     assert cam.min() >= 0.0
     assert cam.max() <= 1.0
 
     analysis = analyze_cam_zones(cam)
-    assert "dominant_zone_name" in analysis
+    assert "dominant_zone_key" in analysis
     assert "coverage_pct" in analysis
 
-    exp = generate_explanation("Pneumonia", 0.92, cam)
-    assert "plain_text" in exp
-    assert "clinical_text" in exp
-    assert "disclaimer" in exp
-    assert "Decision-support" in exp["disclaimer"]

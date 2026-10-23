@@ -269,3 +269,4 @@ class PoisonDetector:
 
         self.verdicts_history.append(verdicts)
         return verdicts, trusted_ids
+

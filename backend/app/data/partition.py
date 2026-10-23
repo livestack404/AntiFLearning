@@ -8,8 +8,8 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader, Subset
 from typing import Dict, List, Tuple
-from backend.app import config
-from backend.app.data.loader import load_medmnist_raw, MedMNISTDataset
+from app import config
+from app.data.loader import load_medmnist_raw, MedMNISTDataset
 
 def partition_data(
     num_clients: int = config.NUM_CLIENTS,
@@ -87,3 +87,4 @@ def partition_data(
         }
 
     return client_loaders, client_stats
+

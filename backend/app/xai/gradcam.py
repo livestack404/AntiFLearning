@@ -54,8 +54,9 @@ class GradCAM:
         cam = torch.sum(weights * self.activations, dim=1, keepdim=True)  # (1, 1, H, W)
         cam = F.relu(cam)
 
-        # Upsample to 28x28 matching input resolution
-        cam = F.interpolate(cam, size=(28, 28), mode="bilinear", align_corners=False)
+        # Upsample to match input tensor resolution
+        h, w = input_tensor.shape[-2], input_tensor.shape[-1]
+        cam = F.interpolate(cam, size=(h, w), mode="bilinear", align_corners=False)
         cam_np = cam.squeeze().cpu().numpy()
 
         # Min-max normalization
@@ -100,3 +101,4 @@ class GradCAM:
         out_pil.save(buf, format="PNG")
         b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
         return f"data:image/png;base64,{b64}"
+

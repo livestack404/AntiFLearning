@@ -16,7 +16,7 @@ import json
 import logging
 import os
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from fastapi import (
     FastAPI,
@@ -29,18 +29,20 @@ from fastapi import (
     BackgroundTasks,
 )
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse, FileResponse, Response
+import zipfile
 from PIL import Image
 import torch
+import torch.nn.functional as F
+import numpy as np
 
-from backend.app import config
-from backend.app.config import RunConfig, SCENARIOS
-from backend.app.state import training_state
-from backend.app.orchestrator import orchestrator
-from backend.app.fl.model import PneumoniaCNN
-from backend.app.xai.ood import ood_detector
-from backend.app.xai.gradcam import GradCAM
-from backend.app.xai.explain_text import generate_explanation
+from app import config
+from app.config import RunConfig, SCENARIOS
+from app.state import training_state
+from app.orchestrator import orchestrator
+from app.fl.model import PneumoniaCNN
+from app.xai.ood import ood_detector
+from app.xai.gradcam import GradCAM
 
 # Setup logging
 logging.basicConfig(
@@ -68,46 +70,47 @@ app.add_middleware(
 # Global Model Cache for Fast Clinical Inference
 # ---------------------------------------------------------------------------
 _inference_model: Optional[PneumoniaCNN] = None
+_inference_meta: Optional[Dict] = None
+_inference_model_path: Optional[Path] = None
 
 
-def get_inference_model() -> PneumoniaCNN:
-    """Loads the model checkpoint into memory for inference. Fails if missing."""
-    global _inference_model
-    # Check FINAL_MODEL_PATH first, fallback to CHECKPOINTS_DIR / best_model.pth if it exists
-    model_path = config.FINAL_MODEL_PATH
-    if not model_path.exists():
-        fallback_path = config.CHECKPOINTS_DIR / "best_model.pth"
-        if fallback_path.exists():
-            model_path = fallback_path
-        else:
-            raise HTTPException(
-                status_code=503,
-                detail="Model not loaded. Model weights file is missing."
-            )
+def get_inference_model() -> Tuple[PneumoniaCNN, Dict]:
+    """Loads the model checkpoint into memory for inference. Fails with 503 if missing."""
+    global _inference_model, _inference_meta, _inference_model_path
+    model_path, meta = config.get_selected_final_model()
+    if model_path is None or not model_path.exists():
+        raise HTTPException(
+            status_code=503,
+            detail="Model not loaded"
+        )
 
-    if _inference_model is None:
+    if _inference_model is None or _inference_model_path != model_path:
         try:
-            # Detect model architecture size from meta or checkpoint if needed
-            model = PneumoniaCNN(num_classes=config.NUM_CLASSES)
+            resolution = meta.get("resolution", 64) if meta else 64
+            model = PneumoniaCNN(num_classes=config.NUM_CLASSES, resolution=resolution)
             state_dict = torch.load(model_path, map_location="cpu")
             model.load_state_dict(state_dict)
             model.eval()
             _inference_model = model
-            logger.info(f"Loaded model checkpoint from {model_path}")
+            _inference_meta = meta
+            _inference_model_path = model_path
+            logger.info(f"Loaded model checkpoint from {model_path} (resolution {resolution})")
         except Exception as e:
             logger.error(f"Failed to load checkpoint ({e})")
             raise HTTPException(
                 status_code=503,
-                detail=f"Model not loaded. Failed to load checkpoint: {e}"
+                detail="Model not loaded"
             )
 
-    return _inference_model
+    return _inference_model, _inference_meta
 
 
 def reload_inference_model():
     """Forces reloading checkpoint after a new training run."""
-    global _inference_model
+    global _inference_model, _inference_meta, _inference_model_path
     _inference_model = None
+    _inference_meta = None
+    _inference_model_path = None
     return get_inference_model()
 
 
@@ -192,6 +195,15 @@ async def resume_training():
         raise HTTPException(status_code=400, detail="No simulation is running.")
     training_state.resume()
     return {"status": "resumed", "current_round": training_state.current_round}
+
+
+@app.post("/api/step")
+async def step_training():
+    """Advances one phase while paused."""
+    if not training_state.is_running:
+        raise HTTPException(status_code=400, detail="No simulation is running.")
+    training_state.step()
+    return {"status": "stepping", "current_round": training_state.current_round}
 
 
 @app.post("/api/stop")
@@ -299,39 +311,33 @@ async def reset_ledger():
 # ---------------------------------------------------------------------------
 # Clinical Inference & XAI Endpoints
 # ---------------------------------------------------------------------------
+@app.get("/api/model-info")
+async def get_model_info():
+    """Returns the meta JSON of the active trained final model."""
+    _, meta = get_inference_model()
+    if meta is None:
+        raise HTTPException(status_code=503, detail="Model not loaded")
+    return meta
+
+
 @app.get("/api/samples")
 async def get_sample_images():
-    """Returns preset sample images for one-click testing in the UI."""
-    sample_defs = [
-        {
-            "id": "normal",
-            "name": "Normal Radiograph",
-            "description": "Clear lung fields, symmetric aeration, healthy parenchyma.",
-            "expected": "Normal",
-            "file": "normal_sample.png",
-            "type": "valid",
-        },
-        {
-            "id": "pneumonia",
-            "name": "Pneumonia Infiltrate",
-            "description": "Focal airspace consolidation with dense opacity.",
-            "expected": "Pneumonia",
-            "file": "pneumonia_sample.png",
-            "type": "valid",
-        },
-        {
-            "id": "invalid",
-            "name": "Non-Radiological Object",
-            "description": "Out-Of-Distribution image intended to trigger guardrail rejection.",
-            "expected": "Rejected",
-            "file": "invalid_sample.png",
-            "type": "invalid",
-        },
-    ]
+    """Returns the 16 test sample images from samples/manifest.json with image data URLs."""
+    manifest_path = config.SAMPLES_MANIFEST_PATH
+    if not manifest_path.exists():
+        # Fallback to empty if not exported
+        return []
+
+    try:
+        with open(manifest_path, "r", encoding="utf-8") as f:
+            manifest = json.load(f)
+    except Exception:
+        return []
 
     results = []
-    for s in sample_defs:
-        img_path = config.SAMPLE_IMAGES_DIR / s["file"]
+    for s in manifest:
+        filename = s.get("filename", "")
+        img_path = config.SAMPLES_DIR / filename
         data_url = None
         if img_path.exists():
             try:
@@ -340,93 +346,155 @@ async def get_sample_images():
                     data_url = f"data:image/png;base64,{b64}"
             except Exception:
                 pass
-        results.append({**s, "image_url": data_url})
-
+        results.append({
+            "id": s.get("id", filename),
+            "filename": filename,
+            "label": s.get("label", ""),
+            "label_idx": s.get("label_idx", 0),
+            "image_url": data_url,
+            "image_data_url": data_url,
+        })
     return results
+
+
+@app.get("/api/samples/download")
+@app.get("/api/samples/zip")
+async def download_samples_zip():
+    """Returns a ZIP archive of all 16 sample images and the manifest.json."""
+    if not config.SAMPLES_DIR.exists():
+        raise HTTPException(status_code=404, detail="Samples directory not found")
+
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
+        for p in config.SAMPLES_DIR.iterdir():
+            if p.is_file():
+                zf.write(p, arcname=p.name)
+
+    zip_buffer.seek(0)
+    return Response(
+        content=zip_buffer.getvalue(),
+        media_type="application/zip",
+        headers={"Content-Disposition": 'attachment; filename="anti-flearning-samples.zip"'},
+    )
 
 
 @app.post("/api/predict")
 async def predict_image(file: UploadFile = File(...)):
-    """Runs 5-stage OOD guardrail filtering, PneumoniaCNN classification, and Grad-CAM generation."""
+    """Runs input guardrails, PneumoniaCNN classification, and Grad-CAM generation."""
     contents = await file.read()
     return _process_prediction(contents)
 
 
 @app.post("/api/predict/sample/{sample_id}")
 async def predict_preset_sample(sample_id: str):
-    """Runs inference directly on one of the built-in sample images."""
-    file_map = {
-        "normal": "normal_sample.png",
-        "pneumonia": "pneumonia_sample.png",
-        "invalid": "invalid_sample.png",
-    }
-    if sample_id not in file_map:
-        raise HTTPException(status_code=404, detail="Sample not found.")
+    """Runs inference directly on a sample image, returning prediction and true label from manifest."""
+    target_path = None
+    manifest_item = None
 
-    target_path = config.SAMPLE_IMAGES_DIR / file_map[sample_id]
-    if not target_path.exists():
-        raise HTTPException(status_code=404, detail="Sample file missing on disk.")
+    if config.SAMPLES_MANIFEST_PATH.exists():
+        try:
+            with open(config.SAMPLES_MANIFEST_PATH, "r", encoding="utf-8") as f:
+                manifest = json.load(f)
+            for item in manifest:
+                if (
+                    item.get("id") == sample_id
+                    or item.get("filename") == sample_id
+                    or item.get("filename") == f"{sample_id}.png"
+                ):
+                    manifest_item = item
+                    target_path = config.SAMPLES_DIR / item["filename"]
+                    break
+        except Exception:
+            pass
+
+    if target_path is None or not target_path.exists():
+        candidate = config.SAMPLES_DIR / (sample_id if sample_id.endswith(".png") else f"{sample_id}.png")
+        if candidate.exists():
+            target_path = candidate
+        else:
+            legacy_map = {
+                "normal": "normal_sample.png",
+                "pneumonia": "pneumonia_sample.png",
+                "invalid": "invalid_sample.png",
+            }
+            if sample_id in legacy_map:
+                target_path = config.SAMPLE_IMAGES_DIR / legacy_map[sample_id]
+
+    if target_path is None or not target_path.exists():
+        raise HTTPException(status_code=404, detail="Sample not found.")
 
     with open(target_path, "rb") as f:
         contents = f.read()
 
-    return _process_prediction(contents)
+    result = _process_prediction(contents)
+    if manifest_item is not None:
+        result["sample_id"] = manifest_item.get("id")
+        result["filename"] = manifest_item.get("filename")
+        result["true_label"] = manifest_item.get("label")
+        result["true_label_idx"] = manifest_item.get("label_idx")
+        if result.get("status") == "accepted":
+            result["is_match"] = bool(result.get("prediction") == manifest_item.get("label"))
+
+    return result
 
 
 def _process_prediction(image_bytes: bytes) -> Dict:
-    """Core prediction pipeline with multi-stage OOD guardrail checks."""
-    model = get_inference_model()
+    """Core prediction pipeline with hard reject guardrails and soft uncertainty."""
+    model, meta = get_inference_model()
+    resolution = meta.get("resolution", 64) if meta else 64
 
-    # Preprocessing & format check
-    is_valid_format, error_msg, tensor, pil_img = ood_detector.preprocess_image(image_bytes)
-    if not is_valid_format:
-        return {
-            "status": "rejected",
-            "is_ood": True,
-            "error_type": "Format/Contrast Error",
-            "reason": error_msg,
-            "disclaimer": "Decision-support demonstration only. Not a medical diagnosis.",
-        }
-
-    # Softmax confidence & Mahalanobis distance check
-    is_valid_xray, ood_msg, details = ood_detector.check_ood(model, tensor)
-    if not is_valid_xray:
-        return {
-            "status": "rejected",
-            "is_ood": True,
-            "error_type": "Out-Of-Distribution Rejection",
-            "reason": ood_msg,
-            "details": details,
-            "disclaimer": "Decision-support demonstration only. Not a medical diagnosis.",
-        }
-
-    # Generate Grad-CAM for predicted class
-    pred_class = details["predicted_class"]
-    gradcam = GradCAM(model, model.get_last_conv_layer())
-    cam = gradcam.generate_cam(tensor, target_class=pred_class)
-    heatmap_b64 = gradcam.overlay_heatmap(cam, pil_img, alpha=0.5)
-
-    # Dynamic plain-language and clinical explanation
-    explanations = generate_explanation(
-        prediction_label=details["label"],
-        confidence=details["confidence"],
-        cam=cam,
+    # Hard rejects only: undecodable, either side < 32 px, aspect ratio > 2.5 or < 0.4,
+    # flat/blank (grayscale std < 8), strongly colored (mean channel diff > 20 of 255)
+    valid, error_msg, tensor, gray_img = ood_detector.preprocess_image(
+        image_bytes, target_resolution=resolution
     )
+    if not valid:
+        return {
+            "status": "rejected",
+            "is_ood": True,
+            "reason": error_msg,
+            "disclaimer": "Decision support only, not a medical diagnosis.",
+        }
+
+    model.eval()
+    with torch.no_grad():
+        logits = model(tensor)
+        probs = F.softmax(logits, dim=1).squeeze().cpu().numpy()
+
+    pred_class = int(np.argmax(probs))
+    confidence = float(probs[pred_class])
+    label = "Pneumonia" if pred_class == 1 else "Normal"
+    # Soft: max probability < 0.70 returns an uncertain: true flag; the result is still returned
+    uncertain = bool(confidence < 0.70)
+
+    heatmap_b64 = None
+    if config.XAI_ENABLED:
+        try:
+            gradcam = GradCAM(model, model.get_last_conv_layer())
+            cam = gradcam.generate_cam(tensor, target_class=pred_class)
+            heatmap_b64 = gradcam.overlay_heatmap(cam, gray_img, alpha=0.5)
+        except Exception as e:
+            logger.warning(f"Grad-CAM generation failed: {e}")
+
+    # Static caption for explainability overlay. The response carries no per-image explanation text.
+    # The UI shows one static caption: "Highlighted areas show where the model focused most."
+    caption = "Highlighted areas show where the model focused most."
 
     return {
         "status": "accepted",
         "is_ood": False,
-        "prediction": details["label"],
+        "prediction": label,
         "predicted_class": pred_class,
-        "confidence": details["confidence"],
-        "confidence_percentage": round(details["confidence"] * 100, 1),
+        "confidence": round(confidence, 4),
+        "confidence_percentage": round(confidence * 100, 1),
         "probabilities": {
-            "normal": details["probs"][0],
-            "pneumonia": details["probs"][1],
+            "normal": round(float(probs[0]), 4),
+            "pneumonia": round(float(probs[1]), 4),
         },
+        "uncertain": uncertain,
         "heatmap_data_url": heatmap_b64,
-        "explanation": explanations,
-        "disclaimer": "Decision-support demonstration only. Not a medical diagnosis.",
+        "caption": caption,
+        "disclaimer": "Decision support only, not a medical diagnosis.",
     }
 
 
@@ -484,3 +552,4 @@ async def get_scenario_replay(scenario: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
+

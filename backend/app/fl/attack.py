@@ -16,3 +16,4 @@ def apply_label_flip(labels: torch.Tensor, num_classes: int = 2) -> torch.Tensor
 def apply_sign_flip(update_vector: np.ndarray, scale: float = 5.0) -> np.ndarray:
     """Inverts update direction to push global model weights in opposite direction."""
     return -scale * update_vector
+

@@ -13,7 +13,7 @@ Validates:
 
 import numpy as np
 import pytest
-from backend.app.detection.detector import PoisonDetector
+from app.detection.detector import PoisonDetector
 
 def test_cosine_similarity():
     v1 = np.array([1.0, 0.0, 0.0])
@@ -107,3 +107,4 @@ def test_quorum_rule():
     }
     verdicts, trusted = detector.evaluate_round(1, updates, detection_enabled=True)
     assert len(trusted) == 0  # Quorum not met (< 3 accepted updates), aggregation skipped
+

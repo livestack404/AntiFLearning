@@ -16,8 +16,8 @@ import time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from backend.app import config
-from backend.app.blockchain.mock_ledger import (
+from app import config
+from app.blockchain.mock_ledger import (
     MockLedger,
     LocalRecordStore,
     canonical_fingerprint,
@@ -268,3 +268,4 @@ class BlockchainLogger:
     def reset(self):
         self.mock_ledger.reset()
         self.local_store.reset()
+
