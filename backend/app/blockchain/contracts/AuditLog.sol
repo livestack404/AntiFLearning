@@ -1,79 +1,74 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-/// @title Federated Learning Audit Log
-/// @notice Append-only immutable log for recording FL round contribution verdicts.
-/// @dev Raw model weights and patient data are NEVER stored on-chain. Only SHA-256 digests and verdicts.
+/// @title AntiFLearning Audit Log Contract
+/// @notice Records fingerprints of federated learning contribution decisions.
+/// @dev Raw model weights and images are NEVER stored on-chain. Only hashes, round, hospitalId, and status code.
 contract AuditLog {
     struct Entry {
-        uint256 roundNumber;
-        uint256 clientId;
-        string  updateHash;
-        string  status;          // "ACCEPTED" | "FLAGGED" | "EXCLUDED"
-        int256  similarityScaled; // Cosine similarity * 10000 (fixed point int)
+        bytes32 recordHash;
+        uint16 round;
+        string hospitalId;
+        uint8 status;
         uint256 timestamp;
     }
 
     Entry[] public entries;
 
     event EntryLogged(
-        uint256 indexed roundNumber,
-        uint256 indexed clientId,
-        string updateHash,
-        string status,
-        int256 similarityScaled,
+        uint256 indexed index,
+        bytes32 indexed recordHash,
+        uint16 round,
+        string hospitalId,
+        uint8 status,
         uint256 timestamp
     );
 
-    /// @notice Append an immutable audit entry.
-    function addEntry(
-        uint256 roundNumber,
-        uint256 clientId,
-        string calldata updateHash,
-        string calldata status,
-        int256 similarityScaled
+    /// @notice Appends a decision record fingerprint to the immutable blockchain ledger.
+    function logEntry(
+        bytes32 recordHash,
+        uint16 round,
+        string calldata hospitalId,
+        uint8 status
     ) external returns (uint256) {
         entries.push(
             Entry({
-                roundNumber: roundNumber,
-                clientId: clientId,
-                updateHash: updateHash,
+                recordHash: recordHash,
+                round: round,
+                hospitalId: hospitalId,
                 status: status,
-                similarityScaled: similarityScaled,
                 timestamp: block.timestamp
             })
         );
         uint256 index = entries.length - 1;
-        emit EntryLogged(roundNumber, clientId, updateHash, status, similarityScaled, block.timestamp);
+        emit EntryLogged(index, recordHash, round, hospitalId, status, block.timestamp);
         return index;
     }
 
-    /// @notice Returns the total count of entries.
+    /// @notice Returns the total count of logged entries.
     function entryCount() external view returns (uint256) {
         return entries.length;
     }
 
-    /// @notice Retrieve an entry by index.
+    /// @notice Retrieves an entry by index.
     function getEntry(uint256 index)
         external
         view
         returns (
-            uint256 roundNumber,
-            uint256 clientId,
-            string memory updateHash,
-            string memory status,
-            int256 similarityScaled,
+            bytes32 recordHash,
+            uint16 round,
+            string memory hospitalId,
+            uint8 status,
             uint256 timestamp
         )
     {
         require(index < entries.length, "Index out of bounds");
         Entry storage e = entries[index];
         return (
-            e.roundNumber,
-            e.clientId,
-            e.updateHash,
+            e.recordHash,
+            e.round,
+            e.hospitalId,
             e.status,
-            e.similarityScaled,
             e.timestamp
         );
     }

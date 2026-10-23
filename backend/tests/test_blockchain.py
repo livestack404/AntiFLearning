@@ -1,49 +1,86 @@
 """Unit tests for Blockchain and Mock Ledger.
 
-Validates:
-- SHA-256 block creation and chaining
-- Cryptographic integrity verification
-- Tamper detection when a past entry is altered
+Validates per spec 4.5:
+- Clean ledger passes Verify ("All N entries intact")
+- Local decision record tampering (e.g. flipping Rejected to Accepted) fails Verify ("Record N does not match the blockchain")
+- Restore reverts local records and passes Verify
+- Blockchain itself is never modified
 """
 
 from pathlib import Path
 import tempfile
 import pytest
 
-from backend.app.blockchain.mock_ledger import MockLedger
+from backend.app.blockchain.logger import BlockchainLogger
+from backend.app.blockchain.mock_ledger import LocalRecordStore, canonical_fingerprint
 
-def test_mock_ledger_chaining_and_integrity():
+
+def test_clean_ledger_passes_verify():
     with tempfile.TemporaryDirectory() as tmpdir:
-        storage_path = Path(tmpdir) / "test_ledger.json"
-        ledger = MockLedger(storage_path=storage_path)
+        mock_path = Path(tmpdir) / "test_ledger.json"
+        local_path = Path(tmpdir) / "local_records.json"
 
-        # Add 3 entries
-        e1 = ledger.add_entry(round_no=1, client_id=0, update_hash="0xabc1", status="ACCEPTED", similarity=0.88)
-        e2 = ledger.add_entry(round_no=1, client_id=1, update_hash="0xabc2", status="ACCEPTED", similarity=0.85)
-        e3 = ledger.add_entry(round_no=1, client_id=2, update_hash="0xabc3", status="EXCLUDED", similarity=-0.50)
+        logger = BlockchainLogger()
+        logger.mock_ledger.storage_path = mock_path
+        logger.mock_ledger.reset()
+        logger.local_store.storage_path = local_path
+        logger.local_store.backup_path = Path(tmpdir) / "local_records_backup.json"
+        logger.local_store.reset()
 
-        assert e1["prev_hash"] == "0" * 64
-        assert e2["prev_hash"] == e1["block_hash"]
-        assert e3["prev_hash"] == e2["block_hash"]
+        # Log 3 decisions
+        for i in range(3):
+            logger.log_decision_record({
+                "round": 1,
+                "hospital_id": f"H{i+1}",
+                "status": "Accepted",
+                "cosine_similarity": 0.85,
+                "update_hash": f"0xabc{i}",
+            })
 
-        # Verify initial valid state
-        verify_res = ledger.verify_integrity()
+        verify_res = logger.verify_integrity()
         assert verify_res["valid"] is True
-        assert verify_res["total_entries"] == 3
+        assert "All 3 entries intact" in verify_res["message"]
 
-def test_tamper_detection():
+
+def test_tamper_and_restore():
     with tempfile.TemporaryDirectory() as tmpdir:
-        storage_path = Path(tmpdir) / "test_ledger.json"
-        ledger = MockLedger(storage_path=storage_path)
+        mock_path = Path(tmpdir) / "test_ledger.json"
+        local_path = Path(tmpdir) / "local_records.json"
 
-        for i in range(5):
-            ledger.add_entry(round_no=1, client_id=i, update_hash=f"0x{i}", status="ACCEPTED", similarity=0.9)
+        logger = BlockchainLogger()
+        logger.mock_ledger.storage_path = mock_path
+        logger.mock_ledger.reset()
+        logger.local_store.storage_path = local_path
+        logger.local_store.backup_path = Path(tmpdir) / "local_records_backup.json"
+        logger.local_store.reset()
 
-        # Forcibly tamper entry #2 on disk
-        tamper_res = ledger.tamper_entry(2, new_status="EXCLUDED")
+        # Log 3 decisions
+        for i in range(3):
+            logger.log_decision_record({
+                "round": 1,
+                "hospital_id": f"H{i+1}",
+                "status": "Accepted" if i < 2 else "Rejected",
+                "cosine_similarity": 0.85 if i < 2 else -0.5,
+                "update_hash": f"0xabc{i}",
+            })
+
+        # 1. Clean passes
+        assert logger.verify_integrity()["valid"] is True
+
+        # 2. Tamper entry #1 in local store (flip Rejected to Accepted or Accepted to Rejected)
+        tamper_res = logger.tamper_attempt(1)
         assert tamper_res["success"] is True
 
-        # Now verify integrity: must catch the tampering!
-        verify_res = ledger.verify_integrity()
-        assert verify_res["valid"] is False
-        assert verify_res["tampered_index"] == 2
+        # Verify must fail now with "Record 1 does not match the blockchain"
+        verify_fail = logger.verify_integrity()
+        assert verify_fail["valid"] is False
+        assert "Record 1 does not match the blockchain" in verify_fail["message"]
+
+        # 3. Restore reverts local records back to original
+        restore_res = logger.restore_attempt()
+        assert restore_res["success"] is True
+
+        # Verify must pass again
+        verify_pass = logger.verify_integrity()
+        assert verify_pass["valid"] is True
+        assert "All 3 entries intact" in verify_pass["message"]

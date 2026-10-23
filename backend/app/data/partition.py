@@ -16,8 +16,12 @@ def partition_data(
     batch_size: int = config.BATCH_SIZE,
     seed: int = config.SEED,
     size: int = config.IMAGE_SIZE,
+    alpha: float = config.DIRICHLET_ALPHA,
+    min_samples: int = config.MIN_CLIENT_SAMPLES,
 ) -> Tuple[Dict[int, DataLoader], Dict[int, Dict[str, int]]]:
     """Partitions PneumoniaMNIST training data across `num_clients` hospitals.
+
+    Mildly non-IID partition using Dirichlet alpha=2.0, ensuring at least `min_samples` per hospital.
 
     Returns:
         client_loaders: Dict[int, DataLoader] mapping client_id -> DataLoader
@@ -36,22 +40,26 @@ def partition_data(
     rng.shuffle(class_0_indices)
     rng.shuffle(class_1_indices)
 
-    # Generate Dirichlet proportions with high alpha (alpha=15) for roughly IID with mild variation
-    alpha = 15.0
-    dirichlet_0 = rng.dirichlet(np.full(num_clients, alpha))
-    dirichlet_1 = rng.dirichlet(np.full(num_clients, alpha))
+    # Sample Dirichlet distributions with rejection/adjustment if any client has < min_samples
+    max_attempts = 100
+    for attempt in range(max_attempts):
+        dirichlet_0 = rng.dirichlet(np.full(num_clients, alpha))
+        dirichlet_1 = rng.dirichlet(np.full(num_clients, alpha))
 
-    # Compute slice counts
-    c0_counts = np.floor(dirichlet_0 * len(class_0_indices)).astype(int)
-    c1_counts = np.floor(dirichlet_1 * len(class_1_indices)).astype(int)
-    
-    # Allocate remainder to balance
-    c0_rem = len(class_0_indices) - c0_counts.sum()
-    c1_rem = len(class_1_indices) - c1_counts.sum()
-    for i in range(c0_rem):
-        c0_counts[i % num_clients] += 1
-    for i in range(c1_rem):
-        c1_counts[i % num_clients] += 1
+        c0_counts = np.floor(dirichlet_0 * len(class_0_indices)).astype(int)
+        c1_counts = np.floor(dirichlet_1 * len(class_1_indices)).astype(int)
+
+        # Allocate remainder
+        c0_rem = len(class_0_indices) - c0_counts.sum()
+        c1_rem = len(class_1_indices) - c1_counts.sum()
+        for i in range(c0_rem):
+            c0_counts[i % num_clients] += 1
+        for i in range(c1_rem):
+            c1_counts[i % num_clients] += 1
+
+        total_per_client = c0_counts + c1_counts
+        if np.all(total_per_client >= min_samples) or attempt == max_attempts - 1:
+            break
 
     client_loaders = {}
     client_stats = {}

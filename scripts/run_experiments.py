@@ -60,13 +60,13 @@ async def main():
 
     logger.info(f"Starting benchmark suite with {rounds} rounds per scenario...")
 
-    # 1. Clean
-    await run_scenario("clean", malicious_ids=[], detection=False, rounds=rounds)
+    # 1. Clean (no attackers, detector on)
+    await run_scenario("clean", malicious_ids=[], detection=True, rounds=rounds)
 
-    # 2. Attacked (without defense)
+    # 2. Attacked (attackers, detector OFF)
     await run_scenario("attacked", malicious_ids=config.DEFAULT_MALICIOUS_CLIENTS, detection=False, rounds=rounds)
 
-    # 3. Defended (with defense)
+    # 3. Defended (attackers, detector ON)
     await run_scenario("defended", malicious_ids=config.DEFAULT_MALICIOUS_CLIENTS, detection=True, rounds=rounds)
 
     logger.info("\nAll experiment runs successfully completed! Results stored in experiments/results/")

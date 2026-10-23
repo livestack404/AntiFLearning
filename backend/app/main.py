@@ -277,8 +277,15 @@ async def verify_ledger():
 
 @app.post("/api/ledger/tamper")
 async def tamper_ledger(index: int = Query(0, ge=0)):
-    """Demonstrates tamper detection by forcibly altering a past block."""
+    """Demonstrates tamper detection by editing the local record copy only."""
     result = orchestrator.blockchain.tamper_attempt(index=index)
+    return result
+
+
+@app.post("/api/ledger/restore")
+async def restore_ledger():
+    """Reverts any tampered local records back to the blockchain-verified original."""
+    result = orchestrator.blockchain.restore_attempt()
     return result
 
 
@@ -417,7 +424,7 @@ def _process_prediction(image_bytes: bytes) -> Dict:
             "normal": details["probs"][0],
             "pneumonia": details["probs"][1],
         },
-        "heatmap_data_url": f"data:image/png;base64,{heatmap_b64}",
+        "heatmap_data_url": heatmap_b64,
         "explanation": explanations,
         "disclaimer": "Decision-support demonstration only. Not a medical diagnosis.",
     }

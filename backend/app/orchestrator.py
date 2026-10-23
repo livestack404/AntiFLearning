@@ -151,6 +151,10 @@ class FLOrchestrator:
             except Exception:
                 best_accuracy = 0.0
 
+        all_decision_records = []
+        caught_attackers = {}  # attacker_id -> round caught
+        honest_wrongly_flagged = set()
+
         try:
             for round_no in range(1, run_config.rounds + 1):
                 if training_state.should_stop:
@@ -164,8 +168,8 @@ class FLOrchestrator:
 
                 training_state.current_round = round_no
 
-                # Step 1: Start round
-                await training_state.emit_event("round_start", {
+                # Event 1: round_started
+                await training_state.emit_event("round_started", {
                     "round": round_no,
                     "total_rounds": run_config.rounds,
                     "scenario": run_config.scenario,
@@ -174,11 +178,20 @@ class FLOrchestrator:
                 # Server distributes global weights
                 global_weights = server.get_global_weights()
 
-                # Step 2 & 3: Hospitals train locally (malicious nodes poison)
-                await training_state.emit_event("client_status_batch", {
-                    "status": "Training",
-                    "cids": list(clients.keys()),
+                # Event 2: global_model_broadcast (NEW)
+                await training_state.emit_event("global_model_broadcast", {
+                    "round": round_no,
+                    "message": "Server sends the current model to every hospital",
                 })
+
+                # Event 3: client_training (per hospital)
+                for cid in sorted(clients.keys()):
+                    await training_state.emit_event("client_training", {
+                        "round": round_no,
+                        "client_id": cid,
+                        "hospital_id": f"H{cid+1}",
+                        "message": f"Hospital H{cid+1} trains locally on private X-rays",
+                    })
 
                 client_updates = {}
                 sample_counts = {}
@@ -197,76 +210,81 @@ class FLOrchestrator:
                     sample_counts[cid] = count
                     update_hashes[cid] = compute_update_hash(delta)
 
-                await training_state.emit_event("client_status_batch", {
-                    "status": "Sent",
-                    "cids": list(clients.keys()),
-                })
+                    # Event 4: client_update_sent (per hospital)
+                    await training_state.emit_event("client_update_sent", {
+                        "round": round_no,
+                        "client_id": cid,
+                        "hospital_id": f"H{cid+1}",
+                        "message": f"Hospital H{cid+1} sends model update to server",
+                    })
 
-                # Step 5: Detection (Cosine vs Median + MAD Robust Z + Persistence)
+                # Step 4: Detection
                 verdicts, trusted_ids = self.detector.evaluate_round(
                     round_no=round_no,
                     client_updates=client_updates,
                     detection_enabled=run_config.detection,
+                    run_id=run_config.scenario,
                 )
 
-                # Emit similarity, flag, and exclude events
+                # Track ground truth for run end detection report (never leaked to detector)
                 for cid, v in verdicts.items():
-                    await training_state.emit_event("similarity", {
-                        "round": round_no,
-                        "client_id": cid,
-                        "similarity": v["similarity"],
-                        "robust_z": v["robust_z"],
-                        "status": v["status"],
-                    })
-                    if v["is_flagged"]:
-                        await training_state.emit_event("flag", {
-                            "round": round_no,
-                            "client_id": cid,
-                            "reason": f"Cosine similarity {v['similarity']:.3f} below consensus",
-                        })
-                    if v["is_excluded"]:
-                        await training_state.emit_event("exclude", {
-                            "round": round_no,
-                            "client_id": cid,
-                            "reason": f"Persistent anomaly ({v.get('k_flags', 0)} flags)",
-                        })
+                    all_decision_records.append(v)
+                    if cid in run_config.malicious_ids:
+                        if v["status"] in ["Rejected", "Excluded"] and cid not in caught_attackers:
+                            caught_attackers[cid] = round_no
+                    else:
+                        if v["status"] in ["Rejected", "Excluded"]:
+                            honest_wrongly_flagged.add(cid)
 
-                # Step 6: FedAvg aggregation over trusted updates only
-                trusted_tuples = [
-                    (client_updates[cid], sample_counts[cid])
-                    for cid in trusted_ids
-                ]
-                server.aggregate(trusted_tuples)
-                await training_state.emit_event("aggregate", {
+                # Event 5: detection_complete (all decision records)
+                await training_state.emit_event("detection_complete", {
                     "round": round_no,
-                    "trusted_count": len(trusted_ids),
-                    "excluded_count": len(client_updates) - len(trusted_ids),
-                    "trusted_ids": trusted_ids,
+                    "records": list(verdicts.values()),
+                    "records_by_client": verdicts,
                 })
 
-                # Step 7: Evaluate global model on validation set (no leakage)
+                # Step 5: FedAvg aggregation over trusted updates (skip if quorum not met)
+                if trusted_ids:
+                    trusted_tuples = [
+                        (client_updates[cid], sample_counts[cid])
+                        for cid in trusted_ids
+                    ]
+                    server.aggregate(trusted_tuples)
+                    aggregation_status = "success"
+                else:
+                    logger.warning(f"Round {round_no}: Quorum not met (<3 accepted updates). Skipping aggregation.")
+                    aggregation_status = "skipped_quorum"
+
+                # Evaluate global model on validation set
                 val_metrics = server.evaluate(val_loader)
-                await training_state.emit_event("metrics", {
+
+                # Event 6: aggregation_complete (new validation accuracy and loss)
+                await training_state.emit_event("aggregation_complete", {
                     "round": round_no,
+                    "status": aggregation_status,
+                    "trusted_count": len(trusted_ids),
+                    "excluded_count": len(client_updates) - len(trusted_ids),
+                    "accuracy": val_metrics["accuracy"],
+                    "loss": val_metrics["loss"],
                     "metrics": val_metrics,
                 })
 
-                # Step 8: Log one blockchain entry per client per round
+                # Step 6: Log decision records to ledger
                 chain_time_start = time.time()
+                logged_entries = []
                 for cid in sorted(clients.keys()):
                     v = verdicts[cid]
-                    block_entry = self.blockchain.log_entry(
-                        round_no=round_no,
-                        client_id=cid,
-                        update_hash=update_hashes[cid],
-                        status=v["status"],
-                        similarity=v["similarity"],
-                    )
-                    await training_state.emit_event("chain_write", {
-                        "entry": block_entry,
-                        "mode": self.blockchain.mode,
-                    })
+                    block_entry = self.blockchain.log_decision_record(v)
+                    logged_entries.append(block_entry)
+
                 chain_ms = (time.time() - chain_time_start) * 1000.0
+
+                # Event 7: ledger_written
+                await training_state.emit_event("ledger_written", {
+                    "round": round_no,
+                    "entries_count": len(logged_entries),
+                    "mode": self.blockchain.mode,
+                })
 
                 # Assemble round record (per-round accuracy is validation accuracy)
                 rec = {
@@ -282,14 +300,13 @@ class FLOrchestrator:
                 }
                 round_records.append(rec)
 
-                await training_state.emit_event("round_end", {
+                # Event 8: round_completed
+                await training_state.emit_event("round_completed", {
                     "round": round_no,
                     "record": rec,
                 })
 
-                # Checkpoint saving rule:
-                # experiments/results/defended/best_model.pth is replaced ONLY by a Clean
-                # or Protected run with validation accuracy >= the current best.
+                # Checkpoint saving rule (Clean / Defended based on validation accuracy)
                 if run_config.scenario in [config.SCENARIO_CLEAN, config.SCENARIO_DEFENDED]:
                     if val_metrics["accuracy"] >= best_accuracy:
                         best_accuracy = val_metrics["accuracy"]
@@ -305,7 +322,6 @@ class FLOrchestrator:
                                 "timestamp": time.time(),
                             }, f, indent=2)
 
-                # Delay for live animation pacing
                 if run_config.speed_ms > 0:
                     await asyncio.sleep(run_config.speed_ms / 1000.0)
 
@@ -317,12 +333,28 @@ class FLOrchestrator:
             training_state.is_running = False
             training_state.is_paused = False
 
-            # Evaluate final global model on test set ONCE at run end
+            # Final evaluation on test set ONCE at run end
             final_test_metrics = server.evaluate(test_loader)
             logger.info(f"Final test accuracy evaluated at run end: {final_test_metrics['accuracy']:.4f}")
 
-            # Save per-round CSV and summary JSON
-            self._save_results(scenario_dir, round_records, run_config, start_time, final_test_metrics=final_test_metrics)
+            # Detection report computed from ground truth
+            detection_report = {
+                "actual_attackers": run_config.malicious_ids,
+                "caught_attackers": caught_attackers,
+                "honest_wrongly_flagged_or_excluded": list(honest_wrongly_flagged),
+                "honest_wrongly_flagged_count": len(honest_wrongly_flagged),
+            }
+
+            # Save per-round CSV, metrics.json, and records.json under experiments/results/<scenario>/
+            self._save_results(
+                scenario_dir,
+                round_records,
+                run_config,
+                start_time,
+                final_test_metrics=final_test_metrics,
+                decision_records=all_decision_records,
+                detection_report=detection_report,
+            )
 
             summary = {
                 "scenario": run_config.scenario,
@@ -330,9 +362,12 @@ class FLOrchestrator:
                 "final_accuracy": final_test_metrics["accuracy"],
                 "final_val_accuracy": round_records[-1]["accuracy"] if round_records else 0.0,
                 "best_val_accuracy": max((r["accuracy"] for r in round_records), default=0.0),
+                "best_accuracy": max((r["accuracy"] for r in round_records), default=0.0),
+                "detection_report": detection_report,
                 "elapsed_seconds": round(time.time() - start_time, 2),
             }
-            await training_state.emit_event("run_end", summary)
+            # Event 9: run_completed (summary + detection report)
+            await training_state.emit_event("run_completed", summary)
             return summary
 
     def _save_results(
@@ -342,8 +377,10 @@ class FLOrchestrator:
         run_config: config.RunConfig,
         start_time: float,
         final_test_metrics: Optional[Dict] = None,
+        decision_records: Optional[List[Dict]] = None,
+        detection_report: Optional[Dict] = None,
     ):
-        """Saves per-round CSV, metrics JSON, and full event log."""
+        """Saves per-round CSV, metrics JSON, records JSON, and full event log."""
         if not round_records:
             return
 
@@ -364,9 +401,15 @@ class FLOrchestrator:
                 "elapsed_seconds": round(time.time() - start_time, 2),
                 "final_metrics": round_records[-1] if round_records else {},
                 "final_test_metrics": final_test_metrics or {},
+                "detection_report": detection_report or {},
             }, f, indent=2)
 
-        # 3. Event log JSON for Replay feature
+        # 3. Decision records JSON (4.3 & 4.4: records.json)
+        records_path = scenario_dir / "records.json"
+        with open(records_path, "w", encoding="utf-8") as f:
+            json.dump(decision_records or [], f, indent=2)
+
+        # 4. Event log JSON for Replay feature
         event_log_path = scenario_dir / "event_log.json"
         with open(event_log_path, "w", encoding="utf-8") as f:
             json.dump(training_state.current_run_events, f, indent=2)

@@ -1,6 +1,7 @@
 {
-  "accuracy": 0.8814,
-  "scenario": "defended",
-  "round": 4,
-  "timestamp": 1791346974.2212636
+  "accuracy": 0.9542,
+  "val_accuracy": 0.9542,
+  "scenario": "clean",
+  "round": 10,
+  "timestamp": 1792735372.2609923
 }

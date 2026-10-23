@@ -4,137 +4,163 @@
     "scenario": "clean",
     "num_clients": 8,
     "malicious_ids": [],
-    "detection": false,
+    "detection": true,
     "attack_type": "label_flip",
     "rounds": 10,
     "local_epochs": 1,
     "batch_size": 32,
     "learning_rate": 0.001,
-    "speed_ms": 100,
+    "speed_ms": 0,
     "seed": 42
   },
   "rounds": [
     {
       "round": 1,
-      "accuracy": 0.8157,
-      "loss": 0.5452,
-      "precision": 0.8481,
-      "recall": 0.859,
-      "f1": 0.8535,
+      "accuracy": 0.8454,
+      "loss": 0.5917,
+      "precision": 0.8291,
+      "recall": 0.9974,
+      "f1": 0.9055,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 0.0
+      "blockchain_ms": 8.2
     },
     {
       "round": 2,
-      "accuracy": 0.867,
-      "loss": 0.414,
-      "precision": 0.8809,
-      "recall": 0.9103,
-      "f1": 0.8953,
+      "accuracy": 0.9294,
+      "loss": 0.3197,
+      "precision": 0.9378,
+      "recall": 0.9692,
+      "f1": 0.9532,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 0.0
+      "blockchain_ms": 15.71
     },
     {
       "round": 3,
-      "accuracy": 0.8766,
-      "loss": 0.4009,
-      "precision": 0.8962,
-      "recall": 0.9077,
-      "f1": 0.9019,
+      "accuracy": 0.9218,
+      "loss": 0.3494,
+      "precision": 0.9085,
+      "recall": 0.9949,
+      "f1": 0.9497,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 0.0
+      "blockchain_ms": 21.21
     },
     {
       "round": 4,
-      "accuracy": 0.8606,
-      "loss": 0.4967,
-      "precision": 0.8531,
-      "recall": 0.9385,
-      "f1": 0.8938,
+      "accuracy": 0.9351,
+      "loss": 0.213,
+      "precision": 0.9683,
+      "recall": 0.9434,
+      "f1": 0.9557,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 14.36
+      "blockchain_ms": 22.8
     },
     {
       "round": 5,
-      "accuracy": 0.867,
-      "loss": 0.5242,
-      "precision": 0.8545,
-      "recall": 0.9487,
-      "f1": 0.8991,
+      "accuracy": 0.9523,
+      "loss": 0.213,
+      "precision": 0.9643,
+      "recall": 0.9717,
+      "f1": 0.968,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 16.29
+      "blockchain_ms": 27.48
     },
     {
       "round": 6,
-      "accuracy": 0.8654,
-      "loss": 0.5509,
-      "precision": 0.8509,
-      "recall": 0.9513,
-      "f1": 0.8983,
+      "accuracy": 0.9466,
+      "loss": 0.1887,
+      "precision": 0.9664,
+      "recall": 0.9614,
+      "f1": 0.9639,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 40.27
+      "blockchain_ms": 24.51
     },
     {
       "round": 7,
-      "accuracy": 0.8622,
-      "loss": 0.5198,
-      "precision": 0.8535,
-      "recall": 0.941,
-      "f1": 0.8951,
+      "accuracy": 0.937,
+      "loss": 0.1791,
+      "precision": 0.9734,
+      "recall": 0.9409,
+      "f1": 0.9569,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 47.39
+      "blockchain_ms": 39.12
     },
     {
       "round": 8,
-      "accuracy": 0.8702,
-      "loss": 0.4232,
-      "precision": 0.8872,
-      "recall": 0.9077,
-      "f1": 0.8973,
+      "accuracy": 0.9427,
+      "loss": 0.1724,
+      "precision": 0.9736,
+      "recall": 0.9486,
+      "f1": 0.9609,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 47.97
+      "blockchain_ms": 31.83
     },
     {
       "round": 9,
-      "accuracy": 0.8686,
-      "loss": 0.5311,
-      "precision": 0.8581,
-      "recall": 0.9462,
-      "f1": 0.9,
+      "accuracy": 0.9466,
+      "loss": 0.1729,
+      "precision": 0.9688,
+      "recall": 0.9589,
+      "f1": 0.9638,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 45.15
+      "blockchain_ms": 37.06
     },
     {
       "round": 10,
-      "accuracy": 0.8718,
-      "loss": 0.5239,
-      "precision": 0.8656,
-      "recall": 0.941,
-      "f1": 0.9017,
+      "accuracy": 0.9466,
+      "loss": 0.1798,
+      "precision": 0.9688,
+      "recall": 0.9589,
+      "f1": 0.9638,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 49.79
+      "blockchain_ms": 45.69
     }
   ],
-  "elapsed_seconds": 57.16,
+  "elapsed_seconds": 12.46,
   "final_metrics": {
     "round": 10,
-    "accuracy": 0.8718,
-    "loss": 0.5239,
-    "precision": 0.8656,
-    "recall": 0.941,
-    "f1": 0.9017,
+    "accuracy": 0.9466,
+    "loss": 0.1798,
+    "precision": 0.9688,
+    "recall": 0.9589,
+    "f1": 0.9638,
     "trusted_clients": 8,
     "excluded_clients": 0,
-    "blockchain_ms": 49.79
+    "blockchain_ms": 45.69
+  },
+  "final_test_metrics": {
+    "loss": 0.6822,
+    "accuracy": 0.8429,
+    "balanced_accuracy": 0.8017,
+    "precision": 0.816,
+    "recall": 0.9667,
+    "specificity": 0.6368,
+    "auc": 0.9164,
+    "f1": 0.885,
+    "confusion_matrix": [
+      [
+        149,
+        85
+      ],
+      [
+        13,
+        377
+      ]
+    ]
+  },
+  "detection_report": {
+    "actual_attackers": [],
+    "caught_attackers": {},
+    "honest_wrongly_flagged_or_excluded": [],
+    "honest_wrongly_flagged_count": 0
   }
 }

@@ -1,19 +1,32 @@
 """Blockchain Audit Logger with automatic Ganache detection and cryptographic mock fallback.
 
-Strict separation: records audit metadata only and NEVER influences training.
-Only hashes and small verdicts are recorded on-chain, NEVER patient data or raw weights.
+Per 4.5 Ledger design:
+- Full decision records live in local store (LocalRecordStore).
+- Only record fingerprint (SHA-256 of canonical JSON) + round + hospital_id + status code goes on chain.
+- Ganache contract: logEntry(bytes32 recordHash, uint16 round, string hospitalId, uint8 status),
+  entryCount(), getEntry(index).
+- Verify recomputes each local record fingerprint and compares with the chain entry.
+- Tamper demo edits local copy only (never modifies chain).
+- Restore reverts local copy.
 """
 
 import json
 import logging
 import time
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from backend.app import config
-from backend.app.blockchain.mock_ledger import MockLedger
+from backend.app.blockchain.mock_ledger import (
+    MockLedger,
+    LocalRecordStore,
+    canonical_fingerprint,
+    STATUS_TO_CODE,
+    CODE_TO_STATUS,
+)
 
 logger = logging.getLogger(__name__)
+
 
 class BlockchainLogger:
     def __init__(self, ganache_url: str = config.GANACHE_URL):
@@ -24,6 +37,7 @@ class BlockchainLogger:
         self.account = None
         self.contract_address = None
         self.mock_ledger = MockLedger()
+        self.local_store = LocalRecordStore()
 
         self._init_connection()
 
@@ -37,7 +51,6 @@ class BlockchainLogger:
                 if accounts:
                     self.account = accounts[config.DEPLOY_ACCOUNT_INDEX]
                     self.web3.eth.default_account = self.account
-                    # Check for existing deployed contract
                     addr = self._load_persisted_address()
                     artifact = self._load_artifact()
                     if addr and artifact:
@@ -46,16 +59,14 @@ class BlockchainLogger:
                                 address=Web3.to_checksum_address(addr),
                                 abi=artifact["abi"],
                             )
-                            # Probe call
                             self.contract.functions.entryCount().call()
                             self.contract_address = addr
                             self.mode = "ganache"
                             logger.info(f"Connected to Ganache at {self.ganache_url}, contract: {addr}")
                             return
                         except Exception as e:
-                            logger.warning(f"Failed to bind contract at {addr}: {e}")
-                    
-                    # Auto-deploy if artifact exists
+                            logger.warning(f"Failed to bind existing contract ({e}), deploying new...")
+
                     if artifact:
                         new_addr = self._deploy_contract(artifact)
                         if new_addr:
@@ -63,10 +74,10 @@ class BlockchainLogger:
                             self.mode = "ganache"
                             return
 
-            logger.info("Ganache node not detected. Initializing local cryptographic hash-chain fallback.")
+            logger.info("Ganache node not detected. Using Local ledger (simulated chain).")
             self.mode = "mock"
         except Exception as e:
-            logger.info(f"Web3 init failed ({e}). Using cryptographic mock ledger.")
+            logger.info(f"Web3 init failed ({e}). Using Local ledger (simulated chain).")
             self.mode = "mock"
 
     def _load_artifact(self) -> Optional[Dict]:
@@ -109,66 +120,151 @@ class BlockchainLogger:
             logger.warning(f"Contract auto-deployment failed: {e}")
             return None
 
-    def log_entry(
-        self,
-        round_no: int,
-        client_id: int,
-        update_hash: str,
-        status: str,
-        similarity: float,
-    ) -> Dict:
-        """Records an audit entry on-chain or mock hash chain."""
-        # Always record to mock ledger for local integrity verification and fast queries
+    def log_decision_record(self, record: Dict) -> Dict:
+        """Stores full record in local store, and records fingerprint on blockchain."""
+        index, fp_hex = self.local_store.add_record(record)
+        round_no = int(record.get("round", 1))
+        hospital_id = str(record.get("hospital_id", record.get("client_id", 0)))
+        status_str = record.get("status", "Accepted")
+        status_code = STATUS_TO_CODE.get(status_str, 1)
+
+        # Record to mock fallback ledger
         mock_entry = self.mock_ledger.add_entry(
-            round_no, client_id, update_hash, status, similarity
+            record_hash=fp_hex,
+            round_no=round_no,
+            hospital_id=hospital_id,
+            status_code=status_code,
         )
 
+        tx_hex = None
         if self.mode == "ganache" and self.contract is not None:
             try:
                 from web3 import Web3
-                # Scaled integer for fixed point similarity: e.g. 0.8524 -> 8524
-                scaled_sim = int(round(similarity * 10000))
-                fn = self.contract.functions.addEntry(
-                    round_no, client_id, update_hash, status, scaled_sim
+                fp_bytes = bytes.fromhex(fp_hex)
+                fn = self.contract.functions.logEntry(
+                    fp_bytes,
+                    round_no,
+                    hospital_id,
+                    status_code,
                 )
                 tx_hash = fn.transact({"from": self.account})
                 receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
                 tx_hex = Web3.to_hex(receipt.transactionHash)
-                mock_entry["tx_hash"] = tx_hex
             except Exception as e:
                 logger.error(f"Ganache transaction failed ({e}). Degraded to mock chain.")
                 self.mode = "mock"
 
-        return mock_entry
+        return {
+            "index": index,
+            "fingerprint": fp_hex,
+            "round": round_no,
+            "hospital_id": hospital_id,
+            "status": status_str,
+            "tx_hash": tx_hex or mock_entry.get("tx_hash"),
+            "mode": self.mode,
+        }
+
+    # Backward compatibility helper for orchestrator
+    def log_entry(self, round_no: int, client_id: int, update_hash: str, status: str, similarity: float) -> Dict:
+        rec = {
+            "round": round_no,
+            "hospital_id": f"H{client_id+1}" if isinstance(client_id, int) else str(client_id),
+            "client_id": client_id,
+            "status": status,
+            "cosine_similarity": similarity,
+            "update_hash": update_hash,
+        }
+        return self.log_decision_record(rec)
 
     def get_entries(self, limit: Optional[int] = None) -> List[Dict]:
-        """Returns recorded entries."""
-        return self.mock_ledger.get_entries(limit)
+        """Returns full local records combined with blockchain status."""
+        records = self.local_store.get_records(limit)
+        return records
 
     def verify_integrity(self) -> Dict:
-        """Verifies the cryptographic integrity of the audit trail."""
-        result = self.mock_ledger.verify_integrity()
-        result["mode"] = self.mode
-        result["mode_display"] = "Ganache (live)" if self.mode == "ganache" else "Local hash-chain (Ganache not connected)"
-        return result
+        """Verifies local records against blockchain fingerprints at each index."""
+        local_records = self.local_store.get_records()
+        total = len(local_records)
+        if total == 0:
+            return {
+                "valid": True,
+                "message": "All 0 entries intact",
+                "total_entries": 0,
+                "mode": self.mode,
+                "mode_badge": "Ganache (local blockchain)" if self.mode == "ganache" else "Local ledger (simulated chain)",
+            }
+
+        mismatches = []
+
+        if self.mode == "ganache" and self.contract is not None:
+            try:
+                chain_count = self.contract.functions.entryCount().call()
+                for i, rec in enumerate(local_records):
+                    if i >= chain_count:
+                        mismatches.append({
+                            "index": i,
+                            "reason": f"Record {i} not found on blockchain (chain has {chain_count} entries)",
+                        })
+                        continue
+
+                    # On-chain entry
+                    c_hash_bytes, c_round, c_hosp, c_status, c_ts = self.contract.functions.getEntry(i).call()
+                    chain_fp = c_hash_bytes.hex()
+                    # Recompute local record fingerprint
+                    local_fp = canonical_fingerprint(rec)
+                    if chain_fp.lower() != local_fp.lower():
+                        mismatches.append({
+                            "index": i,
+                            "reason": f"Record {i} does not match the blockchain",
+                            "expected_blockchain_fingerprint": chain_fp,
+                            "actual_local_fingerprint": local_fp,
+                            "local_record": rec,
+                        })
+            except Exception as e:
+                logger.warning(f"Error querying Ganache ({e}), falling back to mock ledger check.")
+                mismatches = self._verify_against_mock(local_records)
+        else:
+            mismatches = self._verify_against_mock(local_records)
+
+        valid = len(mismatches) == 0
+        message = f"All {total} entries intact" if valid else f"Record {mismatches[0]['index']} does not match the blockchain"
+
+        return {
+            "valid": valid,
+            "message": message,
+            "total_entries": total,
+            "mismatch_count": len(mismatches),
+            "mismatches": mismatches,
+            "mode": self.mode,
+            "mode_badge": "Ganache (local blockchain)" if self.mode == "ganache" else "Local ledger (simulated chain)",
+        }
+
+    def _verify_against_mock(self, local_records: List[Dict]) -> List[Dict]:
+        mismatches = []
+        chain_count = self.mock_ledger.entry_count()
+        for i, rec in enumerate(local_records):
+            chain_entry = self.mock_ledger.get_entry(i)
+            if not chain_entry:
+                mismatches.append({"index": i, "reason": f"Record {i} does not match the blockchain"})
+                continue
+            local_fp = canonical_fingerprint(rec)
+            if chain_entry["record_hash"] != local_fp:
+                mismatches.append({
+                    "index": i,
+                    "reason": f"Record {i} does not match the blockchain",
+                    "expected_blockchain_fingerprint": chain_entry["record_hash"],
+                    "actual_local_fingerprint": local_fp,
+                })
+        return mismatches
 
     def tamper_attempt(self, index: int = 0) -> Dict:
-        """Demonstrates tamper detection by attempting to alter a past ledger entry."""
-        if self.mode == "ganache":
-            return {
-                "success": False,
-                "mode": "ganache",
-                "message": "REJECTED: AuditLog.sol has no update/delete functions. Ethereum EVM rejected state modification.",
-            }
-        else:
-            tamper_res = self.mock_ledger.tamper_entry(index, new_status=None)
-            return {
-                "success": True,
-                "mode": "mock",
-                "message": f"Tampered entry #{tamper_res.get('tampered_index')} status. Run integrity verification to detect!",
-                "detail": tamper_res,
-            }
+        """Edits the local copy only (e.g. flips Rejected to Accepted)."""
+        return self.local_store.tamper_record(index)
+
+    def restore_attempt(self) -> Dict:
+        """Reverts the local copy from backup."""
+        return self.local_store.restore_records()
 
     def reset(self):
-        """Clears entries for a fresh run."""
         self.mock_ledger.reset()
+        self.local_store.reset()

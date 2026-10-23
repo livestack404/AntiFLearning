@@ -70,7 +70,18 @@ export interface VerificationResult {
 
 export interface WSEvent {
   type:
+    // Backend canonical event names (orchestrator.py)
     | 'init'
+    | 'round_started'
+    | 'global_model_broadcast'
+    | 'client_training'
+    | 'client_update_sent'
+    | 'detection_complete'
+    | 'aggregation_complete'
+    | 'ledger_written'
+    | 'round_completed'
+    | 'run_completed'
+    // Legacy / alternative names (kept for compatibility)
     | 'round_start'
     | 'client_status_batch'
     | 'similarity'

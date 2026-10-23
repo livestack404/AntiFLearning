@@ -43,6 +43,8 @@ DATASET: str = "pneumoniamnist"
 NUM_CLASSES: int = 2
 IMAGE_SIZE: int = 28
 INPUT_SHAPE: tuple = (1, 28, 28)
+DIRICHLET_ALPHA: float = 2.0
+MIN_CLIENT_SAMPLES: int = 200
 
 # ---------------------------------------------------------------------------
 # Attack & Detection Settings
@@ -53,7 +55,7 @@ SIGN_FLIP_SCALE: float = 5.0
 
 # Detection thresholds & persistence parameters
 DETECTION_THRESHOLD: float = 0.50   # Absolute cosine floor
-MAD_THRESHOLD: float = 2.50         # Relative outlier threshold (Robust Z-Score via Median Absolute Deviation)
+MAD_THRESHOLD: float = 4.50         # Relative outlier threshold (Tuned on real runs: clean has zero Excluded)
 PERSISTENCE_K: int = 2              # Must be flagged K times in last M rounds to exclude
 PERSISTENCE_M: int = 3              # Sliding window size M
 WARMUP_ROUNDS: int = 2              # Warmup rounds before exclusion triggers
@@ -83,10 +85,10 @@ SCENARIO_DEFENDED = "defended"
 
 SCENARIOS = {
     SCENARIO_CLEAN: {
-        "name": "Clean (No Attack)",
-        "description": "Baseline federated training with all honest hospital nodes and detection inactive.",
+        "name": "Normal (Clean)",
+        "description": "Baseline federated training with all honest hospital nodes and detection active.",
         "malicious_ids": [],
-        "detection": False,
+        "detection": True,
         "attack_type": "label_flip",
     },
     SCENARIO_ATTACKED: {

@@ -116,6 +116,7 @@ export const App: React.FC = () => {
     setEvents((prev) => [...prev, { timestamp, type: event.type, data: event.data }]);
 
     switch (event.type) {
+      // ── Legacy / compatibility names ──────────────────────────────────────
       case 'init':
         setIsRunning(event.data.is_running);
         setIsPaused(event.data.is_paused);
@@ -124,27 +125,113 @@ export const App: React.FC = () => {
         setBlockchainMode(event.data.blockchain_mode);
         break;
 
+      // ── Backend canonical event names ─────────────────────────────────────
+      // round_started / round_start (both supported)
+      case 'round_started':
       case 'round_start':
         setIsRunning(true);
         setCurrentRound(event.data.round);
-        setTotalRounds(event.data.total_rounds);
+        setTotalRounds(event.data.total_rounds || totalRounds);
+        // Reset all clients to Training state at the start of each round
         setClients((prev) =>
           prev.map((c) => ({
             ...c,
-            status: 'Training',
+            status: 'Training' as const,
           }))
         );
         break;
 
-      case 'client_status_batch':
+      // global_model_broadcast: server distributes weights
+      case 'global_model_broadcast':
+        // No UI state change needed; event logged for EventStream
+        break;
+
+      // client_training: individual hospital starts training
+      case 'client_training': {
+        const cid = event.data.client_id;
         setClients((prev) =>
-          prev.map((c) => ({
-            ...c,
-            status: event.data.status,
-          }))
+          prev.map((c) => (c.id === cid ? { ...c, status: 'Training' as const } : c))
+        );
+        break;
+      }
+
+      // client_update_sent: hospital finishes and sends update
+      case 'client_update_sent': {
+        const cid = event.data.client_id;
+        setClients((prev) =>
+          prev.map((c) => (c.id === cid ? { ...c, status: 'Sent' as const } : c))
+        );
+        break;
+      }
+
+      // detection_complete: detector verdicts for all clients in the round
+      case 'detection_complete': {
+        const records: Record<string, any> = event.data.records_by_client || {};
+        setClients((prev) =>
+          prev.map((c) => {
+            const verdict = records[String(c.id)];
+            if (!verdict) return c;
+            const statusMap: Record<string, any> = {
+              Accepted: 'ACCEPTED',
+              Rejected: 'FLAGGED',
+              Excluded: 'EXCLUDED',
+            };
+            return {
+              ...c,
+              similarity: verdict.cosine_similarity ?? c.similarity,
+              robustZ: verdict.robust_z ?? c.robustZ,
+              status: statusMap[verdict.status] ?? c.status,
+              kFlags:
+                verdict.status === 'Rejected'
+                  ? c.kFlags + 1
+                  : verdict.status === 'Excluded'
+                  ? c.kFlags
+                  : c.kFlags,
+              reason: verdict.reason_text,
+            };
+          })
+        );
+        break;
+      }
+
+      // aggregation_complete: FedAvg done, new validation metrics available
+      case 'aggregation_complete':
+        setMetrics({
+          round: event.data.round,
+          accuracy: event.data.accuracy,
+          loss: event.data.loss,
+          precision: event.data.metrics?.precision ?? 0,
+          recall: event.data.metrics?.recall ?? 0,
+          f1: event.data.metrics?.f1 ?? 0,
+          trusted_clients: event.data.trusted_count ?? 0,
+          excluded_clients: event.data.excluded_count ?? 0,
+          blockchain_ms: 0,
+        });
+        break;
+
+      // ledger_written: blockchain block committed
+      case 'ledger_written':
+        setMetrics((prev) =>
+          prev ? { ...prev, blockchain_ms: event.data.blockchain_ms ?? prev.blockchain_ms } : prev
         );
         break;
 
+      // round_completed: full per-round record
+      case 'round_completed':
+      case 'round_end':
+        if (event.data.record) {
+          setMetrics(event.data.record);
+        }
+        break;
+
+      // run_completed / run_end: simulation finished
+      case 'run_completed':
+      case 'run_end':
+        setIsRunning(false);
+        setIsPaused(false);
+        break;
+
+      // Legacy similarity / flag / exclude
       case 'similarity':
         setClients((prev) =>
           prev.map((c) =>
@@ -153,7 +240,7 @@ export const App: React.FC = () => {
                   ...c,
                   similarity: event.data.similarity,
                   robustZ: event.data.robust_z,
-                  status: event.data.status,
+                  status: event.data.status ?? c.status,
                 }
               : c
           )
@@ -164,12 +251,7 @@ export const App: React.FC = () => {
         setClients((prev) =>
           prev.map((c) =>
             c.id === event.data.client_id
-              ? {
-                  ...c,
-                  status: 'FLAGGED',
-                  kFlags: c.kFlags + 1,
-                  reason: event.data.reason,
-                }
+              ? { ...c, status: 'FLAGGED' as const, kFlags: c.kFlags + 1, reason: event.data.reason }
               : c
           )
         );
@@ -179,11 +261,7 @@ export const App: React.FC = () => {
         setClients((prev) =>
           prev.map((c) =>
             c.id === event.data.client_id
-              ? {
-                  ...c,
-                  status: 'EXCLUDED',
-                  reason: event.data.reason,
-                }
+              ? { ...c, status: 'EXCLUDED' as const, reason: event.data.reason }
               : c
           )
         );
@@ -192,29 +270,24 @@ export const App: React.FC = () => {
       case 'metrics':
         setMetrics((prev) => ({
           round: event.data.round,
-          accuracy: event.data.metrics.accuracy,
-          loss: event.data.metrics.loss,
-          precision: event.data.metrics.precision,
-          recall: event.data.metrics.recall,
-          f1: event.data.metrics.f1,
-          trusted_clients: prev ? prev.trusted_clients : 8,
-          excluded_clients: prev ? prev.excluded_clients : 0,
-          blockchain_ms: prev ? prev.blockchain_ms : 0,
+          accuracy: event.data.metrics?.accuracy ?? event.data.accuracy,
+          loss: event.data.metrics?.loss ?? event.data.loss,
+          precision: event.data.metrics?.precision ?? 0,
+          recall: event.data.metrics?.recall ?? 0,
+          f1: event.data.metrics?.f1 ?? 0,
+          trusted_clients: prev?.trusted_clients ?? 8,
+          excluded_clients: prev?.excluded_clients ?? 0,
+          blockchain_ms: prev?.blockchain_ms ?? 0,
         }));
-        break;
-
-      case 'round_end':
-        setMetrics(event.data.record);
-        break;
-
-      case 'run_end':
-        setIsRunning(false);
-        setIsPaused(false);
         break;
 
       case 'error':
         setIsRunning(false);
         console.error('FL Orchestrator Error:', event.data.message);
+        break;
+
+      default:
+        // Unknown event types are already logged to EventStream above
         break;
     }
   };
