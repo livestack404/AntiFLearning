@@ -96,16 +96,31 @@ export interface WSEvent {
   data: any;
 }
 
+/**
+ * A benchmark sample image returned by GET /api/samples.
+ * Fields mirror the backend response exactly:
+ *   id, filename, label ("Normal" | "Pneumonia"), label_idx (0 | 1),
+ *   image_url and image_data_url are both the data: URI base-64 PNG.
+ */
 export interface SampleImage {
   id: string;
-  name: string;
-  description: string;
-  expected: string;
-  file: string;
-  type: 'valid' | 'invalid';
+  filename: string;
+  label: 'Normal' | 'Pneumonia';
+  label_idx: 0 | 1;
   image_url?: string;
+  image_data_url?: string;
+  // Optional legacy / enriched fields (may be absent)
+  name?: string;
+  description?: string;
+  expected?: string;
+  type?: 'valid' | 'invalid';
 }
 
+/**
+ * Prediction result from POST /api/predict or POST /api/predict/sample/{id}.
+ * `status === 'accepted'` ⟹ full classification fields are present.
+ * `status === 'rejected'` ⟹ only `reason`, `error_type`, `is_ood` are meaningful.
+ */
 export interface PredictionResult {
   status: 'accepted' | 'rejected';
   is_ood: boolean;
@@ -119,18 +134,19 @@ export interface PredictionResult {
     normal: number;
     pneumonia: number;
   };
+  uncertain?: boolean;
   heatmap_data_url?: string;
-  explanation?: {
-    plain_text: string;
-    clinical_text: string;
-    disclaimer: string;
-    dominant_zone: string;
-    coverage_pct: number;
-    pattern_type: string;
-    peak_intensity: number;
-  };
+  /** Single-sentence Grad-CAM caption returned by the backend. */
+  caption?: string;
+  /** Raw diagnostic telemetry included in OOD rejection responses. */
   details?: any;
   disclaimer: string;
+  // Sample-prediction enrichment (only present for /api/predict/sample/:id)
+  sample_id?: string;
+  filename?: string;
+  true_label?: string;
+  true_label_idx?: number;
+  is_match?: boolean;
 }
 
 export interface ScenarioResultData {
