@@ -71,23 +71,35 @@ _inference_model: Optional[PneumoniaCNN] = None
 
 
 def get_inference_model() -> PneumoniaCNN:
-    """Loads the best defended model checkpoint into memory for inference."""
+    """Loads the model checkpoint into memory for inference. Fails if missing."""
     global _inference_model
-    best_path = config.CHECKPOINTS_DIR / "best_model.pth"
+    # Check FINAL_MODEL_PATH first, fallback to CHECKPOINTS_DIR / best_model.pth if it exists
+    model_path = config.FINAL_MODEL_PATH
+    if not model_path.exists():
+        fallback_path = config.CHECKPOINTS_DIR / "best_model.pth"
+        if fallback_path.exists():
+            model_path = fallback_path
+        else:
+            raise HTTPException(
+                status_code=503,
+                detail="Model not loaded. Model weights file is missing."
+            )
 
     if _inference_model is None:
-        model = PneumoniaCNN(num_classes=config.NUM_CLASSES)
-        if best_path.exists():
-            try:
-                state_dict = torch.load(best_path, map_location="cpu")
-                model.load_state_dict(state_dict)
-                logger.info(f"Loaded best model checkpoint from {best_path}")
-            except Exception as e:
-                logger.warning(f"Could not load checkpoint ({e}), using initialized weights.")
-        else:
-            logger.info("No checkpoint found at best_model.pth. Using freshly initialized model.")
-        model.eval()
-        _inference_model = model
+        try:
+            # Detect model architecture size from meta or checkpoint if needed
+            model = PneumoniaCNN(num_classes=config.NUM_CLASSES)
+            state_dict = torch.load(model_path, map_location="cpu")
+            model.load_state_dict(state_dict)
+            model.eval()
+            _inference_model = model
+            logger.info(f"Loaded model checkpoint from {model_path}")
+        except Exception as e:
+            logger.error(f"Failed to load checkpoint ({e})")
+            raise HTTPException(
+                status_code=503,
+                detail=f"Model not loaded. Failed to load checkpoint: {e}"
+            )
 
     return _inference_model
 

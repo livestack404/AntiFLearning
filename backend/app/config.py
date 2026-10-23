@@ -22,15 +22,18 @@ BLOCKCHAIN_DIR = APP_DIR / "blockchain"
 CONTRACT_PATH = BLOCKCHAIN_DIR / "contracts" / "AuditLog.sol"
 MOCK_LEDGER_PATH = BLOCKCHAIN_DIR / "mock_ledger.json"
 
+MODELS_DIR = BASE_DIR / "models"
+FINAL_MODEL_PATH = MODELS_DIR / "final_model_64.pth"
+
 # Ensure all essential directories exist
-for p in [DATA_DIR, RESULTS_DIR, CHECKPOINTS_DIR, SAMPLE_IMAGES_DIR, BLOCKCHAIN_DIR]:
+for p in [DATA_DIR, RESULTS_DIR, CHECKPOINTS_DIR, SAMPLE_IMAGES_DIR, BLOCKCHAIN_DIR, MODELS_DIR]:
     p.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # Default FL & Training Hyperparameters (Single Source of Truth)
 # ---------------------------------------------------------------------------
 NUM_CLIENTS: int = 8
-NUM_ROUNDS: int = 50
+NUM_ROUNDS: int = 10
 LOCAL_EPOCHS: int = 1
 BATCH_SIZE: int = 32
 LEARNING_RATE: float = 0.001

@@ -342,7 +342,7 @@ export const App: React.FC = () => {
         color: 'var(--text-muted)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <strong style={{ color: 'var(--text-secondary)' }}>AegisFL Architecture</strong>
+          <strong style={{ color: 'var(--text-secondary)' }}>AntiFLearning Architecture</strong>
           <span>&bull;</span>
           <span>Zero-Trust Poisoning Defense & Blockchain Audit Logger for Healthcare</span>
         </div>

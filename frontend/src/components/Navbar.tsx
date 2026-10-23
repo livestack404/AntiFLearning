@@ -96,10 +96,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}>
-                AegisFL
-              </span>
-              <span className="badge badge-cyan" style={{ fontSize: '0.65rem', padding: '0.1rem 0.45rem' }}>
-                v2.0 PROTOTYPE
+                AntiFLearning
               </span>
             </div>
             <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', margin: 0 }}>
@@ -173,17 +170,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             alignItems: 'center',
             gap: '0.4rem',
             padding: '0.35rem 0.75rem',
-            background: blockchainMode === 'ganache' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(139, 92, 246, 0.1)',
-            border: `1px solid ${blockchainMode === 'ganache' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(139, 92, 246, 0.3)'}`,
+            background: 'rgba(6, 182, 212, 0.1)',
+            border: '1px solid rgba(6, 182, 212, 0.3)',
             borderRadius: '20px',
             fontSize: '0.75rem',
-            color: blockchainMode === 'ganache' ? '#34d399' : '#c084fc',
+            color: 'var(--cyan-bright)',
           }}>
             <Lock size={13} />
-            <span>Ledger: {blockchainMode === 'ganache' ? 'Ganache EVM' : 'SHA-256 HashChain'}</span>
+            <span>{blockchainMode === 'ganache' ? 'Ganache (local blockchain)' : 'Local ledger (simulated chain)'}</span>
           </div>
 
-          {/* WebSocket Status Indicator */}
+          {/* Connection Chip */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -196,7 +193,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             color: isConnected ? '#34d399' : '#f87171',
           }}>
             {isConnected ? <Wifi size={13} /> : <WifiOff size={13} />}
-            <span>{isConnected ? 'Stream Live' : 'Disconnected'}</span>
+            <span>{isConnected ? 'Connected' : 'Disconnected'}</span>
           </div>
         </div>
       </div>
