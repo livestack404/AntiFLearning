@@ -1,4 +1,4 @@
-﻿# AntiFLearning: Project Assumptions & Design Decisions
+# AntiFLearning: Project Assumptions & Design Decisions
 
 This document records the architectural assumptions, implementation interpretations, and design parameters established per the specification prompt.
 
@@ -7,7 +7,7 @@ This document records the architectural assumptions, implementation interpretati
 ### 1. Dataset & Resolution
 - **Dataset**: MedMNIST v2 PneumoniaMNIST (pediatric chest radiographs, binary classification: Normal vs. Pneumonia).
 - **Demo Resolution**: 28x28 grayscale images are used exclusively for the 10-round interactive live simulation to ensure near-instantaneous client training in the browser.
-- **Production Models**: Trained separately via scripts/train_final.py at 64x64 and 128x128 with early stopping on validation accuracy (patience 8, minimum 10 rounds) to serve the clinical Predict page.
+- **Production Models**: Higher-resolution models (64x64 and 128x128) and `scripts/train_final.py` are not yet trained; only demo resolution models currently exist.
 
 ---
 
@@ -18,7 +18,7 @@ This document records the architectural assumptions, implementation interpretati
 ---
 
 ### 3. Threat Model & Detection
-- **Adversarial Setup**: Hospitals H4 (Client 3) and H8 (Client 7) act as compromised nodes in ttacked and defended scenarios.
+- **Adversarial Setup**: Hospitals H4 (client 3) and H8 (client 7) act as compromised nodes in attacked and defended scenarios.
 - **Attack Vector**: Label-flipping is the primary active attack mode; sign-flipping updates are supported in configuration.
 - **Detector Consensus**:
   - Distance metric: Coordinate-wise median delta vector as the honest consensus reference.
