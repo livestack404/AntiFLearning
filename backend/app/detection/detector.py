@@ -161,14 +161,14 @@ class PoisonDetector:
             robust_z[cid] = round(float(z_i), 3)
 
             # Rejection logic per section 4.1:
-            # Warm-up (rounds 1 and 2): reject only if cos_i < 0
-            # Round 3 onward: reject if cos_i < 0 OR (robust_z_i < -2.5 AND cos_i < median(cos) - 0.15)
+            # Warm-up (rounds 1 and 2): reject if cos_i < -0.05 (distinguishes true attack from random init noise)
+            # Round 3 onward: reject if cos_i < 0.0 OR (cos_i < 0.20 and robust_z_i < -2.5 and cos_i < median(cos) - 0.15)
             if round_no <= self.warmup_rounds:
-                would_reject = bool(cos_i < 0.0)
+                would_reject = bool(cos_i < -0.05)
             else:
                 would_reject = bool(
                     (cos_i < 0.0)
-                    or (z_i < -abs(self.mad_threshold) and cos_i < (median_cos - 0.15))
+                    or (cos_i < 0.20 and z_i < -abs(self.mad_threshold) and cos_i < (median_cos - 0.15))
                 )
 
             if would_reject:
