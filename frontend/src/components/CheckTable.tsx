@@ -80,7 +80,7 @@ export const CheckTable: React.FC<CheckTableProps> = ({
           </thead>
           <tbody>
             {clients.map((c) => {
-              const v = verdicts ? verdicts[c.id] : null;
+              const v = verdicts ? (verdicts[c.id] ?? (verdicts as any)[String(c.id)]) : null;
               const status = isChecked && v ? v.status : (c.status || 'Idle');
               const reason = isChecked && v ? (v.reason_text || v.reason || 'Normal weight delta') : 'Pending evaluation at Step 4';
               const sim = isChecked && v && v.cosine_similarity !== undefined

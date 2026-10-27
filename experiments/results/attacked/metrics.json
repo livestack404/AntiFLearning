@@ -13,73 +13,151 @@
     "local_epochs": 1,
     "batch_size": 32,
     "learning_rate": 0.001,
-    "speed_ms": 100,
-    "seed": 42
+    "speed_ms": 0,
+    "seed": 42,
+    "partition_seed": 445
   },
   "rounds": [
     {
       "round": 1,
-      "accuracy": 0.8302,
-      "loss": 0.6135,
-      "precision": 0.8151,
-      "recall": 0.9974,
-      "f1": 0.8971,
+      "accuracy": 0.7844,
+      "loss": 0.6033,
+      "precision": 0.9726,
+      "recall": 0.7301,
+      "f1": 0.8341,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 13.8
+      "blockchain_ms": 24.47
     },
     {
       "round": 2,
-      "accuracy": 0.8092,
-      "loss": 0.4283,
-      "precision": 0.9769,
-      "recall": 0.7609,
-      "f1": 0.8555,
+      "accuracy": 0.4866,
+      "loss": 0.5709,
+      "precision": 1.0,
+      "recall": 0.3085,
+      "f1": 0.4715,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 17.86
+      "blockchain_ms": 26.95
     },
     {
       "round": 3,
-      "accuracy": 0.9103,
-      "loss": 0.3307,
-      "precision": 0.9672,
-      "recall": 0.91,
-      "f1": 0.9377,
+      "accuracy": 0.5477,
+      "loss": 0.5601,
+      "precision": 1.0,
+      "recall": 0.3907,
+      "f1": 0.5619,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 20.52
+      "blockchain_ms": 16.74
+    },
+    {
+      "round": 4,
+      "accuracy": 0.5611,
+      "loss": 0.5533,
+      "precision": 1.0,
+      "recall": 0.4087,
+      "f1": 0.5803,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 31.43
+    },
+    {
+      "round": 5,
+      "accuracy": 0.6145,
+      "loss": 0.5052,
+      "precision": 1.0,
+      "recall": 0.4807,
+      "f1": 0.6493,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 27.17
+    },
+    {
+      "round": 6,
+      "accuracy": 0.6069,
+      "loss": 0.5171,
+      "precision": 1.0,
+      "recall": 0.4704,
+      "f1": 0.6399,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 40.11
+    },
+    {
+      "round": 7,
+      "accuracy": 0.6622,
+      "loss": 0.4557,
+      "precision": 1.0,
+      "recall": 0.545,
+      "f1": 0.7055,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 47.49
+    },
+    {
+      "round": 8,
+      "accuracy": 0.624,
+      "loss": 0.5007,
+      "precision": 1.0,
+      "recall": 0.4936,
+      "f1": 0.6609,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 52.93
+    },
+    {
+      "round": 9,
+      "accuracy": 0.626,
+      "loss": 0.5055,
+      "precision": 1.0,
+      "recall": 0.4961,
+      "f1": 0.6632,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 61.25
+    },
+    {
+      "round": 10,
+      "accuracy": 0.6737,
+      "loss": 0.4527,
+      "precision": 1.0,
+      "recall": 0.5604,
+      "f1": 0.7183,
+      "trusted_clients": 8,
+      "excluded_clients": 0,
+      "blockchain_ms": 48.78
     }
   ],
-  "elapsed_seconds": 14.56,
+  "elapsed_seconds": 93.91,
   "final_metrics": {
-    "round": 3,
-    "accuracy": 0.9103,
-    "loss": 0.3307,
-    "precision": 0.9672,
-    "recall": 0.91,
-    "f1": 0.9377,
+    "round": 10,
+    "accuracy": 0.6737,
+    "loss": 0.4527,
+    "precision": 1.0,
+    "recall": 0.5604,
+    "f1": 0.7183,
     "trusted_clients": 8,
     "excluded_clients": 0,
-    "blockchain_ms": 20.52
+    "blockchain_ms": 48.78
   },
   "final_test_metrics": {
-    "loss": 0.4553,
-    "accuracy": 0.8702,
-    "balanced_accuracy": 0.856,
-    "precision": 0.8834,
-    "recall": 0.9128,
-    "specificity": 0.7991,
-    "auc": 0.9205,
-    "f1": 0.8979,
+    "loss": 0.4181,
+    "accuracy": 0.7308,
+    "balanced_accuracy": 0.7752,
+    "precision": 0.9549,
+    "recall": 0.5974,
+    "specificity": 0.953,
+    "auc": 0.9247,
+    "f1": 0.735,
     "confusion_matrix": [
       [
-        187,
-        47
+        223,
+        11
       ],
       [
-        34,
-        356
+        157,
+        233
       ]
     ]
   },

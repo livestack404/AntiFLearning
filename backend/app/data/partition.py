@@ -14,14 +14,16 @@ from app.data.loader import load_medmnist_raw, MedMNISTDataset
 def partition_data(
     num_clients: int = config.NUM_CLIENTS,
     batch_size: int = config.BATCH_SIZE,
-    seed: int = config.SEED,
+    seed: int = config.PARTITION_SEED,
     size: int = config.IMAGE_SIZE,
     alpha: float = config.DIRICHLET_ALPHA,
     min_samples: int = config.MIN_CLIENT_SAMPLES,
+    min_class_ratio: float = config.MIN_CLASS_RATIO,
 ) -> Tuple[Dict[int, DataLoader], Dict[int, Dict[str, int]]]:
     """Partitions PneumoniaMNIST training data across `num_clients` hospitals.
 
-    Mildly non-IID partition using Dirichlet alpha=2.0, ensuring at least `min_samples` per hospital.
+    Mildly non-IID partition using Dirichlet alpha=2.0, ensuring at least `min_samples` per hospital
+    and enforcing a minimum class ratio floor `min_class_ratio` for each class.
 
     Returns:
         client_loaders: Dict[int, DataLoader] mapping client_id -> DataLoader
@@ -40,7 +42,7 @@ def partition_data(
     rng.shuffle(class_0_indices)
     rng.shuffle(class_1_indices)
 
-    # Sample Dirichlet distributions with rejection/adjustment if any client has < min_samples
+    # Sample Dirichlet distributions with rejection/adjustment if any client has < min_samples or < min_class_ratio
     max_attempts = 100
     for attempt in range(max_attempts):
         dirichlet_0 = rng.dirichlet(np.full(num_clients, alpha))
@@ -58,7 +60,11 @@ def partition_data(
             c1_counts[i % num_clients] += 1
 
         total_per_client = c0_counts + c1_counts
-        if np.all(total_per_client >= min_samples) or attempt == max_attempts - 1:
+        r0 = c0_counts / np.maximum(total_per_client, 1)
+        r1 = c1_counts / np.maximum(total_per_client, 1)
+        valid_samples = np.all(total_per_client >= min_samples)
+        valid_ratios = np.all(r0 >= min_class_ratio) and np.all(r1 >= min_class_ratio)
+        if (valid_samples and valid_ratios) or attempt == max_attempts - 1:
             break
 
     client_loaders = {}

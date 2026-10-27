@@ -98,6 +98,8 @@ IMAGE_SIZE: int = 28
 INPUT_SHAPE: tuple = (1, 28, 28)
 DIRICHLET_ALPHA: float = 2.0
 MIN_CLIENT_SAMPLES: int = 200
+PARTITION_SEED: int = 445
+MIN_CLASS_RATIO: float = 0.18  # Minimum class ratio floor (~18% vs dataset 25.8% minority class)
 
 # ---------------------------------------------------------------------------
 # Attack & Detection Settings
@@ -175,4 +177,6 @@ class RunConfig(BaseModel):
     learning_rate: float = Field(default=LEARNING_RATE, gt=0, le=0.1)
     speed_ms: int = Field(default=100, ge=0, le=2000)  # Delay between rounds for animation
     seed: int = SEED
+    partition_seed: int = PARTITION_SEED
+
 

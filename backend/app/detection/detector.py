@@ -163,31 +163,6 @@ class PoisonDetector:
         if not cids:
             return {}, []
 
-        # If detection disabled (e.g. attacked scenario), accept all updates without penalty
-        if not detection_enabled:
-            verdicts = {}
-            for cid in cids:
-                u_vec = client_updates[cid]
-                u_hash = compute_update_hash(u_vec)
-                trust_before = self.trust_scores[cid]
-                trust_after = min(100, trust_before + 10)
-                self.trust_scores[cid] = trust_after
-                verdicts[cid] = {
-                    "run_id": run_id,
-                    "round": round_no,
-                    "hospital_id": f"H{cid+1}" if isinstance(cid, int) else str(cid),
-                    "client_id": cid,
-                    "status": "Accepted",
-                    "reason_text": "Update consistent with the group.",
-                    "cosine_similarity": 1.0,
-                    "robust_z": 0.0,
-                    "norm_ratio": 1.0,
-                    "trust_before": trust_before,
-                    "trust_after": trust_after,
-                    "update_hash": u_hash,
-                }
-            return verdicts, cids
-
         # 1. Coordinate-wise median of all deltas
         update_matrix = np.stack([client_updates[cid] for cid in cids], axis=0)
         median_delta = np.median(update_matrix, axis=0)
@@ -219,11 +194,52 @@ class PoisonDetector:
         robust_z_denom = 1.4826 * mad_cos + 1e-8
 
         robust_z = {}
-        anomalous_candidates = []
         for cid in cids:
             cos_i = similarities[cid]
             z_i = (cos_i - median_cos) / robust_z_denom
             robust_z[cid] = round(float(z_i), 3)
+
+        # If detection disabled (e.g. attacked scenario):
+        # Compute and report REAL cosine_similarity and robust_z for telemetry/UI visibility,
+        # but accept all updates without penalty into FedAvg.
+        if not detection_enabled:
+            verdicts = {}
+            for cid in cids:
+                trust_before = self.trust_scores[cid]
+                trust_after = min(100, trust_before + 10)
+                self.trust_scores[cid] = trust_after
+                cos_i = similarities[cid]
+                z_i = robust_z[cid]
+                n_ratio = norm_ratios[cid]
+                u_hash = compute_update_hash(client_updates[cid])
+                hosp_str = f"H{cid+1}" if isinstance(cid, int) else str(cid)
+
+                if cos_i < 0.0:
+                    reason_text = f"Update divergent (similarity {cos_i:.2f}), but accepted: defense disabled."
+                else:
+                    reason_text = "Update consistent with group (defense disabled)."
+
+                verdicts[cid] = {
+                    "run_id": run_id,
+                    "round": round_no,
+                    "hospital_id": hosp_str,
+                    "client_id": cid,
+                    "status": "Accepted",
+                    "reason_text": reason_text,
+                    "cosine_similarity": cos_i,
+                    "head_cosine": head_similarities[cid],
+                    "full_cosine": full_similarities[cid],
+                    "robust_z": z_i,
+                    "norm_ratio": n_ratio,
+                    "trust_before": trust_before,
+                    "trust_after": trust_after,
+                    "update_hash": u_hash,
+                }
+            return verdicts, list(cids)
+
+        anomalous_candidates = []
+        for cid in cids:
+            cos_i = similarities[cid]
 
             # Rejection logic:
             # Warm-up (rounds 1-2): reject only if blended_cos < -0.10
@@ -263,30 +279,11 @@ class PoisonDetector:
             self.rejection_history[cid].append(is_round_rejected)
             rejections_in_last_3 = sum(self.rejection_history[cid])
 
-            # Reinstatement check for previously excluded hospital
             if already_excluded:
-                if not is_round_rejected:
-                    self.consecutive_pass_count[cid] += 1
-                    if self.consecutive_pass_count[cid] >= 3:
-                        # Reinstated with trust 60
-                        self.is_excluded[cid] = False
-                        already_excluded = False
-                        self.trust_scores[cid] = 60
-                        self.consecutive_pass_count[cid] = 0
-                else:
-                    self.consecutive_pass_count[cid] = 0
-
-            if already_excluded:
-                # Hospital remains Excluded
+                # Hospital remains Excluded permanently for the rest of this run (zero-tolerance persistent quarantine)
                 trust_after = trust_before
                 status = "Excluded"
-                reason_text = f"Rejected repeatedly; trust score {trust_after} is below the limit. Updates are no longer used."
-            elif not already_excluded and self.trust_scores[cid] == 60 and self.consecutive_pass_count[cid] == 0 and not is_round_rejected and trust_before < 50:
-                # Just reinstated this round
-                trust_after = 60
-                status = "Accepted"
-                reason_text = "Update consistent with the group."
-                accepted_candidates.append(cid)
+                reason_text = f"Rejected repeatedly; trust score {trust_after} is below the limit. Updates are permanently quarantined."
             elif is_round_rejected:
                 # Rejected this round: trust -30
                 trust_after = max(0, trust_before - 30)

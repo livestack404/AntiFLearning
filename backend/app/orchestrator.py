@@ -93,7 +93,7 @@ class FLOrchestrator:
         client_loaders, client_stats = partition_data(
             num_clients=run_config.num_clients,
             batch_size=run_config.batch_size,
-            seed=run_config.seed,
+            seed=getattr(run_config, "partition_seed", config.PARTITION_SEED),
         )
 
         clients = {
