@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Server, Building2, ShieldAlert, XCircle, ShieldCheck, Database, Cpu, CheckCircle2 } from 'lucide-react';
+import {
+  Server,
+  Building2,
+  ShieldAlert,
+  XCircle,
+  ShieldCheck,
+  Database,
+  Cpu,
+  CheckCircle2,
+  StepForward,
+  Play,
+  Pause,
+} from 'lucide-react';
 import { ClientNodeState } from '../types';
 
 interface NetworkGraphProps {
   clients: ClientNodeState[];
   isRunning: boolean;
+  isPaused?: boolean;
   currentRound: number;
   currentStep: number;
   selectedClient: number | null;
   onSelectClient: (id: number) => void;
+  onStep?: () => void;
+  onTogglePause?: () => void;
 }
 
 const STEP_SENTENCES: Record<number, string> = {
@@ -23,10 +38,13 @@ const STEP_SENTENCES: Record<number, string> = {
 export const NetworkGraph: React.FC<NetworkGraphProps> = ({
   clients,
   isRunning,
+  isPaused = false,
   currentRound,
   currentStep,
   selectedClient,
   onSelectClient,
+  onStep,
+  onTogglePause,
 }) => {
   const [dotProgress, setDotProgress] = useState(0);
 
@@ -52,9 +70,9 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
     }
   }, [currentStep, currentRound]);
 
-  const centerX = 260;
-  const centerY = 240;
-  const radius = 170;
+  const centerX = 310;
+  const centerY = 260;
+  const radius = 195;
 
   const getNodeCoordinates = (index: number, total: number) => {
     const angle = (index * (2 * Math.PI) / total) - (Math.PI / 2);
@@ -129,12 +147,52 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--cyan-bright)' }}>
-            Round {currentRound > 0 ? currentRound : 1} &mdash; Step {activeStep} of 6
-          </span>
-          <span style={{ fontSize: '0.8rem', color: '#ffffff', fontWeight: 500 }}>
-            {stepText}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--cyan-bright)' }}>
+              Round {currentRound > 0 ? currentRound : 1} &mdash; Step {activeStep} of 6
+            </span>
+            <span style={{ fontSize: '0.8rem', color: '#ffffff', fontWeight: 500 }}>
+              {stepText}
+            </span>
+          </div>
+
+          {/* Step Button & Pause Toggle located right beside Decentralized Healthcare Topology */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            {onTogglePause && isRunning && (
+              <button
+                className="btn-secondary"
+                onClick={onTogglePause}
+                style={{ padding: '0.2rem 0.55rem', fontSize: '0.725rem', height: '26px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+                title={isPaused ? 'Resume simulation' : 'Pause simulation to step one phase at a time'}
+              >
+                {isPaused ? <Play size={11} fill="currentColor" /> : <Pause size={11} />}
+                <span>{isPaused ? 'Resume' : 'Pause'}</span>
+              </button>
+            )}
+
+            {onStep && (
+              <button
+                className="btn-primary"
+                onClick={onStep}
+                disabled={!isRunning || !isPaused}
+                style={{
+                  padding: '0.2rem 0.65rem',
+                  fontSize: '0.725rem',
+                  height: '26px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  background: isRunning && isPaused ? 'var(--cyan-primary)' : 'rgba(255,255,255,0.06)',
+                  color: isRunning && isPaused ? '#000000' : 'var(--text-muted)',
+                  border: isRunning && isPaused ? '1px solid var(--cyan-bright)' : '1px solid var(--border-subtle)',
+                }}
+                title={isRunning && isPaused ? 'Step forward one phase' : 'Pause simulation first to step one phase at a time'}
+              >
+                <StepForward size={12} />
+                <span>Step</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* 6-segment progress stepper bar */}
@@ -153,11 +211,11 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
         </div>
       </div>
 
-      {/* ── SVG Scene ────────────────────────────────────────────────── */}
+      {/* ── SVG Scene (Enlarged) ────────────────────────────────────────────────── */}
       <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
         <svg
-          viewBox="0 0 520 480"
-          style={{ width: '100%', maxWidth: '520px', height: 'auto', maxHeight: '420px' }}
+          viewBox="0 0 620 520"
+          style={{ width: '100%', maxWidth: '640px', height: 'auto', maxHeight: '520px' }}
         >
           <defs>
             <radialGradient id="serverGlow" cx="50%" cy="50%" r="50%">
@@ -312,7 +370,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
             const { x, y } = getNodeCoordinates(i, clients.length);
             const statusColor = getStatusColor(client.status);
             const isSelected = selectedClient === client.id;
-            const nodeRadius = 24;
+            const nodeRadius = 26;
 
             return (
               <g
@@ -333,15 +391,15 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                   />
                 )}
 
-                {/* Step 2 Pulsing Training Ring */}
-                {currentStep === 2 && client.status === 'Training' && (
+                {/* Step 2 Pulsing Training Ring: All active hospitals train simultaneously */}
+                {currentStep === 2 && client.status !== 'EXCLUDED' && (
                   <circle
                     cx={x}
                     cy={y}
-                    r={nodeRadius + 5}
+                    r={nodeRadius + 6}
                     fill="none"
                     stroke="#06b6d4"
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                     className="pulse-glow"
                   />
                 )}

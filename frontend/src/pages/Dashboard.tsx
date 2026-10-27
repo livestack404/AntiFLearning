@@ -104,10 +104,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <NetworkGraph
           clients={clients}
           isRunning={isRunning}
+          isPaused={isPaused}
           currentRound={currentRound}
           currentStep={currentStep}
           selectedClient={selectedClient}
           onSelectClient={(id) => setSelectedClient(selectedClient === id ? null : id)}
+          onStep={onStep}
+          onTogglePause={onTogglePause}
         />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
