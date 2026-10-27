@@ -10,3 +10,4 @@ build/
 experiments/production/
 *.pth
 *.npz
+ganache-db/

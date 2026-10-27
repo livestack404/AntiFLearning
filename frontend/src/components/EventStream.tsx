@@ -112,7 +112,7 @@ export const EventStream: React.FC<EventStreamProps> = ({ events }) => {
         case 'metrics':
           return `Global Eval: Acc ${((data.metrics?.accuracy ?? data.accuracy ?? 0) * 100).toFixed(1)}% | Loss ${(data.metrics?.loss ?? data.loss ?? 0).toFixed(4)} | F1 ${((data.metrics?.f1 ?? data.f1 ?? 0) * 100).toFixed(1)}%`;
         case 'chain_write':
-          return `Block #${data.entry?.index} mined [Client ${data.entry?.client_id} → ${data.entry?.status}] tx: ${(data.entry?.tx_hash ?? '').slice(0, 10)}...`;
+          return `Block #${data.entry?.index} mined [Client ${data.entry?.client_id} → ${data.entry?.status}] hash: ${(data.entry?.fingerprint ?? data.entry?.update_hash ?? '').slice(0, 10)}...`;
         case 'error':
           return `Error: ${data.message ?? JSON.stringify(data)}`;
         default:

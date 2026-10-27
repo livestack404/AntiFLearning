@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Navbar } from './components/Navbar';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { Dashboard } from './pages/Dashboard';
 import { PredictPage } from './pages/PredictPage';
 import { LedgerPage } from './pages/LedgerPage';
-import { ResultsPage } from './pages/ResultsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ClientNodeState, RoundMetrics, RunConfig, WSEvent } from './types';
 
@@ -373,31 +373,43 @@ export const App: React.FC = () => {
 
       <main style={{ flex: 1 }}>
         {activeTab === 'dashboard' && (
-          <Dashboard
-            clients={clients}
-            metrics={metrics}
-            config={config}
-            onChangeConfig={setConfig}
-            isRunning={isRunning}
-            isPaused={isPaused}
-            onStart={handleStart}
-            onPause={handlePause}
-            onResume={handleResume}
-            onStop={handleStop}
-            onReset={handleReset}
-            currentRound={currentRound}
-            totalRounds={totalRounds}
-            events={events}
-          />
+          <ErrorBoundary label="Live Simulation">
+            <Dashboard
+              clients={clients}
+              metrics={metrics}
+              config={config}
+              onChangeConfig={setConfig}
+              isRunning={isRunning}
+              isPaused={isPaused}
+              onStart={handleStart}
+              onPause={handlePause}
+              onResume={handleResume}
+              onStop={handleStop}
+              onReset={handleReset}
+              currentRound={currentRound}
+              totalRounds={totalRounds}
+              events={events}
+            />
+          </ErrorBoundary>
         )}
 
-        {activeTab === 'predict' && <PredictPage />}
+        {activeTab === 'predict' && (
+          <ErrorBoundary label="Clinical Predict & XAI">
+            <PredictPage />
+          </ErrorBoundary>
+        )}
 
-        {activeTab === 'ledger' && <LedgerPage />}
+        {activeTab === 'ledger' && (
+          <ErrorBoundary label="Blockchain Audit Ledger">
+            <LedgerPage />
+          </ErrorBoundary>
+        )}
 
-        {activeTab === 'results' && <ResultsPage />}
-
-        {activeTab === 'about' && <AboutPage />}
+        {activeTab === 'about' && (
+          <ErrorBoundary label="Architecture & Zero-Trust">
+            <AboutPage />
+          </ErrorBoundary>
+        )}
       </main>
 
       {/* Footer */}
@@ -420,7 +432,7 @@ export const App: React.FC = () => {
           <span>Zero-Trust Poisoning Defense & Blockchain Audit Logger for Healthcare</span>
         </div>
         <div>
-          <span>MedMNIST Pneumonia (4,708 Train / 624 Holdout Test) &bull; Ganache EVM &bull; PyTorch Grad-CAM</span>
+          <span>MedMNIST Pneumonia (4,708 Train / 624 Test) · {blockchainMode === 'ganache' ? 'Ganache EVM' : 'SHA-256 Hash-Chain'} · PyTorch Grad-CAM</span>
         </div>
       </footer>
     </div>

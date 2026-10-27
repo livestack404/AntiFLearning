@@ -40,7 +40,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
     };
   };
 
-  const getStatusColor = (status: string, isMalicious: boolean) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'EXCLUDED':
         return '#ef4444';
@@ -52,8 +52,9 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
         return '#06b6d4';
       case 'Sent':
         return '#3b82f6';
+      case 'Idle':
       default:
-        return isMalicious ? '#ef4444' : '#64748b';
+        return '#64748b';
     }
   };
 
@@ -124,7 +125,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
           {/* Data Conduit Lines & Animated Packet Transmission */}
           {clients.map((client, i) => {
             const { x, y } = getNodeCoordinates(i, clients.length);
-            const statusColor = getStatusColor(client.status, client.isMalicious);
+            const statusColor = getStatusColor(client.status);
             const isSelected = selectedClient === client.id;
             const isExcluded = client.status === 'EXCLUDED';
 
@@ -154,7 +155,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                     cx={packetX}
                     cy={packetY}
                     r={3}
-                    fill={client.isMalicious ? '#ef4444' : '#22d3ee'}
+                    fill={statusColor}
                     filter="url(#glowEffect)"
                   />
                 )}
@@ -207,7 +208,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
           {/* Hospital Client Nodes */}
           {clients.map((client, i) => {
             const { x, y } = getNodeCoordinates(i, clients.length);
-            const statusColor = getStatusColor(client.status, client.isMalicious);
+            const statusColor = getStatusColor(client.status);
             const isSelected = selectedClient === client.id;
             const nodeRadius = 24;
 
@@ -246,7 +247,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
                     {client.status === 'EXCLUDED' ? (
                       <XCircle size={16} color="#ef4444" />
-                    ) : client.isMalicious ? (
+                    ) : client.status === 'FLAGGED' ? (
                       <ShieldAlert size={16} color="#f59e0b" />
                     ) : (
                       <Building2 size={16} color={statusColor} />
@@ -311,13 +312,13 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                     width: '32px',
                     height: '32px',
                     borderRadius: '8px',
-                    background: getStatusColor(sc.status, sc.isMalicious) + '22',
+                    background: getStatusColor(sc.status) + '22',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: `1px solid ${getStatusColor(sc.status, sc.isMalicious)}`,
+                    border: `1px solid ${getStatusColor(sc.status)}`,
                   }}>
-                    <Building2 size={18} color={getStatusColor(sc.status, sc.isMalicious)} />
+                    <Building2 size={18} color={getStatusColor(sc.status)} />
                   </div>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -335,7 +336,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                 <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.8rem' }}>
                   <div>
                     <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.7rem' }}>VERDICT</span>
-                    <span style={{ fontWeight: 600, color: getStatusColor(sc.status, sc.isMalicious) }}>
+                    <span style={{ fontWeight: 600, color: getStatusColor(sc.status) }}>
                       {sc.status}
                     </span>
                   </div>

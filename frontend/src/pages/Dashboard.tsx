@@ -72,7 +72,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <SimilarityChart clients={clients} threshold={0.50} />
+          <SimilarityChart clients={clients} />
           <EventStream events={events} />
         </div>
       </div>

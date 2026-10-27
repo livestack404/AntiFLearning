@@ -66,7 +66,7 @@ export const LiveMetricsCards: React.FC<LiveMetricsCardsProps> = ({ metrics, tot
             {loss}
           </span>
         </div>
-        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Holdout 624 cases</span>
+        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>MedMNIST-Pneumonia test set (624 cases)</span>
       </div>
 
       {/* F1 Score Card */}

@@ -3,7 +3,6 @@ import {
   ShieldCheck, 
   Activity, 
   Database, 
-  BarChart3, 
   Info, 
   Wifi, 
   WifiOff, 
@@ -31,10 +30,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   totalRounds,
 }) => {
   const navItems = [
-    { id: 'dashboard', label: 'FL Defense Grid', icon: Activity },
+    { id: 'dashboard', label: 'Live Simulation', icon: Activity },
     { id: 'predict', label: 'Clinical Predict & XAI', icon: Cpu },
-    { id: 'ledger', label: 'Blockchain Audit Trail', icon: Database },
-    { id: 'results', label: 'Benchmark Analytics', icon: BarChart3 },
+    { id: 'ledger', label: 'Blockchain Audit Ledger', icon: Database },
     { id: 'about', label: 'Architecture & Zero-Trust', icon: Info },
   ];
 
@@ -177,7 +175,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             color: 'var(--cyan-bright)',
           }}>
             <Lock size={13} />
-            <span>{blockchainMode === 'ganache' ? 'Ganache (local blockchain)' : 'Local ledger (simulated chain)'}</span>
+            <span>
+              {blockchainMode === 'ganache'
+                ? 'Ganache EVM (local blockchain)'
+                : 'SHA-256 Hash-Chain (mock ledger)'}
+            </span>
           </div>
 
           {/* Connection Chip */}

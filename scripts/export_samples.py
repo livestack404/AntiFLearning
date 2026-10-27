@@ -14,7 +14,10 @@ SAMPLES_DIR = BASE_DIR / "samples"
 SAMPLES_DIR.mkdir(parents=True, exist_ok=True)
 
 import sys
+BASE_DIR = Path(__file__).resolve().parent.parent
+BACKEND_DIR = BASE_DIR / 'backend'
 sys.path.insert(0, str(BASE_DIR))
+sys.path.insert(0, str(BACKEND_DIR))
 
 from backend.app.data.loader import load_medmnist_raw
 

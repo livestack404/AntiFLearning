@@ -42,15 +42,24 @@ export interface RoundMetrics {
 
 export interface LedgerEntry {
   index: number;
+  run_id?: string;
   round: number;
+  hospital_id: string;
   client_id: number;
+  /** Backend returns "Accepted" | "Rejected" | "Excluded" (title-case) */
+  status: string;
+  reason_text: string;
+  cosine_similarity: number;
+  robust_z: number;
+  norm_ratio?: number;
+  trust_before: number;
+  trust_after: number;
   update_hash: string;
-  status: 'ACCEPTED' | 'FLAGGED' | 'EXCLUDED';
-  similarity: number;
-  timestamp: number;
-  prev_hash: string;
-  block_hash: string;
-  tx_hash: string;
+  fingerprint: string;
+  // present only in ganache / hash-chain mode
+  block_hash?: string;
+  prev_hash?: string;
+  timestamp?: number;
 }
 
 export interface VerificationResult {

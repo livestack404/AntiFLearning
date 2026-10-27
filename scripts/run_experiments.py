@@ -13,9 +13,11 @@ import logging
 import sys
 from pathlib import Path
 
-# Add project root to sys.path
+# Add project root and backend dir to sys.path
 BASE_DIR = Path(__file__).resolve().parent.parent
+BACKEND_DIR = BASE_DIR / 'backend'
 sys.path.insert(0, str(BASE_DIR))
+sys.path.insert(0, str(BACKEND_DIR))
 
 from backend.app import config
 from backend.app.config import RunConfig
