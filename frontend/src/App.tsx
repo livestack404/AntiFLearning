@@ -54,6 +54,11 @@ export const App: React.FC = () => {
 
   const wsRef = useRef<WebSocket | null>(null);
 
+  // Scroll to top of page whenever active tab changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+
   // Sync malicious_ids whenever scenario / malicious_ids in config changes
   useEffect(() => {
     setClients((prev) =>

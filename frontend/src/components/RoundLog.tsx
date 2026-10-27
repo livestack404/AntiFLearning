@@ -18,11 +18,13 @@ interface RoundLogProps {
 }
 
 export const RoundLog: React.FC<RoundLogProps> = ({ logs, currentRound }) => {
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [collapsedRounds, setCollapsedRounds] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
   }, [logs]);
 
   const toggleRound = (round: number) => {
@@ -47,6 +49,7 @@ export const RoundLog: React.FC<RoundLogProps> = ({ logs, currentRound }) => {
       </div>
 
       <div
+        ref={containerRef}
         style={{
           background: 'rgba(5, 8, 14, 0.95)',
           borderRadius: '8px',
@@ -156,7 +159,6 @@ export const RoundLog: React.FC<RoundLogProps> = ({ logs, currentRound }) => {
             );
           })
         )}
-        <div ref={terminalEndRef} />
       </div>
     </div>
   );
