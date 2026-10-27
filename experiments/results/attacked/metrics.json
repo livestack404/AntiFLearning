@@ -13,7 +13,7 @@
     "local_epochs": 1,
     "batch_size": 32,
     "learning_rate": 0.001,
-    "speed_ms": 0,
+    "speed_ms": 100,
     "seed": 42
   },
   "rounds": [
@@ -26,7 +26,7 @@
       "f1": 0.8971,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 13.79
+      "blockchain_ms": 13.8
     },
     {
       "round": 2,
@@ -37,7 +37,7 @@
       "f1": 0.8555,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 16.04
+      "blockchain_ms": 17.86
     },
     {
       "round": 3,
@@ -48,115 +48,38 @@
       "f1": 0.9377,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 20.19
-    },
-    {
-      "round": 4,
-      "accuracy": 0.8168,
-      "loss": 0.3356,
-      "precision": 0.9933,
-      "recall": 0.7584,
-      "f1": 0.8601,
-      "trusted_clients": 8,
-      "excluded_clients": 0,
-      "blockchain_ms": 19.28
-    },
-    {
-      "round": 5,
-      "accuracy": 0.8664,
-      "loss": 0.2968,
-      "precision": 0.9819,
-      "recall": 0.8355,
-      "f1": 0.9028,
-      "trusted_clients": 8,
-      "excluded_clients": 0,
-      "blockchain_ms": 27.75
-    },
-    {
-      "round": 6,
-      "accuracy": 0.8721,
-      "loss": 0.2505,
-      "precision": 0.982,
-      "recall": 0.8432,
-      "f1": 0.9073,
-      "trusted_clients": 8,
-      "excluded_clients": 0,
-      "blockchain_ms": 23.39
-    },
-    {
-      "round": 7,
-      "accuracy": 0.8492,
-      "loss": 0.2863,
-      "precision": 0.9844,
-      "recall": 0.8098,
-      "f1": 0.8886,
-      "trusted_clients": 8,
-      "excluded_clients": 0,
-      "blockchain_ms": 28.31
-    },
-    {
-      "round": 8,
-      "accuracy": 0.8473,
-      "loss": 0.2804,
-      "precision": 0.9874,
-      "recall": 0.8046,
-      "f1": 0.8867,
-      "trusted_clients": 8,
-      "excluded_clients": 0,
-      "blockchain_ms": 34.67
-    },
-    {
-      "round": 9,
-      "accuracy": 0.8531,
-      "loss": 0.263,
-      "precision": 0.9815,
-      "recall": 0.8175,
-      "f1": 0.892,
-      "trusted_clients": 8,
-      "excluded_clients": 0,
-      "blockchain_ms": 40.9
-    },
-    {
-      "round": 10,
-      "accuracy": 0.8702,
-      "loss": 0.2371,
-      "precision": 0.982,
-      "recall": 0.8406,
-      "f1": 0.9058,
-      "trusted_clients": 8,
-      "excluded_clients": 0,
-      "blockchain_ms": 41.67
+      "blockchain_ms": 20.52
     }
   ],
-  "elapsed_seconds": 8.39,
+  "elapsed_seconds": 14.56,
   "final_metrics": {
-    "round": 10,
-    "accuracy": 0.8702,
-    "loss": 0.2371,
-    "precision": 0.982,
-    "recall": 0.8406,
-    "f1": 0.9058,
+    "round": 3,
+    "accuracy": 0.9103,
+    "loss": 0.3307,
+    "precision": 0.9672,
+    "recall": 0.91,
+    "f1": 0.9377,
     "trusted_clients": 8,
     "excluded_clients": 0,
-    "blockchain_ms": 41.67
+    "blockchain_ms": 20.52
   },
   "final_test_metrics": {
-    "loss": 0.4029,
-    "accuracy": 0.8622,
-    "balanced_accuracy": 0.8632,
-    "precision": 0.9153,
-    "recall": 0.859,
-    "specificity": 0.8675,
-    "auc": 0.9255,
-    "f1": 0.8862,
+    "loss": 0.4553,
+    "accuracy": 0.8702,
+    "balanced_accuracy": 0.856,
+    "precision": 0.8834,
+    "recall": 0.9128,
+    "specificity": 0.7991,
+    "auc": 0.9205,
+    "f1": 0.8979,
     "confusion_matrix": [
       [
-        203,
-        31
+        187,
+        47
       ],
       [
-        55,
-        335
+        34,
+        356
       ]
     ]
   },

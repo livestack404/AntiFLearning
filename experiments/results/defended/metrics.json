@@ -26,7 +26,7 @@
       "f1": 0.8521,
       "trusted_clients": 6,
       "excluded_clients": 2,
-      "blockchain_ms": 36.63
+      "blockchain_ms": 14.84
     },
     {
       "round": 2,
@@ -37,7 +37,7 @@
       "f1": 0.8555,
       "trusted_clients": 7,
       "excluded_clients": 1,
-      "blockchain_ms": 30.47
+      "blockchain_ms": 18.11
     },
     {
       "round": 3,
@@ -48,7 +48,7 @@
       "f1": 0.9292,
       "trusted_clients": 6,
       "excluded_clients": 2,
-      "blockchain_ms": 46.01
+      "blockchain_ms": 20.86
     },
     {
       "round": 4,
@@ -59,7 +59,7 @@
       "f1": 0.9558,
       "trusted_clients": 6,
       "excluded_clients": 2,
-      "blockchain_ms": 56.75
+      "blockchain_ms": 27.49
     },
     {
       "round": 5,
@@ -70,7 +70,7 @@
       "f1": 0.9632,
       "trusted_clients": 6,
       "excluded_clients": 2,
-      "blockchain_ms": 63.7
+      "blockchain_ms": 29.63
     },
     {
       "round": 6,
@@ -81,7 +81,7 @@
       "f1": 0.8951,
       "trusted_clients": 8,
       "excluded_clients": 0,
-      "blockchain_ms": 62.37
+      "blockchain_ms": 41.65
     },
     {
       "round": 7,
@@ -92,7 +92,7 @@
       "f1": 0.9652,
       "trusted_clients": 6,
       "excluded_clients": 2,
-      "blockchain_ms": 66.66
+      "blockchain_ms": 41.73
     },
     {
       "round": 8,
@@ -103,7 +103,7 @@
       "f1": 0.9585,
       "trusted_clients": 6,
       "excluded_clients": 2,
-      "blockchain_ms": 83.35
+      "blockchain_ms": 50.0
     },
     {
       "round": 9,
@@ -114,7 +114,7 @@
       "f1": 0.9328,
       "trusted_clients": 5,
       "excluded_clients": 3,
-      "blockchain_ms": 83.38
+      "blockchain_ms": 55.8
     },
     {
       "round": 10,
@@ -125,10 +125,10 @@
       "f1": 0.9086,
       "trusted_clients": 7,
       "excluded_clients": 1,
-      "blockchain_ms": 96.76
+      "blockchain_ms": 61.57
     }
   ],
-  "elapsed_seconds": 32.33,
+  "elapsed_seconds": 48.46,
   "final_metrics": {
     "round": 10,
     "accuracy": 0.874,
@@ -138,7 +138,7 @@
     "f1": 0.9086,
     "trusted_clients": 7,
     "excluded_clients": 1,
-    "blockchain_ms": 96.76
+    "blockchain_ms": 61.57
   },
   "final_test_metrics": {
     "loss": 0.3991,
