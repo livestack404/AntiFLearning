@@ -1,28 +1,39 @@
 """Export 16 test images (8 Normal, 8 Pneumonia) with fixed seed 42 to samples/.
 
-Saved as 64x64 PNG files with samples/manifest.json.
-Leaves old sample_images/ folder untouched.
+Saved as PNG files at the resolution of the selected final model (defaults from meta, 128 now)
+with samples/manifest.json. Leaves old sample_images/ folder untouched.
 """
 
 import json
 from pathlib import Path
+import sys
 import numpy as np
 from PIL import Image
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SAMPLES_DIR = BASE_DIR / "samples"
 SAMPLES_DIR.mkdir(parents=True, exist_ok=True)
-
-import sys
-BASE_DIR = Path(__file__).resolve().parent.parent
 BACKEND_DIR = BASE_DIR / 'backend'
 sys.path.insert(0, str(BASE_DIR))
 sys.path.insert(0, str(BACKEND_DIR))
 
+from backend.app.config import get_selected_final_model
 from backend.app.data.loader import load_medmnist_raw
 
 
-def export_samples(seed: int = 42, resolution: int = 64):
+def get_default_resolution() -> int:
+    try:
+        _, meta = get_selected_final_model()
+        if meta and "resolution" in meta:
+            return int(meta["resolution"])
+    except Exception as e:
+        print(f"Warning: could not read model meta resolution ({e}), defaulting to 128")
+    return 128
+
+
+def export_samples(seed: int = 42, resolution: int = None):
+    if resolution is None:
+        resolution = get_default_resolution()
     print(f"Loading test split at resolution {resolution}x{resolution}...")
     _, _, (test_imgs, test_lbls) = load_medmnist_raw(size=resolution)
     labels = test_lbls.squeeze()
@@ -57,14 +68,15 @@ def export_samples(seed: int = 42, resolution: int = 64):
             "filename": filename,
             "label": label_str,
             "label_idx": lbl,
+            "resolution": resolution,
         })
-        print(f"  Exported {filename}: {label_str} (test index {idx})")
+        print(f"  Exported {filename}: {label_str} (test index {idx}, {resolution}x{resolution})")
 
     manifest_path = SAMPLES_DIR / "manifest.json"
     with open(manifest_path, "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2)
 
-    print(f"\nSuccessfully exported 16 sample images and manifest to {SAMPLES_DIR}")
+    print(f"\nSuccessfully exported 16 sample images and manifest to {SAMPLES_DIR} at {resolution}x{resolution}")
     return manifest
 
 

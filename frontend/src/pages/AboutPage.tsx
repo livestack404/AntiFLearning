@@ -147,7 +147,7 @@ export const AboutPage: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#c084fc' }}>
             <Database size={20} />
             <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1.1rem' }}>
-              Dual Blockchain & Mock Hash-Chain
+              Dual Blockchain &amp; Mock Hash-Chain
             </h3>
           </div>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
@@ -167,6 +167,33 @@ export const AboutPage: React.FC = () => {
               <p style={{ color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                 Persisted to disk with SHA-256 block chaining (prev_hash &rarr; block_hash). Supports interactive tampering demonstration and automatic integrity verification.
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Clinical Limitations Card */}
+        <div className="glass-panel" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', gridColumn: '1 / -1' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#f59e0b' }}>
+            <AlertCircle size={20} />
+            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1.1rem' }}>
+              Limitations
+            </h3>
+          </div>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+            The model is trained on a small pediatric dataset and misses some Normal X-rays (see specificity: 76.1%); results on sample images reflect this.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', background: 'var(--bg-secondary)', padding: '0.75rem 1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)', fontSize: '0.8rem' }}>
+            <div>
+              <span style={{ color: 'var(--text-muted)' }}>Dataset: </span>
+              <strong style={{ color: '#ffffff' }}>MedMNIST PneumoniaMNIST (Pediatric Cohort)</strong>
+            </div>
+            <div>
+              <span style={{ color: 'var(--text-muted)' }}>Test Specificity: </span>
+              <strong style={{ color: '#f59e0b' }}>76.1% (178 / 234 Normal verified)</strong>
+            </div>
+            <div>
+              <span style={{ color: 'var(--text-muted)' }}>Test Sensitivity: </span>
+              <strong style={{ color: '#34d399' }}>97.4% (380 / 390 Pneumonia caught)</strong>
             </div>
           </div>
         </div>

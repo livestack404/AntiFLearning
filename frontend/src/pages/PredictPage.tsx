@@ -7,41 +7,22 @@ import {
   Sparkles,
   Sliders,
   CheckCircle2,
-  FileText,
-  User,
-  Stethoscope,
   Layers,
   Info,
   AlertCircle,
+  Cpu,
 } from 'lucide-react';
 import { SampleImage, PredictionResult } from '../types';
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-/** Human-readable display name derived from sample id ("sample_03" → "Sample 03") */
-const sampleDisplayName = (s: SampleImage): string => {
-  if (s.name) return s.name;
-  // e.g. "sample_03" → "Sample 03"
-  return s.id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-};
-
-/** Badge text: show true label from manifest when available */
-const sampleBadgeText = (s: SampleImage): string => {
-  if (s.expected) return s.expected;
-  return s.label;
-};
-
-/** Badge class: Normal → cyan, Pneumonia → red */
-const sampleBadgeClass = (s: SampleImage): string => {
-  const lbl = (s.expected ?? s.label ?? '').toLowerCase();
-  return lbl === 'normal' ? 'badge badge-cyan' : 'badge badge-red';
-};
-
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
+interface ModelInfo {
+  resolution?: number;
+  test_accuracy?: number;
+  validation_accuracy?: number;
+  specificity?: number;
+  sensitivity?: number;
+  precision?: number;
+  f1?: number;
+}
 
 export const PredictPage: React.FC = () => {
   const [samples, setSamples] = useState<SampleImage[]>([]);
@@ -52,12 +33,23 @@ export const PredictPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [heatmapAlpha, setHeatmapAlpha] = useState(0.5);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [modelInfo, setModelInfo] = useState<ModelInfo | null>(null);
 
   useEffect(() => {
+    // Load sample benchmark images
     fetch('/api/samples')
       .then((res) => res.json())
       .then((data) => setSamples(data))
       .catch((err) => console.error('Failed to load sample images', err));
+
+    // Load active model metadata (resolution, accuracy, specificity)
+    fetch('/api/model-info')
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error('Model info not loaded');
+      })
+      .then((data) => setModelInfo(data))
+      .catch((err) => console.warn('Could not load /api/model-info:', err));
   }, []);
 
   const handleSelectSample = async (sample: SampleImage) => {
@@ -72,7 +64,7 @@ export const PredictPage: React.FC = () => {
       const res = await fetch(`/api/predict/sample/${sample.id}`, { method: 'POST' });
       if (res.status === 503) {
         const body = await res.json().catch(() => ({}));
-        setApiError(body.detail ?? 'Model not yet available (503). The 64 × 64 training run is in progress — please wait and retry.');
+        setApiError(body.detail ?? 'Model not yet available (503). Training run is in progress — please wait and retry.');
         return;
       }
       const data = await res.json();
@@ -130,6 +122,17 @@ export const PredictPage: React.FC = () => {
     }
   };
 
+  // Probabilities and plain leaning text
+  const pNorm = prediction?.probabilities?.normal ?? 0;
+  const pPneu = prediction?.probabilities?.pneumonia ?? 0;
+  const normPct = (pNorm * 100).toFixed(1);
+  const pneuPct = (pPneu * 100).toFixed(1);
+  const winningClass = pPneu >= pNorm ? 'Pneumonia' : 'Normal';
+  const winningPct = Math.round(Math.max(pNorm, pPneu) * 100);
+  const leanSentence = `The model leans ${winningClass} (${winningPct}%)`;
+
+  const isUncertain = (prediction?.uncertain ?? false) || Math.max(pNorm, pPneu) < 0.70;
+
   return (
     <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Page Header */}
@@ -165,63 +168,30 @@ export const PredictPage: React.FC = () => {
       )}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem' }}>
-        {/* Left Column: Sample Picker & Image Uploader */}
+        {/* Left Column: Model Card, Upload (First), Compact Sample Strip (Below Upload), Slider, Guardrails */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          {/* Preset Samples */}
-          <div className="glass-panel" style={{ padding: '1.25rem' }}>
-            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.75rem', color: '#ffffff' }}>
-              Select Benchmark Sample (One-Click Verification)
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.65rem' }}>
-              {samples.map((s) => {
-                const isSelected = selectedSampleId === s.id;
-                return (
-                  <div
-                    key={s.id}
-                    onClick={() => handleSelectSample(s)}
-                    style={{
-                      background: isSelected ? 'rgba(6, 182, 212, 0.15)' : 'var(--bg-secondary)',
-                      border: isSelected ? '1.5px solid var(--cyan-primary)' : '1px solid var(--border-subtle)',
-                      borderRadius: '10px',
-                      padding: '0.65rem',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      textAlign: 'center',
-                      gap: '0.45rem',
-                      transition: 'all 0.2s ease',
-                    }}
-                  >
-                    <div style={{ width: '56px', height: '56px', borderRadius: '8px', overflow: 'hidden', background: '#000000', border: '1px solid var(--border-subtle)' }}>
-                      {s.image_url || s.image_data_url ? (
-                        <img
-                          src={s.image_url ?? s.image_data_url}
-                          alt={sampleDisplayName(s)}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
-                      ) : (
-                        <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b', fontSize: '0.65rem' }}>X-Ray</div>
-                      )}
-                    </div>
-                    <div>
-                      <span style={{ fontWeight: 600, fontSize: '0.75rem', display: 'block', color: '#ffffff' }}>
-                        {sampleDisplayName(s)}
-                      </span>
-                      <span className={sampleBadgeClass(s)} style={{ fontSize: '0.6rem', marginTop: '0.2rem' }}>
-                        {sampleBadgeText(s)}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+          
+          {/* Active Model Card */}
+          <div className="glass-panel" style={{ padding: '1rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <Cpu size={18} color="var(--cyan-bright)" />
+              <div>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>LOADED MODEL</span>
+                <span style={{ fontSize: '0.88rem', fontWeight: 600, color: '#ffffff' }}>PneumoniaCNN</span>
+              </div>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>RESOLUTION</span>
+              <span className="badge badge-cyan" style={{ fontSize: '0.75rem', fontWeight: 600 }}>
+                {modelInfo?.resolution ? `${modelInfo.resolution} × ${modelInfo.resolution} px` : '128 × 128 px'}
+              </span>
             </div>
           </div>
 
-          {/* Custom Upload Card */}
+          {/* Upload Card - PLACED FIRST */}
           <div className="glass-panel" style={{ padding: '1.25rem' }}>
             <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.75rem', color: '#ffffff' }}>
-              Or Upload Patient Radiograph
+              Upload Patient Radiograph
             </h3>
             <label
               style={{
@@ -258,6 +228,81 @@ export const PredictPage: React.FC = () => {
                 </button>
               </div>
             )}
+          </div>
+
+          {/* Compact Sample Gallery - Single-row horizontal strip under "Or try a sample", below upload */}
+          <div className="glass-panel" style={{ padding: '1rem 1.25rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '0.9rem', color: '#ffffff' }}>
+                Or try a sample
+              </h3>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                16 benchmark cases (128×128)
+              </span>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                gap: '0.6rem',
+                overflowX: 'auto',
+                paddingBottom: '0.4rem',
+                scrollbarWidth: 'thin',
+              }}
+            >
+              {samples.map((s, idx) => {
+                const isSelected = selectedSampleId === s.id;
+                const isNormal = s.label?.toLowerCase() === 'normal';
+                return (
+                  <button
+                    key={s.id || idx}
+                    type="button"
+                    onClick={() => handleSelectSample(s)}
+                    title={`${s.label} (${s.id}) - click to analyze`}
+                    style={{
+                      width: '56px',
+                      minWidth: '56px',
+                      height: '56px',
+                      borderRadius: '8px',
+                      overflow: 'hidden',
+                      padding: 0,
+                      background: '#000000',
+                      border: isSelected ? '2px solid var(--cyan-primary)' : '1px solid var(--border-subtle)',
+                      boxShadow: isSelected ? '0 0 10px rgba(6, 182, 212, 0.4)' : 'none',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      flexShrink: 0,
+                      transition: 'transform 0.15s ease, border-color 0.15s ease',
+                    }}
+                  >
+                    {s.image_url || s.image_data_url ? (
+                      <img
+                        src={s.image_url ?? s.image_data_url}
+                        alt={s.label}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b', fontSize: '0.65rem' }}>
+                        #{idx + 1}
+                      </div>
+                    )}
+                    {/* Small color indicator dot on top-right */}
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '3px',
+                        right: '3px',
+                        width: '7px',
+                        height: '7px',
+                        borderRadius: '50%',
+                        background: isNormal ? '#34d399' : '#f87171',
+                        border: '1px solid #000000',
+                      }}
+                    />
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Heatmap Alpha Slider */}
@@ -315,7 +360,7 @@ export const PredictPage: React.FC = () => {
             <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
               <Layers size={36} color="var(--text-muted)" style={{ margin: '0 auto 0.75rem', opacity: 0.5 }} />
               <h3 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-secondary)' }}>No Active Diagnosis</h3>
-              <p style={{ fontSize: '0.8rem' }}>Select a preset sample on the left or upload an image to view Grad-CAM and clinical explanations.</p>
+              <p style={{ fontSize: '0.8rem' }}>Upload an image above or select a benchmark sample to view diagnostic predictions and localized Grad-CAM heatmaps.</p>
             </div>
           ) : prediction.status === 'rejected' ? (
             /* OOD Rejection Panel */
@@ -365,29 +410,58 @@ export const PredictPage: React.FC = () => {
                     <span className={prediction.prediction === 'Pneumonia' ? 'badge badge-red' : 'badge badge-green'}>
                       {prediction.prediction === 'Pneumonia' ? 'Infection Detected' : 'Clear Lung Fields'}
                     </span>
-                    {prediction.uncertain && (
-                      <span className="badge badge-amber" title="Max softmax probability < 70% — interpret with caution">
-                        UNCERTAIN
+                    {isUncertain && (
+                      <span className="badge badge-amber" title="Posterior confidence < 70% — interpret with caution">
+                        Uncertain, interpret with caution
                       </span>
                     )}
                   </div>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                    Softmax Posterior Confidence: <strong>{prediction.confidence_percentage}%</strong>
-                  </span>
+                  {/* One plain line: "The model leans Pneumonia (82%)" */}
+                  <p style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--text-main)', marginTop: '0.25rem' }}>
+                    {leanSentence}
+                  </p>
+                </div>
+              </div>
+
+              {/* Both Probabilities: Visual Bars */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', background: 'var(--bg-secondary)', padding: '0.9rem 1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+                  POSTERIOR CLASS PROBABILITIES
+                </span>
+
+                {/* Normal bar */}
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', marginBottom: '0.25rem' }}>
+                    <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>Normal</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, color: '#34d399' }}>{normPct}%</span>
+                  </div>
+                  <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.06)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div
+                      style={{
+                        width: `${normPct}%`,
+                        height: '100%',
+                        background: 'linear-gradient(90deg, #10b981, #34d399)',
+                        transition: 'width 0.4s ease',
+                      }}
+                    />
+                  </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem', background: 'var(--bg-secondary)', padding: '0.5rem 0.9rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
-                  <div>
-                    <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', display: 'block' }}>P(NORMAL)</span>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, fontSize: '0.9rem', color: '#6ee7b7' }}>
-                      {((prediction.probabilities?.normal || 0) * 100).toFixed(1)}%
-                    </span>
+                {/* Pneumonia bar */}
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', marginBottom: '0.25rem' }}>
+                    <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>Pneumonia</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, color: '#f87171' }}>{pneuPct}%</span>
                   </div>
-                  <div style={{ borderLeft: '1px solid var(--border-subtle)', paddingLeft: '1rem' }}>
-                    <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', display: 'block' }}>P(PNEUMONIA)</span>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 600, fontSize: '0.9rem', color: '#f87171' }}>
-                      {((prediction.probabilities?.pneumonia || 0) * 100).toFixed(1)}%
-                    </span>
+                  <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.06)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div
+                      style={{
+                        width: `${pneuPct}%`,
+                        height: '100%',
+                        background: 'linear-gradient(90deg, #ef4444, #f87171)',
+                        transition: 'width 0.4s ease',
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -439,7 +513,7 @@ export const PredictPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Grad-CAM Caption */}
+              {/* Static Grad-CAM Caption */}
               {prediction.caption && (
                 <div style={{ padding: '0.75rem 1rem', background: 'rgba(6, 182, 212, 0.06)', borderRadius: '8px', border: '1px solid rgba(6, 182, 212, 0.2)', fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
                   <Info size={14} style={{ flexShrink: 0, marginTop: '0.1rem', color: 'var(--cyan-bright)' }} />
