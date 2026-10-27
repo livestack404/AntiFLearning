@@ -28,7 +28,7 @@ export const LiveMetricsCards: React.FC<LiveMetricsCardsProps> = ({ metrics, tot
       <div className="glass-panel" style={{ padding: '0.9rem', position: 'relative', overflow: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
           <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Holdout Accuracy
+            Validation Accuracy
           </span>
           <Target size={16} color="var(--cyan-bright)" />
         </div>
@@ -41,7 +41,7 @@ export const LiveMetricsCards: React.FC<LiveMetricsCardsProps> = ({ metrics, tot
           }}>
             {acc}%
           </span>
-          <span style={{ fontSize: '0.7rem', color: '#34d399' }}>test set</span>
+          <span style={{ fontSize: '0.7rem', color: '#34d399' }}>validation set</span>
         </div>
         <div style={{ marginTop: '0.35rem', height: '3px', background: 'rgba(255,255,255,0.06)', borderRadius: '2px', overflow: 'hidden' }}>
           <div style={{ width: `${acc}%`, height: '100%', background: 'var(--cyan-primary)' }} />
@@ -66,7 +66,7 @@ export const LiveMetricsCards: React.FC<LiveMetricsCardsProps> = ({ metrics, tot
             {loss}
           </span>
         </div>
-        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>MedMNIST-Pneumonia test set (624 cases)</span>
+        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>validation set</span>
       </div>
 
       {/* F1 Score Card */}

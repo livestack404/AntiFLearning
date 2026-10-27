@@ -1,37 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { Server, Building2, AlertTriangle, ShieldAlert, CheckCircle2, XCircle } from 'lucide-react';
+import { Server, Building2, ShieldAlert, XCircle, ShieldCheck, Database, Cpu, CheckCircle2 } from 'lucide-react';
 import { ClientNodeState } from '../types';
 
 interface NetworkGraphProps {
   clients: ClientNodeState[];
   isRunning: boolean;
   currentRound: number;
+  currentStep: number;
   selectedClient: number | null;
   onSelectClient: (id: number) => void;
 }
+
+const STEP_SENTENCES: Record<number, string> = {
+  1: 'Server sends the current model to every hospital',
+  2: 'Each hospital trains on its own private X-rays',
+  3: 'Hospitals send back only what they learned',
+  4: 'Server checks every update for suspicious ones',
+  5: 'Server combines the good updates into a better model',
+  6: 'Every decision is recorded in the ledger',
+};
 
 export const NetworkGraph: React.FC<NetworkGraphProps> = ({
   clients,
   isRunning,
   currentRound,
+  currentStep,
   selectedClient,
   onSelectClient,
 }) => {
-  const [animationTick, setAnimationTick] = useState(0);
+  const [dotProgress, setDotProgress] = useState(0);
 
+  // Drive animation progress for Step 1 (server -> hospital) and Step 3 (hospital -> server)
   useEffect(() => {
-    if (!isRunning) return;
-    const interval = setInterval(() => {
-      setAnimationTick((t) => (t + 1) % 100);
-    }, 40);
-    return () => clearInterval(interval);
-  }, [isRunning]);
+    if (currentStep === 1 || currentStep === 3) {
+      setDotProgress(0);
+      const start = Date.now();
+      const duration = 600; // 600ms or less per specification
+
+      const frame = () => {
+        const elapsed = Date.now() - start;
+        const p = Math.min(1, elapsed / duration);
+        setDotProgress(p);
+        if (p < 1) {
+          requestAnimationFrame(frame);
+        }
+      };
+      const handle = requestAnimationFrame(frame);
+      return () => cancelAnimationFrame(handle);
+    } else {
+      setDotProgress(0);
+    }
+  }, [currentStep, currentRound]);
 
   const centerX = 260;
   const centerY = 240;
   const radius = 170;
 
-  // Calculate coordinates for 8 hospitals arranged in a circle
   const getNodeCoordinates = (index: number, total: number) => {
     const angle = (index * (2 * Math.PI) / total) - (Math.PI / 2);
     return {
@@ -43,7 +67,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
   const getStatusColor = (status: string) => {
     switch (status.toUpperCase()) {
       case 'EXCLUDED':
-        return '#f97316'; // orange
+        return 'var(--orange-accent, #f97316)'; // orange
       case 'REJECTED':
         return '#ef4444'; // crimson
       case 'FLAGGED':
@@ -60,14 +84,18 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
     }
   };
 
+  const activeStep = currentStep >= 1 && currentStep <= 6 ? currentStep : 1;
+  const stepText = STEP_SENTENCES[activeStep] || 'Awaiting simulation round start...';
+
   return (
     <div className="glass-panel" style={{ padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+      {/* ── Top Header & Legend ────────────────────────────────────────── */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <div>
-          <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1rem', color: 'var(--text-main)' }}>
+          <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1rem', color: 'var(--text-main)', margin: 0 }}>
             Decentralized Healthcare Topology
           </h3>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: '0.2rem 0 0 0' }}>
             Real-time weight transmission, poisoning flags, and dynamic consensus filtering
           </p>
         </div>
@@ -75,8 +103,8 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#10b981' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981' }} /> Accepted
           </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#f59e0b' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b' }} /> Flagged
+          <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#ef4444' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444' }} /> Rejected
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--orange-accent, #f97316)' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f97316' }} /> Excluded
@@ -87,6 +115,45 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
         </div>
       </div>
 
+      {/* ── Caption Bar: Round N - Step k of 6 & Step sentence ───────── */}
+      <div
+        style={{
+          background: 'rgba(6, 182, 212, 0.08)',
+          border: '1px solid rgba(6, 182, 212, 0.25)',
+          borderRadius: '8px',
+          padding: '0.6rem 0.9rem',
+          marginBottom: '0.75rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.4rem',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--cyan-bright)' }}>
+            Round {currentRound > 0 ? currentRound : 1} &mdash; Step {activeStep} of 6
+          </span>
+          <span style={{ fontSize: '0.8rem', color: '#ffffff', fontWeight: 500 }}>
+            {stepText}
+          </span>
+        </div>
+
+        {/* 6-segment progress stepper bar */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '4px', height: '4px' }}>
+          {[1, 2, 3, 4, 5, 6].map((st) => (
+            <div
+              key={`stepper-${st}`}
+              style={{
+                borderRadius: '2px',
+                background: st <= activeStep ? 'var(--cyan-bright)' : 'rgba(255, 255, 255, 0.1)',
+                boxShadow: st === activeStep ? '0 0 8px var(--cyan-bright)' : 'none',
+                transition: 'background 0.3s ease',
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* ── SVG Scene ────────────────────────────────────────────────── */}
       <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
         <svg
           viewBox="0 0 520 480"
@@ -98,11 +165,6 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
               <stop offset="70%" stopColor="#06b6d4" stopOpacity="0.1" />
               <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
             </radialGradient>
-            <radialGradient id="ringGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="60%" stopColor="#06b6d4" stopOpacity="0" />
-              <stop offset="85%" stopColor="#06b6d4" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
-            </radialGradient>
             <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="3" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
@@ -112,55 +174,74 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
           {/* Background Concentric Grid Rings */}
           <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeDasharray="3,3" />
           <circle cx={centerX} cy={centerY} r={radius * 0.6} fill="none" stroke="rgba(255, 255, 255, 0.03)" />
-          
-          {/* Animated Central Pulse Ring */}
-          <circle
-            cx={centerX}
-            cy={centerY}
-            r={radius + 15}
-            fill="none"
-            stroke="#06b6d4"
-            strokeOpacity={isRunning ? "0.3" : "0.08"}
-            strokeWidth="1.5"
-            strokeDasharray="6,6"
-            className={isRunning ? "animate-spin-slow" : ""}
-            style={{ transformOrigin: `${centerX}px ${centerY}px` }}
-          />
+
+          {/* Step 4 Server Ring Pulse */}
+          {currentStep === 4 && (
+            <circle
+              cx={centerX}
+              cy={centerY}
+              r={radius * 0.45}
+              fill="none"
+              stroke="var(--amber-accent)"
+              strokeWidth="2"
+              className="pulse-glow"
+            />
+          )}
 
           {/* Data Conduit Lines & Animated Packet Transmission */}
           {clients.map((client, i) => {
             const { x, y } = getNodeCoordinates(i, clients.length);
             const statusColor = getStatusColor(client.status);
-            const isSelected = selectedClient === client.id;
             const isExcluded = client.status === 'EXCLUDED';
+            const isAccepted = client.status === 'ACCEPTED';
 
-            // Calculate animated packet positions along conduit line
-            // Phase 1: Upload from client to server (tick 0..50)
-            // Phase 2: Broadcast from server to client (tick 50..100)
-            const progress = (animationTick % 100) / 100;
-            const packetX = isRunning && !isExcluded ? x + (centerX - x) * progress : x;
-            const packetY = isRunning && !isExcluded ? y + (centerY - y) * progress : y;
+            // Step 1: Cyan dots travel from server to every hospital (progress 0 -> 1)
+            // Step 3: White-blue dots travel from hospital back to server (progress 0 -> 1)
+            let dotX = x;
+            let dotY = y;
+            let showDot = false;
+            let dotColor = '#22d3ee';
+
+            if (currentStep === 1) {
+              showDot = true;
+              dotColor = '#22d3ee'; // cyan
+              dotX = centerX + (x - centerX) * dotProgress;
+              dotY = centerY + (y - centerY) * dotProgress;
+            } else if (currentStep === 3) {
+              showDot = true;
+              dotColor = '#93c5fd'; // white-blue
+              dotX = x + (centerX - x) * dotProgress;
+              dotY = y + (centerY - y) * dotProgress;
+            }
 
             return (
               <g key={`conduit-${client.id}`}>
-                {/* Conduit link */}
+                {/* Conduit link: dashed orange for Excluded, flashing cyan/emerald at step 5 if Accepted */}
                 <line
                   x1={centerX}
                   y1={centerY}
                   x2={x}
                   y2={y}
-                  stroke={isSelected ? '#22d3ee' : isExcluded ? 'rgba(239, 68, 68, 0.3)' : 'rgba(255, 255, 255, 0.12)'}
-                  strokeWidth={isSelected ? 2 : 1}
-                  strokeDasharray={isExcluded ? '3,3' : 'none'}
+                  stroke={
+                    isExcluded
+                      ? 'var(--orange-accent, #f97316)'
+                      : currentStep === 5 && isAccepted
+                      ? '#34d399'
+                      : isRunning
+                      ? 'rgba(6, 182, 212, 0.35)'
+                      : 'rgba(255, 255, 255, 0.1)'
+                  }
+                  strokeWidth={isExcluded ? 1.5 : currentStep === 5 && isAccepted ? 2.5 : 1}
+                  strokeDasharray={isExcluded ? '4,4' : 'none'}
                 />
 
-                {/* Animated Data Energy Packet */}
-                {isRunning && !isExcluded && (
+                {/* Animated Dot driven by Step 1 or Step 3 */}
+                {showDot && (
                   <circle
-                    cx={packetX}
-                    cy={packetY}
-                    r={3}
-                    fill={statusColor}
+                    cx={dotX}
+                    cy={dotY}
+                    r={3.5}
+                    fill={dotColor}
                     filter="url(#glowEffect)"
                   />
                 )}
@@ -168,47 +249,63 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
             );
           })}
 
-          {/* Central Aggregation Server */}
-          <g>
-            {/* Outer halo */}
-            <circle cx={centerX} cy={centerY} r={46} fill="url(#serverGlow)" />
+          {/* Central Aggregation Server Node */}
+          <g transform={`translate(${centerX - 36}, ${centerY - 36})`}>
             <circle
-              cx={centerX}
-              cy={centerY}
-              r={36}
-              fill="#0d1527"
-              stroke="#06b6d4"
-              strokeWidth="2"
+              cx="36"
+              cy="36"
+              r="40"
+              fill="url(#serverGlow)"
               filter="url(#glowEffect)"
             />
-            {/* Server Core Icon */}
-            <foreignObject x={centerX - 16} y={centerY - 18} width="32" height="32">
+            <circle
+              cx="36"
+              cy="36"
+              r="34"
+              fill="#080e1a"
+              stroke="var(--cyan-primary)"
+              strokeWidth="2"
+            />
+            <foreignObject x="18" y="14" width="36" height="36">
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-                <Server size={22} color="#22d3ee" />
+                <Server size={22} color="var(--cyan-bright)" />
               </div>
             </foreignObject>
             <text
-              x={centerX}
-              y={centerY + 48}
+              x="36"
+              y="56"
               textAnchor="middle"
-              fill="#e2e8f0"
-              fontSize="9"
-              fontFamily="var(--font-display)"
-              fontWeight="600"
-            >
-              FEDERATED SERVER
-            </text>
-            <text
-              x={centerX}
-              y={centerY + 58}
-              textAnchor="middle"
-              fill="var(--cyan-bright)"
+              fill="#ffffff"
               fontSize="7.5"
-              fontFamily="var(--font-mono)"
+              fontFamily="var(--font-display)"
+              fontWeight="700"
             >
-              {isRunning ? `ROUND ${currentRound}` : 'AGGREGATOR IDLE'}
+              FEDAVG
             </text>
           </g>
+
+          {/* Step 5: Label 'new global model' appears briefly */}
+          {currentStep === 5 && (
+            <g transform={`translate(${centerX}, ${centerY - 52})`}>
+              <rect x="-50" y="-10" width="100" height="20" rx="5" fill="#080e1a" stroke="#34d399" strokeWidth="1" />
+              <text x="0" y="4" textAnchor="middle" fill="#34d399" fontSize="8" fontFamily="var(--font-display)" fontWeight="700">
+                NEW GLOBAL MODEL
+              </text>
+            </g>
+          )}
+
+          {/* Step 6: Chain-block icon flashes '+8 entries' beside server */}
+          {currentStep === 6 && (
+            <g transform={`translate(${centerX + 48}, ${centerY - 10})`}>
+              <rect x="0" y="-12" width="70" height="24" rx="6" fill="#080e1a" stroke="var(--purple-accent)" strokeWidth="1.2" />
+              <foreignObject x="4" y="-8" width="16" height="16">
+                <Database size={14} color="var(--purple-accent)" />
+              </foreignObject>
+              <text x="42" y="4" textAnchor="middle" fill="#c4b5fd" fontSize="8" fontFamily="var(--font-mono)" fontWeight="700">
+                +8 entries
+              </text>
+            </g>
+          )}
 
           {/* Hospital Client Nodes */}
           {clients.map((client, i) => {
@@ -230,9 +327,22 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                     cy={y}
                     r={nodeRadius + 6}
                     fill="none"
-                    stroke="#22d3ee"
+                    stroke="var(--cyan-bright)"
                     strokeWidth="1.5"
                     strokeDasharray="4,4"
+                  />
+                )}
+
+                {/* Step 2 Pulsing Training Ring */}
+                {currentStep === 2 && client.status === 'Training' && (
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={nodeRadius + 5}
+                    fill="none"
+                    stroke="#06b6d4"
+                    strokeWidth="2"
+                    className="pulse-glow"
                   />
                 )}
 
@@ -244,30 +354,31 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                   fill="#0b1220"
                   stroke={statusColor}
                   strokeWidth={client.status === 'EXCLUDED' ? 2.5 : 1.5}
-                  filter={client.status === 'EXCLUDED' || client.status === 'FLAGGED' ? 'url(#glowEffect)' : 'none'}
                 />
 
                 {/* Hospital Node Icon */}
                 <foreignObject x={x - 12} y={y - 14} width="24" height="24">
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
                     {client.status === 'EXCLUDED' ? (
-                      <XCircle size={16} color="#ef4444" />
-                    ) : client.status === 'FLAGGED' ? (
-                      <ShieldAlert size={16} color="#f59e0b" />
+                      <XCircle size={16} color="var(--orange-accent, #f97316)" />
+                    ) : client.status === 'REJECTED' ? (
+                      <ShieldAlert size={16} color="#ef4444" />
+                    ) : client.status === 'ACCEPTED' ? (
+                      <CheckCircle2 size={16} color="#10b981" />
                     ) : (
                       <Building2 size={16} color={statusColor} />
                     )}
                   </div>
                 </foreignObject>
 
-                {/* Neutral purple Compromised marker (set by demo setup) */}
+                {/* Neutral Purple Compromised Marker (set by demo setup) */}
                 {client.isMalicious && (
                   <g transform={`translate(${x - 28}, ${y - 36})`}>
                     <rect
                       width="56"
                       height="13"
                       rx="4"
-                      fill="rgba(139, 92, 246, 0.2)"
+                      fill="rgba(139, 92, 246, 0.25)"
                       stroke="var(--purple-accent)"
                       strokeWidth="0.8"
                     />

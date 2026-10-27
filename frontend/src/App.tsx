@@ -5,6 +5,8 @@ import { Dashboard } from './pages/Dashboard';
 import { PredictPage } from './pages/PredictPage';
 import { LedgerPage } from './pages/LedgerPage';
 import { AboutPage } from './pages/AboutPage';
+import { LearnPage } from './pages/LearnPage';
+import { RoundLogData } from './components/RoundLog';
 import { ClientNodeState, RoundMetrics, RunConfig, WSEvent } from './types';
 
 const INITIAL_CLIENTS: ClientNodeState[] = [
@@ -28,26 +30,31 @@ const DEFAULT_CONFIG: RunConfig = {
   local_epochs: 1,
   batch_size: 32,
   learning_rate: 0.001,
-  speed_ms: 100,
+  speed_ms: 0,
   seed: 42,
 };
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('dashboard');
-  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState('learn');
+  const [isConnected, setIsConnected] = useState(false);
   const [blockchainMode, setBlockchainMode] = useState<string>('mock');
-  const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [currentRound, setCurrentRound] = useState<number>(0);
-  const [totalRounds, setTotalRounds] = useState<number>(10);
   const [clients, setClients] = useState<ClientNodeState[]>(INITIAL_CLIENTS);
   const [metrics, setMetrics] = useState<RoundMetrics | null>(null);
   const [config, setConfig] = useState<RunConfig>(DEFAULT_CONFIG);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentRound, setCurrentRound] = useState(0);
+  const [totalRounds, setTotalRounds] = useState(10);
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [accuracyHistory, setAccuracyHistory] = useState<{ round: number; accuracy: number }[]>([]);
+  const [verdicts, setVerdicts] = useState<Record<number, any> | null>(null);
+  const [roundLogs, setRoundLogs] = useState<RoundLogData[]>([]);
+  const [runReport, setRunReport] = useState<any | null>(null);
   const [events, setEvents] = useState<any[]>([]);
 
   const wsRef = useRef<WebSocket | null>(null);
 
-  // Update clients malicious flags whenever config changes
+  // Sync malicious_ids whenever scenario / malicious_ids in config changes
   useEffect(() => {
     setClients((prev) =>
       prev.map((c) => ({
@@ -55,9 +62,8 @@ export const App: React.FC = () => {
         isMalicious: config.malicious_ids.includes(c.id),
       }))
     );
-  }, [config.malicious_ids]);
+  }, [config.malicious_ids, config.scenario]);
 
-  // Connect WebSocket with auto-reconnect
   useEffect(() => {
     let reconnectTimeout: any;
 
@@ -93,7 +99,7 @@ export const App: React.FC = () => {
 
     connectWebSocket();
 
-    // Also fetch initial status from API
+    // Fetch initial status from API
     fetch('/api/status')
       .then((res) => res.json())
       .then((data) => {
@@ -116,7 +122,6 @@ export const App: React.FC = () => {
     setEvents((prev) => [...prev, { timestamp, type: event.type, data: event.data }]);
 
     switch (event.type) {
-      // ── Legacy / compatibility names ──────────────────────────────────────
       case 'init':
         setIsRunning(event.data.is_running);
         setIsPaused(event.data.is_paused);
@@ -125,62 +130,125 @@ export const App: React.FC = () => {
         setBlockchainMode(event.data.blockchain_mode);
         break;
 
-      // ── Backend canonical event names ─────────────────────────────────────
-      // round_started / round_start (both supported)
+      // ── Phase 1: round_started & global_model_broadcast ──────────────────
       case 'round_started':
-      case 'round_start':
+      case 'round_start': {
+        const r = event.data.round;
         setIsRunning(true);
-        setCurrentRound(event.data.round);
+        setCurrentRound(r);
+        setCurrentStep(1);
         setTotalRounds(event.data.total_rounds || totalRounds);
-        // Reset all clients to Training state at the start of each round
+        setVerdicts(null);
+
+        // Reset Accepted and Rejected to neutral 'Idle'; Excluded stays 'EXCLUDED'
         setClients((prev) =>
           prev.map((c) => ({
             ...c,
-            status: 'Training' as const,
+            status: c.status === 'EXCLUDED' ? 'EXCLUDED' : 'Idle',
           }))
         );
-        break;
 
-      // global_model_broadcast: server distributes weights
-      case 'global_model_broadcast':
-        // No UI state change needed; event logged for EventStream
+        setRoundLogs((prev) => {
+          if (prev.some((rl) => rl.round === r)) return prev;
+          return [
+            ...prev,
+            {
+              round: r,
+              step2Lines: [],
+              step3Lines: [],
+              step4Lines: [],
+            },
+          ];
+        });
         break;
+      }
 
-      // client_training: individual hospital starts training
+      case 'global_model_broadcast': {
+        const r = event.data.round;
+        setCurrentStep(1);
+        setRoundLogs((prev) =>
+          prev.map((rl) =>
+            rl.round === r
+              ? {
+                  ...rl,
+                  step1: `Server sends global model v${event.data.model_version ?? r - 1} to H1 ... H8`,
+                }
+              : rl
+          )
+        );
+        break;
+      }
+
+      // ── Phase 2: client_training ─────────────────────────────────────────
       case 'client_training': {
         const cid = event.data.client_id;
+        const r = event.data.round;
+        setCurrentStep(2);
         setClients((prev) =>
-          prev.map((c) => (c.id === cid ? { ...c, status: 'Training' as const } : c))
+          prev.map((c) => (c.id === cid ? { ...c, status: 'Training' } : c))
+        );
+        const line = `H${cid + 1} trained on ${event.data.n_samples ?? 588} images, local loss ${(event.data.local_loss ?? 0).toFixed(4)}`;
+        setRoundLogs((prev) =>
+          prev.map((rl) => {
+            if (rl.round !== r) return rl;
+            if (rl.step2Lines.includes(line)) return rl;
+            return { ...rl, step2Lines: [...rl.step2Lines, line] };
+          })
         );
         break;
       }
 
-      // client_update_sent: hospital finishes and sends update
+      // ── Phase 3: client_update_sent ──────────────────────────────────────
       case 'client_update_sent': {
         const cid = event.data.client_id;
+        const r = event.data.round;
+        setCurrentStep(3);
         setClients((prev) =>
-          prev.map((c) => (c.id === cid ? { ...c, status: 'Sent' as const } : c))
+          prev.map((c) => (c.id === cid ? { ...c, status: 'Sent' } : c))
+        );
+        const line = `H${cid + 1} sent update (size ${(event.data.update_norm ?? 0).toFixed(4)})`;
+        setRoundLogs((prev) =>
+          prev.map((rl) => {
+            if (rl.round !== r) return rl;
+            if (rl.step3Lines.includes(line)) return rl;
+            return { ...rl, step3Lines: [...rl.step3Lines, line] };
+          })
         );
         break;
       }
 
-      // detection_complete: detector verdicts for all clients in the round
+      // ── Phase 4: detection_complete ──────────────────────────────────────
       case 'detection_complete': {
+        const r = event.data.round;
+        setCurrentStep(4);
         const records: Record<string, any> = event.data.records_by_client || {};
+        setVerdicts(records);
+
+        const s4Lines: string[] = [];
         setClients((prev) =>
           prev.map((c) => {
             const verdict = records[String(c.id)];
             if (!verdict) return c;
             const statusMap: Record<string, any> = {
               Accepted: 'ACCEPTED',
-              Rejected: 'FLAGGED',
+              Rejected: 'REJECTED',
               Excluded: 'EXCLUDED',
             };
+            const mapped = statusMap[verdict.status] ?? c.status;
+            const sim = (verdict.cosine_similarity ?? 1.0).toFixed(4);
+            const trust = verdict.trust_after ?? 100;
+            const line = `Check: H${c.id + 1} similarity ${sim} trust ${trust} ${
+              verdict.status === 'Accepted'
+                ? 'ACCEPTED'
+                : `REJECTED: ${verdict.reason_text || 'Outlier direction'}`
+            }`;
+            s4Lines.push(line);
+
             return {
               ...c,
               similarity: verdict.cosine_similarity ?? c.similarity,
               robustZ: verdict.robust_z ?? c.robustZ,
-              status: statusMap[verdict.status] ?? c.status,
+              status: mapped,
               kFlags:
                 verdict.status === 'Rejected'
                   ? c.kFlags + 1
@@ -191,15 +259,29 @@ export const App: React.FC = () => {
             };
           })
         );
+
+        setRoundLogs((prev) =>
+          prev.map((rl) => (rl.round === r ? { ...rl, step4Lines: s4Lines } : rl))
+        );
         break;
       }
 
-      // aggregation_complete: FedAvg done, new validation metrics available
-      case 'aggregation_complete':
+      // ── Phase 5: aggregation_complete ────────────────────────────────────
+      case 'aggregation_complete': {
+        const r = event.data.round;
+        const acc = event.data.accuracy ?? 0;
+        const loss = event.data.loss ?? 0;
+        setCurrentStep(5);
+
+        setAccuracyHistory((prev) => [
+          ...prev.filter((p) => p.round !== r),
+          { round: r, accuracy: acc },
+        ]);
+
         setMetrics({
-          round: event.data.round,
-          accuracy: event.data.accuracy,
-          loss: event.data.loss,
+          round: r,
+          accuracy: acc,
+          loss: loss,
           precision: event.data.metrics?.precision ?? 0,
           recall: event.data.metrics?.recall ?? 0,
           f1: event.data.metrics?.f1 ?? 0,
@@ -207,128 +289,89 @@ export const App: React.FC = () => {
           excluded_clients: event.data.excluded_count ?? 0,
           blockchain_ms: 0,
         });
-        break;
 
-      // ledger_written: blockchain block committed
-      case 'ledger_written':
+        const s5Line = `Aggregated ${event.data.trusted_count ?? 8} of 8 updates. New model v${event.data.model_version ?? r}: validation accuracy ${(acc * 100).toFixed(1)}%, loss ${loss.toFixed(4)}`;
+        setRoundLogs((prev) =>
+          prev.map((rl) => (rl.round === r ? { ...rl, step5: s5Line } : rl))
+        );
+        break;
+      }
+
+      // ── Phase 6: ledger_written ──────────────────────────────────────────
+      case 'ledger_written': {
+        const r = event.data.round;
+        setCurrentStep(6);
         setMetrics((prev) =>
           prev ? { ...prev, blockchain_ms: event.data.blockchain_ms ?? prev.blockchain_ms } : prev
         );
+        const s6Line = `${event.data.entries_count ?? 8} decisions written to ledger (${event.data.mode ?? blockchainMode})`;
+        setRoundLogs((prev) =>
+          prev.map((rl) => (rl.round === r ? { ...rl, step6: s6Line } : rl))
+        );
         break;
+      }
 
-      // round_completed: full per-round record
-      case 'round_completed':
-      case 'round_end':
-        if (event.data.record) {
-          setMetrics(event.data.record);
-        }
+      // ── Round & Run Lifecycle ────────────────────────────────────────────
+      case 'round_completed': {
+        const rec = event.data.record;
+        const r = event.data.round;
+        const sumLine = `Round ${r}: accepted ${rec?.trusted_clients ?? 8}, rejected ${rec?.excluded_clients ?? 0}, accuracy ${((rec?.accuracy ?? 0) * 100).toFixed(1)}%`;
+        setRoundLogs((prev) =>
+          prev.map((rl) => (rl.round === r ? { ...rl, summary: sumLine } : rl))
+        );
         break;
+      }
 
-      // run_completed / run_end: simulation finished
       case 'run_completed':
-      case 'run_end':
         setIsRunning(false);
         setIsPaused(false);
-        break;
-
-      // Legacy similarity / flag / exclude
-      case 'similarity':
-        setClients((prev) =>
-          prev.map((c) =>
-            c.id === event.data.client_id
-              ? {
-                  ...c,
-                  similarity: event.data.similarity,
-                  robustZ: event.data.robust_z,
-                  status: event.data.status ?? c.status,
-                }
-              : c
-          )
-        );
-        break;
-
-      case 'flag':
-        setClients((prev) =>
-          prev.map((c) =>
-            c.id === event.data.client_id
-              ? { ...c, status: 'FLAGGED' as const, kFlags: c.kFlags + 1, reason: event.data.reason }
-              : c
-          )
-        );
-        break;
-
-      case 'exclude':
-        setClients((prev) =>
-          prev.map((c) =>
-            c.id === event.data.client_id
-              ? { ...c, status: 'EXCLUDED' as const, reason: event.data.reason }
-              : c
-          )
-        );
-        break;
-
-      case 'metrics':
-        setMetrics((prev) => ({
-          round: event.data.round,
-          accuracy: event.data.metrics?.accuracy ?? event.data.accuracy,
-          loss: event.data.metrics?.loss ?? event.data.loss,
-          precision: event.data.metrics?.precision ?? 0,
-          recall: event.data.metrics?.recall ?? 0,
-          f1: event.data.metrics?.f1 ?? 0,
-          trusted_clients: prev?.trusted_clients ?? 8,
-          excluded_clients: prev?.excluded_clients ?? 0,
-          blockchain_ms: prev?.blockchain_ms ?? 0,
-        }));
-        break;
-
-      case 'error':
-        setIsRunning(false);
-        console.error('FL Orchestrator Error:', event.data.message);
+        setRunReport(event.data.detection_report || {});
         break;
 
       default:
-        // Unknown event types are already logged to EventStream above
         break;
     }
   };
 
-  // Actions
   const handleStart = async () => {
     try {
-      const res = await fetch('/api/start', {
+      setAccuracyHistory([]);
+      setRoundLogs([]);
+      setVerdicts(null);
+      setRunReport(null);
+      setCurrentStep(1);
+
+      await fetch('/api/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(config),
       });
-      if (res.ok) {
-        setIsRunning(true);
-        setIsPaused(false);
-        setTotalRounds(config.rounds);
-        setEvents([]);
-      } else {
-        const err = await res.json();
-        alert(err.detail || 'Could not start simulation');
-      }
+      setIsRunning(true);
+      setIsPaused(false);
     } catch (e) {
       console.error('Failed to start simulation', e);
     }
   };
 
-  const handlePause = async () => {
+  const handleTogglePause = async () => {
     try {
-      await fetch('/api/pause', { method: 'POST' });
-      setIsPaused(true);
+      if (isPaused) {
+        await fetch('/api/resume', { method: 'POST' });
+        setIsPaused(false);
+      } else {
+        await fetch('/api/pause', { method: 'POST' });
+        setIsPaused(true);
+      }
     } catch (e) {
-      console.error('Failed to pause', e);
+      console.error('Failed to toggle pause', e);
     }
   };
 
-  const handleResume = async () => {
+  const handleStep = async () => {
     try {
-      await fetch('/api/resume', { method: 'POST' });
-      setIsPaused(false);
+      await fetch('/api/step', { method: 'POST' });
     } catch (e) {
-      console.error('Failed to resume', e);
+      console.error('Failed to step simulation', e);
     }
   };
 
@@ -338,7 +381,7 @@ export const App: React.FC = () => {
       setIsRunning(false);
       setIsPaused(false);
     } catch (e) {
-      console.error('Failed to stop', e);
+      console.error('Failed to stop simulation', e);
     }
   };
 
@@ -348,14 +391,19 @@ export const App: React.FC = () => {
       setIsRunning(false);
       setIsPaused(false);
       setCurrentRound(0);
+      setCurrentStep(1);
       setMetrics(null);
+      setAccuracyHistory([]);
+      setVerdicts(null);
+      setRoundLogs([]);
+      setRunReport(null);
       setEvents([]);
       setClients(INITIAL_CLIENTS.map((c) => ({
         ...c,
         isMalicious: config.malicious_ids.includes(c.id),
       })));
     } catch (e) {
-      console.error('Failed to reset', e);
+      console.error('Failed to reset simulation', e);
     }
   };
 
@@ -372,8 +420,17 @@ export const App: React.FC = () => {
       />
 
       <main style={{ flex: 1 }}>
+        {activeTab === 'learn' && (
+          <ErrorBoundary label="Learn">
+            <LearnPage
+              onTryLive={() => setActiveTab('dashboard')}
+              onSeePredictions={() => setActiveTab('predict')}
+            />
+          </ErrorBoundary>
+        )}
+
         {activeTab === 'dashboard' && (
-          <ErrorBoundary label="Live Simulation">
+          <ErrorBoundary label="Simulation">
             <Dashboard
               clients={clients}
               metrics={metrics}
@@ -381,32 +438,36 @@ export const App: React.FC = () => {
               onChangeConfig={setConfig}
               isRunning={isRunning}
               isPaused={isPaused}
-              onStart={handleStart}
-              onPause={handlePause}
-              onResume={handleResume}
-              onStop={handleStop}
-              onReset={handleReset}
+              currentStep={currentStep}
               currentRound={currentRound}
               totalRounds={totalRounds}
+              accuracyHistory={accuracyHistory}
+              verdicts={verdicts}
+              roundLogs={roundLogs}
+              runReport={runReport}
+              onStart={handleStart}
+              onTogglePause={handleTogglePause}
+              onStep={handleStep}
+              onReset={handleReset}
               events={events}
             />
           </ErrorBoundary>
         )}
 
         {activeTab === 'predict' && (
-          <ErrorBoundary label="Clinical Predict & XAI">
+          <ErrorBoundary label="Predict">
             <PredictPage />
           </ErrorBoundary>
         )}
 
         {activeTab === 'ledger' && (
-          <ErrorBoundary label="Blockchain Audit Ledger">
+          <ErrorBoundary label="Ledger">
             <LedgerPage />
           </ErrorBoundary>
         )}
 
         {activeTab === 'about' && (
-          <ErrorBoundary label="Architecture & Zero-Trust">
+          <ErrorBoundary label="About">
             <AboutPage />
           </ErrorBoundary>
         )}

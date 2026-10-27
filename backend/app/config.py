@@ -90,6 +90,7 @@ LOCAL_EPOCHS: int = 1
 BATCH_SIZE: int = 32
 LEARNING_RATE: float = 0.001
 SEED: int = 42
+STEP_DELAY_SECONDS: float = 1.2  # 1.2s pause between the 6 simulation phases (~8s per round)
 
 DATASET: str = "pneumoniamnist"
 NUM_CLASSES: int = 2

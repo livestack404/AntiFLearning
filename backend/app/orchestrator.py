@@ -41,10 +41,18 @@ class FLOrchestrator:
             persistence_m=config.PERSISTENCE_M,
             warmup_rounds=config.WARMUP_ROUNDS,
         )
+        self.step_delay: float = config.STEP_DELAY_SECONDS
 
 
     async def _wait_for_step_or_resume(self):
-        """Allows stepping through the 6 simulation phases one at a time while paused."""
+        """Allows stepping through the 6 simulation phases one at a time while paused,
+        and pauses for self.step_delay (default 1.2s) between phases when running.
+        """
+        if not training_state.is_paused:
+            if self.step_delay > 0:
+                await asyncio.sleep(self.step_delay)
+            return
+
         while training_state.is_paused:
             if training_state.should_stop:
                 break
@@ -133,24 +141,20 @@ class FLOrchestrator:
                 global_weights = server.get_global_weights()
                 await training_state.emit_event("global_model_broadcast", {
                     "round": round_no,
-                    "message": "Server sends the current model to every hospital",
+                    "model_version": round_no - 1,
+                    "message": f"Server sends global model v{round_no - 1} to H1 ... H8",
                 })
 
                 # Step 2: client_training (per hospital)
                 await self._wait_for_step_or_resume()
-                for cid in sorted(clients.keys()):
-                    await training_state.emit_event("client_training", {
-                        "round": round_no,
-                        "client_id": cid,
-                        "hospital_id": f"H{cid+1}",
-                        "message": f"Hospital H{cid+1} trains locally on private X-rays",
-                    })
-
                 client_updates = {}
                 sample_counts = {}
                 update_hashes = {}
+                update_norms = {}
+                local_losses = {}
 
-                for cid, client in clients.items():
+                for cid in sorted(clients.keys()):
+                    client = clients[cid]
                     is_mal = (cid in run_config.malicious_ids)
                     delta, count, loss = client.train(
                         global_weights=global_weights,
@@ -159,9 +163,22 @@ class FLOrchestrator:
                         is_malicious=is_mal,
                         attack_type=run_config.attack_type,
                     )
+                    norm = float(torch.norm(delta).item())
                     client_updates[cid] = delta
                     sample_counts[cid] = count
                     update_hashes[cid] = compute_update_hash(delta)
+                    update_norms[cid] = norm
+                    local_losses[cid] = float(loss)
+
+                    await training_state.emit_event("client_training", {
+                        "round": round_no,
+                        "client_id": cid,
+                        "hospital_id": f"H{cid+1}",
+                        "n_samples": count,
+                        "local_loss": round(float(loss), 4),
+                        "update_norm": round(norm, 4),
+                        "message": f"H{cid+1} trained on {count} images, local loss {float(loss):.4f}",
+                    })
 
                 # Step 3: client_update_sent (per hospital)
                 await self._wait_for_step_or_resume()
@@ -170,7 +187,10 @@ class FLOrchestrator:
                         "round": round_no,
                         "client_id": cid,
                         "hospital_id": f"H{cid+1}",
-                        "message": f"Hospital H{cid+1} sends model update to server",
+                        "n_samples": sample_counts[cid],
+                        "local_loss": round(float(local_losses[cid]), 4),
+                        "update_norm": round(update_norms[cid], 4),
+                        "message": f"H{cid+1} sent update (size {update_norms[cid]:.4f})",
                     })
 
                 # Step 4: Detection
@@ -218,6 +238,7 @@ class FLOrchestrator:
                 # Event 6: aggregation_complete (new validation accuracy and loss)
                 await training_state.emit_event("aggregation_complete", {
                     "round": round_no,
+                    "model_version": round_no,
                     "status": aggregation_status,
                     "trusted_count": len(trusted_ids),
                     "excluded_count": len(client_updates) - len(trusted_ids),
