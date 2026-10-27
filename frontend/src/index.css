@@ -22,6 +22,9 @@
   --crimson-accent: #ef4444;
   --crimson-glow: rgba(239, 68, 68, 0.25);
   
+  --orange-accent: #f97316;
+  --orange-glow: rgba(249, 115, 22, 0.25);
+  
   --purple-accent: #8b5cf6;
   
   --text-main: #f8fafc;
@@ -196,6 +199,12 @@ body {
   background: rgba(239, 68, 68, 0.15);
   color: #f87171;
   border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-orange {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.3);
 }
 
 .badge-cyan {

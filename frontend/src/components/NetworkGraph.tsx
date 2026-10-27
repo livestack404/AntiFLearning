@@ -41,20 +41,22 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
   };
 
   const getStatusColor = (status: string) => {
-    switch (status) {
+    switch (status.toUpperCase()) {
       case 'EXCLUDED':
-        return '#ef4444';
+        return '#f97316'; // orange
+      case 'REJECTED':
+        return '#ef4444'; // crimson
       case 'FLAGGED':
-        return '#f59e0b';
+        return '#f59e0b'; // amber
       case 'ACCEPTED':
-        return '#10b981';
-      case 'Training':
-        return '#06b6d4';
-      case 'Sent':
-        return '#3b82f6';
-      case 'Idle':
+        return '#10b981'; // emerald
+      case 'TRAINING':
+        return '#06b6d4'; // cyan
+      case 'SENT':
+        return '#3b82f6'; // blue
+      case 'IDLE':
       default:
-        return '#64748b';
+        return '#64748b'; // neutral slate
     }
   };
 
@@ -69,15 +71,18 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
             Real-time weight transmission, poisoning flags, and dynamic consensus filtering
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '0.6rem', fontSize: '0.7rem' }}>
+        <div style={{ display: 'flex', gap: '0.6rem', fontSize: '0.7rem', flexWrap: 'wrap' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#10b981' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981' }} /> Accepted
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#f59e0b' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b' }} /> Flagged
           </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#ef4444' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444' }} /> Excluded
+          <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--orange-accent, #f97316)' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f97316' }} /> Excluded
+          </span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--purple-accent)' }}>
+            <ShieldAlert size={12} color="var(--purple-accent)" /> Compromised (set by the demo setup)
           </span>
         </div>
       </div>
@@ -255,6 +260,31 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                   </div>
                 </foreignObject>
 
+                {/* Neutral purple Compromised marker (set by demo setup) */}
+                {client.isMalicious && (
+                  <g transform={`translate(${x - 28}, ${y - 36})`}>
+                    <rect
+                      width="56"
+                      height="13"
+                      rx="4"
+                      fill="rgba(139, 92, 246, 0.2)"
+                      stroke="var(--purple-accent)"
+                      strokeWidth="0.8"
+                    />
+                    <text
+                      x="28"
+                      y="9.5"
+                      textAnchor="middle"
+                      fill="#c4b5fd"
+                      fontSize="6.5"
+                      fontFamily="var(--font-sans)"
+                      fontWeight="600"
+                    >
+                      Compromised
+                    </text>
+                  </g>
+                )}
+
                 {/* Node Label */}
                 <text
                   x={x}
@@ -324,7 +354,10 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{sc.name} (Client #{sc.id})</span>
                       {sc.isMalicious && (
-                        <span className="badge badge-red" style={{ fontSize: '0.65rem' }}>Compromised Node</span>
+                        <span className="badge badge-purple" style={{ fontSize: '0.65rem' }}>
+                          <ShieldAlert size={10} color="var(--purple-accent)" />
+                          Compromised
+                        </span>
                       )}
                     </div>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>

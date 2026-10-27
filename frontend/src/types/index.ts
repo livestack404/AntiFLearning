@@ -1,6 +1,6 @@
 export type ScenarioType = 'clean' | 'attacked' | 'defended' | 'custom';
 export type AttackType = 'label_flip' | 'sign_flip';
-export type ClientStatus = 'Idle' | 'Training' | 'Sent' | 'ACCEPTED' | 'FLAGGED' | 'EXCLUDED';
+export type ClientStatus = 'Idle' | 'Training' | 'Sent' | 'ACCEPTED' | 'FLAGGED' | 'EXCLUDED' | 'REJECTED';
 
 export interface RunConfig {
   scenario: ScenarioType;

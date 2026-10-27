@@ -8,14 +8,14 @@ import { AboutPage } from './pages/AboutPage';
 import { ClientNodeState, RoundMetrics, RunConfig, WSEvent } from './types';
 
 const INITIAL_CLIENTS: ClientNodeState[] = [
-  { id: 0, name: 'Metro General', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
-  { id: 1, name: 'St. Jude Health', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
-  { id: 2, name: 'Apex Medical', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
-  { id: 3, name: 'Rogue Node A', isMalicious: true, status: 'Idle', similarity: 0.0, robustZ: 0.0, kFlags: 0 },
-  { id: 4, name: 'Bayview Clinic', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
-  { id: 5, name: 'Cedars Health', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
-  { id: 6, name: 'Highland Care', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
-  { id: 7, name: 'Rogue Node B', isMalicious: true, status: 'Idle', similarity: 0.0, robustZ: 0.0, kFlags: 0 },
+  { id: 0, name: 'H1', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
+  { id: 1, name: 'H2', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
+  { id: 2, name: 'H3', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
+  { id: 3, name: 'H4', isMalicious: true, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
+  { id: 4, name: 'H5', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
+  { id: 5, name: 'H6', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
+  { id: 6, name: 'H7', isMalicious: false, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
+  { id: 7, name: 'H8', isMalicious: true, status: 'Idle', similarity: 1.0, robustZ: 0.0, kFlags: 0 },
 ];
 
 const DEFAULT_CONFIG: RunConfig = {

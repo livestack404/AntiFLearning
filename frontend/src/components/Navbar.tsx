@@ -7,7 +7,8 @@ import {
   Wifi, 
   WifiOff, 
   Cpu, 
-  Lock
+  Lock,
+  BookOpen
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -30,10 +31,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   totalRounds,
 }) => {
   const navItems = [
-    { id: 'dashboard', label: 'Live Simulation', icon: Activity },
-    { id: 'predict', label: 'Clinical Predict & XAI', icon: Cpu },
-    { id: 'ledger', label: 'Blockchain Audit Ledger', icon: Database },
-    { id: 'about', label: 'Architecture & Zero-Trust', icon: Info },
+    { id: 'learn', label: 'Learn', icon: BookOpen },
+    { id: 'dashboard', label: 'Simulation', icon: Activity },
+    { id: 'predict', label: 'Predict', icon: Cpu },
+    { id: 'ledger', label: 'Ledger', icon: Database },
+    { id: 'about', label: 'About', icon: Info },
   ];
 
   return (
