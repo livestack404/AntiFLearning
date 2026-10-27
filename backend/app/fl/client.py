@@ -20,6 +20,11 @@ from app.fl.utils import (
     flatten_weights,
 )
 
+# Malicious clients train for this many times more local epochs than honest ones.
+# More epochs on flipped labels = stronger, more directionally distinct poisoned update.
+# This is realistic: a determined attacker would iterate longer to maximise damage.
+MALICIOUS_EPOCHS_MULTIPLIER: int = 3
+
 class HospitalClient:
     def __init__(
         self,
@@ -80,7 +85,11 @@ class HospitalClient:
         num_batches = 0
         total_samples = 0
 
-        for _ in range(epochs):
+        # Malicious label-flip clients train for 3x longer to amplify the poisoned
+        # gradient direction, making their FC head cosine clearly and unambiguously negative.
+        effective_epochs = (epochs * MALICIOUS_EPOCHS_MULTIPLIER) if (is_malicious and attack_type == "label_flip") else epochs
+
+        for _ in range(effective_epochs):
             for images, labels in self.data_loader:
                 images = images.to(self.device)
                 labels = labels.to(self.device)

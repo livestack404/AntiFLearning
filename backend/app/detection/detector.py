@@ -1,5 +1,19 @@
-"""Poisoning attack detection engine using Median Cosine Similarity,
+"""Poisoning attack detection engine using Head-Weighted Cosine Similarity,
 Robust Z-Score (MAD), Trust Scores, and Persistence Tracking.
+
+Key design decision:
+  Label-flip attacks manifest STRONGEST in the classification head (fc1 + fc2 layers).
+  Convolutional layers learn generic visual features and stay partially aligned even for
+  label-flipping attackers, diluting the full-vector cosine similarity signal.
+
+  We therefore compute a HEAD-WEIGHTED cosine:
+    head_cos   = cosine(delta_head_i,  median_delta_head)   # last FC layers only
+    full_cos   = cosine(delta_full_i,  median_delta_full)   # entire parameter vector
+    blended    = HEAD_WEIGHT * head_cos + (1 - HEAD_WEIGHT) * full_cos
+
+  An honest non-IID client has positive head_cos (correct label direction, just skewed data).
+  A label-flipping attacker has strongly negative head_cos (labels inverted).
+  Rejection gate: blended_cos < 0.0  (hard floor — never flag positive cosine clients).
 
 Imports NOTHING from blockchain/ or fl/ to enforce strict separation of concerns.
 The detector never receives ground-truth labels about which clients are malicious.
@@ -18,6 +32,15 @@ def compute_update_hash(update_vector: np.ndarray) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+# Fraction of flat update vector that belongs to the decision subnet (fc1 onward).
+# For PneumoniaCNN-28: conv params = 4800, total = 105346 → head starts at index 4800.
+# If the model architecture changes (different resolution / channels) the head offset
+# is recomputed at runtime from the actual vector length via HEAD_PARAM_FRACTION.
+# 100546 / 105346 ≈ 0.9545 — i.e. ~95.5% of parameters are in the FC subnet.
+HEAD_PARAM_FRACTION: float = 0.9545   # proportion of tail params that form the FC head
+HEAD_WEIGHT: float = 0.70             # weight given to head cosine vs full cosine (0.30)
+
+
 class PoisonDetector:
     """Detects and excludes adversarial updates in federated learning."""
 
@@ -28,12 +51,16 @@ class PoisonDetector:
         warmup_rounds: int = 2,
         persistence_k: int = 2,
         persistence_m: int = 3,
+        head_param_fraction: float = HEAD_PARAM_FRACTION,
+        head_weight: float = HEAD_WEIGHT,
     ):
         self.similarity_threshold = similarity_threshold
         self.mad_threshold = mad_threshold
         self.warmup_rounds = warmup_rounds
         self.persistence_k = persistence_k
         self.persistence_m = persistence_m
+        self.head_param_fraction = head_param_fraction
+        self.head_weight = head_weight
 
         # Trust score: starts at 100
         self.trust_scores: Dict[int, int] = collections.defaultdict(lambda: 100)
@@ -67,6 +94,34 @@ class PoisonDetector:
             return 0.0
         return float(np.clip(np.dot(v1, v2) / (norm1 * norm2), -1.0, 1.0))
 
+    def _head_slice(self, vec: np.ndarray) -> np.ndarray:
+        """Returns the tail slice of vec corresponding to the FC decision subnet.
+
+        The head_param_fraction controls what fraction of the flat parameter vector
+        is considered the FC subnet. For PneumoniaCNN-28 this is ~95.5% of parameters
+        (everything after the conv1/conv2 layers = fc1.weight + fc1.bias + fc2.weight + fc2.bias).
+        """
+        n = len(vec)
+        head_start = int(n * (1.0 - self.head_param_fraction))
+        return vec[head_start:]
+
+    def _blended_cosine(
+        self,
+        delta_i: np.ndarray,
+        median_delta: np.ndarray,
+    ) -> tuple:
+        """Returns (blended_cos, head_cos, full_cos).
+
+        blended_cos = HEAD_WEIGHT * head_cos + (1 - HEAD_WEIGHT) * full_cos
+        """
+        full_cos = self._cosine_sim(delta_i, median_delta)
+        head_i = self._head_slice(delta_i)
+        head_median = self._head_slice(median_delta)
+        head_cos = self._cosine_sim(head_i, head_median)
+        blended = self.head_weight * head_cos + (1.0 - self.head_weight) * full_cos
+        blended = float(np.clip(blended, -1.0, 1.0))
+        return round(blended, 4), round(head_cos, 4), round(full_cos, 4)
+
     def evaluate_round(
         self,
         round_no: int,
@@ -74,19 +129,23 @@ class PoisonDetector:
         detection_enabled: bool = True,
         run_id: str = "demo",
     ) -> Tuple[Dict[int, Dict], List[int]]:
-        """Evaluates client updates for poisoning anomalies per specs 4.1 & 4.2.
+        """Evaluates client updates for poisoning anomalies.
 
         Mathematical steps per round:
-          delta_i = local_weights_i - global_weights (1D flattened update)
-          median_delta = coordinate-wise median
-          cos_i = cosine similarity of delta_i to median_delta
-          norm_ratio_i = norm of delta_i / median norm (info only)
-          robust_z_i = (cos_i - median(cos)) / (1.4826 * MAD(cos) + 1e-8)
+          delta_i       = local_weights_i - global_weights  (1D flattened update)
+          median_delta  = coordinate-wise median of all deltas
+          head_cos_i    = cosine(delta_i[head:], median_delta[head:])   # FC subnet only
+          full_cos_i    = cosine(delta_i, median_delta)                 # whole vector
+          blended_cos_i = 0.70 * head_cos_i + 0.30 * full_cos_i
+          robust_z_i    = (blended_cos_i - median(blended_cos)) / (1.4826 * MAD + 1e-8)
 
-        Rejection rules:
-          - Warm-up (rounds 1 and 2): reject only if cos_i < 0
-          - Round 3 onward: reject if cos_i < 0 OR (robust_z_i < -2.5 AND cos_i < median(cos) - 0.15)
-          - Reject at most 3 hospitals per round (lowest cos first)
+        Rejection rules (blended_cos is the primary signal):
+          - Warm-up (rounds 1-2): reject only if blended_cos_i < -0.10
+            (allows a little noise in early rounds before model converges)
+          - Round 3 onward: reject if blended_cos_i < 0.0
+            (honest non-IID clients always have positive head cosine; only
+             label-flipping attackers invert the FC head direction)
+          - Hard safety cap: reject at most 3 hospitals per round (lowest cos first)
 
         Trust score & Exclusion:
           - Starts at 100
@@ -129,24 +188,31 @@ class PoisonDetector:
                 }
             return verdicts, cids
 
-        # 1. Coordinate-wise median delta
+        # 1. Coordinate-wise median of all deltas
         update_matrix = np.stack([client_updates[cid] for cid in cids], axis=0)
         median_delta = np.median(update_matrix, axis=0)
 
-        # 2. Cosine similarity and norms
+        # 2. Norms
         norms = {cid: float(np.linalg.norm(client_updates[cid])) for cid in cids}
         median_norm = float(np.median(list(norms.values()))) + 1e-8
 
-        similarities = {}
+        # 3. Head-weighted cosine similarity
+        #    blended_cos = 0.70 * head_cos + 0.30 * full_cos
+        #    head_cos operates on the FC decision subnet (label-flip manifests here strongly)
+        similarities = {}       # blended cosine (primary signal for rejection)
+        head_similarities = {}  # FC-head cosine (for transparency in UI)
+        full_similarities = {}  # full-vector cosine (for transparency in UI)
         norm_ratios = {}
         for cid in cids:
-            sim = self._cosine_sim(client_updates[cid], median_delta)
-            similarities[cid] = round(sim, 4)
+            blended, head_cos, full_cos = self._blended_cosine(client_updates[cid], median_delta)
+            similarities[cid] = blended
+            head_similarities[cid] = head_cos
+            full_similarities[cid] = full_cos
             norm_ratios[cid] = round(norms[cid] / median_norm, 4)
 
         sim_values = np.array([similarities[cid] for cid in cids])
 
-        # 3. Robust Z-score: (cos_i - median(cos)) / (1.4826 * MAD(cos) + 1e-8)
+        # 4. Robust Z-score on blended cosine values
         median_cos = float(np.median(sim_values))
         abs_deviations = np.abs(sim_values - median_cos)
         mad_cos = float(np.median(abs_deviations))
@@ -156,25 +222,25 @@ class PoisonDetector:
         anomalous_candidates = []
         for cid in cids:
             cos_i = similarities[cid]
-            # robust_z_i = (cos_i - median(cos)) / (1.4826 * MAD(cos) + 1e-8)
             z_i = (cos_i - median_cos) / robust_z_denom
             robust_z[cid] = round(float(z_i), 3)
 
-            # Rejection logic per section 4.1:
-            # Warm-up (rounds 1 and 2): reject if cos_i < -0.05 (distinguishes true attack from random init noise)
-            # Round 3 onward: reject if cos_i < 0.0 OR (cos_i < 0.20 and robust_z_i < -2.5 and cos_i < median(cos) - 0.15)
+            # Rejection logic:
+            # Warm-up (rounds 1-2): reject only if blended_cos < -0.10
+            #   (label-flip attacker training for 3 epochs will already be well below this;
+            #    random init noise in round 1 keeps honest clients well above -0.10)
+            # Round 3 onward: reject if blended_cos < 0.0
+            #   (honest non-IID clients always have positive head cosine;
+            #    label-flipping attackers have inverted FC head → blended goes negative)
             if round_no <= self.warmup_rounds:
-                would_reject = bool(cos_i < -0.05)
+                would_reject = bool(cos_i < -0.10)
             else:
-                would_reject = bool(
-                    (cos_i < 0.0)
-                    or (cos_i < 0.20 and z_i < -abs(self.mad_threshold) and cos_i < (median_cos - 0.15))
-                )
+                would_reject = bool(cos_i < 0.0)
 
             if would_reject:
                 anomalous_candidates.append(cid)
 
-        # Cap: Reject at most 3 hospitals per round (lowest cos first)
+        # Safety cap: reject at most 3 hospitals per round (lowest blended cosine first)
         anomalous_candidates.sort(key=lambda c: similarities[c])
         round_rejected_set = set(anomalous_candidates[:3])
 
@@ -252,7 +318,9 @@ class PoisonDetector:
                 "client_id": cid,
                 "status": status,
                 "reason_text": reason_text,
-                "cosine_similarity": cos_i,
+                "cosine_similarity": cos_i,           # blended (primary signal)
+                "head_cosine": head_similarities[cid], # FC head only (most diagnostic)
+                "full_cosine": full_similarities[cid], # full vector
                 "robust_z": z_i,
                 "norm_ratio": n_ratio,
                 "trust_before": trust_before,
