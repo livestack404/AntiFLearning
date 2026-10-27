@@ -163,7 +163,7 @@ class FLOrchestrator:
                         is_malicious=is_mal,
                         attack_type=run_config.attack_type,
                     )
-                    norm = float(torch.norm(delta).item())
+                    norm = float(np.linalg.norm(delta))
                     client_updates[cid] = delta
                     sample_counts[cid] = count
                     update_hashes[cid] = compute_update_hash(delta)
