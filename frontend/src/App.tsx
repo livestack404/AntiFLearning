@@ -494,7 +494,7 @@ export const App: React.FC = () => {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <strong style={{ color: 'var(--text-secondary)' }}>AntiFLearning Architecture</strong>
-          <span>&bull;</span>
+          <span>•</span>
           <span>Zero-Trust Poisoning Defense & Blockchain Audit Logger for Healthcare</span>
         </div>
         <div>

@@ -195,7 +195,7 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
           <span style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--cyan-bright)' }}>
-            Round {currentRound > 0 ? currentRound : 1} &mdash; Step {activeStep} of 6
+            Round {currentRound > 0 ? currentRound : 1} — Step {activeStep} of 6
           </span>
           <span style={{ fontSize: '0.825rem', color: '#ffffff', fontWeight: 500 }}>
             {stepText}

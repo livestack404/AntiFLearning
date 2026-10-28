@@ -44,7 +44,7 @@ export const RoundLog: React.FC<RoundLogProps> = ({ logs, currentRound }) => {
           </h3>
         </div>
         <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-          Monospace execution trace &bull; Real measured metrics
+          Monospace execution trace • Real measured metrics
         </span>
       </div>
 
