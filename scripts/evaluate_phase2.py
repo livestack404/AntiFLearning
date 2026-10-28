@@ -1,5 +1,12 @@
 """Phase 2 Detector Benchmark Evaluation script across seeds (42, 43, 44), 20 rounds,
 clean, attacked, defended scenarios for both label_flip and sign_flip.
+
+Reproducibility note:
+- Uses `config.MAD_THRESHOLD` (4.50) from the central configuration (`backend.app.config`)
+  matching the tuned live simulation and production training settings.
+- If historical Phase 2 benchmark tables in published papers used the earlier hardcoded
+  value (2.50), that represents a prior experimental protocol; running this script evaluates
+  under the updated tuned production threshold.
 """
 
 import math
@@ -38,7 +45,12 @@ def run_simulation(
     np.random.seed(seed)
     
     server = FLServer(conv1_channels=16, conv2_channels=32)
-    detector = PoisonDetector(mad_threshold=2.50, persistence_k=2, persistence_m=3, warmup_rounds=2)
+    detector = PoisonDetector(
+        mad_threshold=config.MAD_THRESHOLD,
+        persistence_k=2,
+        persistence_m=3,
+        warmup_rounds=2,
+    )
     
     client_loaders, _ = partition_data(num_clients=8, batch_size=32, seed=seed, size=28)
     clients = [HospitalClient(cid, client_loaders[cid]) for cid in range(8)]
@@ -72,13 +84,13 @@ def run_simulation(
             
         verdicts, trusted_ids = detector.evaluate_round(r, client_updates, detection_enabled=detection_enabled)
         
-        num_excluded = sum(1 for cid in range(8) if verdicts[cid]["is_excluded"])
+        num_excluded = sum(1 for cid in range(8) if verdicts[cid].get("status") == "Excluded")
         if num_excluded > max_excluded_in_any_round:
             max_excluded_in_any_round = num_excluded
             
         for cid in range(8):
             is_mal = (cid in malicious_ids)
-            is_excl = verdicts[cid]["is_excluded"]
+            is_excl = (verdicts[cid].get("status") == "Excluded")
             
             if is_mal:
                 total_malicious_checks += 1

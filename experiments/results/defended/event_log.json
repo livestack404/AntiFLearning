@@ -1,657 +1,14 @@
 [
   {
-    "type": "round_started",
-    "data": {
-      "round": 1,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 1,
-      "model_version": 0,
-      "message": "Server sends global model v0 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.5997,
-      "update_norm": 1.6698,
-      "message": "H1 trained on 559 images, local loss 0.5997"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.636,
-      "update_norm": 1.4287,
-      "message": "H2 trained on 342 images, local loss 0.6360"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.6022,
-      "update_norm": 1.7022,
-      "message": "H3 trained on 547 images, local loss 0.6022"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.3359,
-      "update_norm": 2.1735,
-      "message": "H4 trained on 921 images, local loss 0.3359"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.5969,
-      "update_norm": 2.1562,
-      "message": "H5 trained on 797 images, local loss 0.5969"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.5639,
-      "update_norm": 2.0855,
-      "message": "H6 trained on 590 images, local loss 0.5639"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.5088,
-      "update_norm": 2.3417,
-      "message": "H7 trained on 658 images, local loss 0.5088"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 1,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 0.6476,
-      "update_norm": 1.2099,
-      "message": "H8 trained on 294 images, local loss 0.6476"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.5997,
-      "update_norm": 1.6698,
-      "message": "H1 sent update (size 1.6698)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.636,
-      "update_norm": 1.4287,
-      "message": "H2 sent update (size 1.4287)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.6022,
-      "update_norm": 1.7022,
-      "message": "H3 sent update (size 1.7022)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.3359,
-      "update_norm": 2.1735,
-      "message": "H4 sent update (size 2.1735)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.5969,
-      "update_norm": 2.1562,
-      "message": "H5 sent update (size 2.1562)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.5639,
-      "update_norm": 2.0855,
-      "message": "H6 sent update (size 2.0855)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.5088,
-      "update_norm": 2.3417,
-      "message": "H7 sent update (size 2.3417)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 1,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 0.6476,
-      "update_norm": 1.2099,
-      "message": "H8 sent update (size 1.2099)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 1,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.599,
-          "head_cosine": 0.5986,
-          "full_cosine": 0.6,
-          "robust_z": -0.981,
-          "norm_ratio": 0.8817,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "39036b2331e9f5cf29164eb343e9258c7d5adaddbb5c22434aa0dd365bb5af98"
-        },
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7177,
-          "head_cosine": 0.7178,
-          "full_cosine": 0.7177,
-          "robust_z": 0.368,
-          "norm_ratio": 0.7544,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "00013485b59fb9c17cca3972045bcd4582b3c45cf4068f4b95e7b4f05fc44aa0"
-        },
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6863,
-          "head_cosine": 0.6858,
-          "full_cosine": 0.6872,
-          "robust_z": 0.011,
-          "norm_ratio": 0.8988,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "caa32fb7c08cce6c9107e60cfc86096c94ab4cd1751314c6a7a9e09abc024323"
-        },
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Rejected",
-          "reason_text": "Update pointed opposite to the group (similarity -0.27).",
-          "cosine_similarity": -0.2709,
-          "head_cosine": -0.2891,
-          "full_cosine": -0.2284,
-          "robust_z": -10.867,
-          "norm_ratio": 1.1476,
-          "trust_before": 100,
-          "trust_after": 70,
-          "update_hash": "024dda4451f3e850d4a1c421ed6f82f54f5e79cd26c952cc05cfbaa0bd60329e"
-        },
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7799,
-          "head_cosine": 0.7787,
-          "full_cosine": 0.7828,
-          "robust_z": 1.075,
-          "norm_ratio": 1.1385,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "21578f8f3f6bc62973df329cf404b5c43d19601ef3170ba1e6add7db40829254"
-        },
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6896,
-          "head_cosine": 0.6884,
-          "full_cosine": 0.6923,
-          "robust_z": 0.048,
-          "norm_ratio": 1.1012,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9b22faf70f6beff2ba22ba26293eaeaff7086bac3c75759b299f85ae6ba5d677"
-        },
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6844,
-          "head_cosine": 0.6831,
-          "full_cosine": 0.6874,
-          "robust_z": -0.011,
-          "norm_ratio": 1.2365,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "d6a7c99919724b9af5435649a5eb50e247923c429512c0d41bbd80354555c82b"
-        },
-        {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Rejected",
-          "reason_text": "Update pointed opposite to the group (similarity -0.39).",
-          "cosine_similarity": -0.3938,
-          "head_cosine": -0.4077,
-          "full_cosine": -0.3613,
-          "robust_z": -12.264,
-          "norm_ratio": 0.6388,
-          "trust_before": 100,
-          "trust_after": 70,
-          "update_hash": "2becfb25ea57bb7d6e2b9bdf7468161d2559ede2b986903d5a7fe0ab3cdcdc90"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.599,
-          "head_cosine": 0.5986,
-          "full_cosine": 0.6,
-          "robust_z": -0.981,
-          "norm_ratio": 0.8817,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "39036b2331e9f5cf29164eb343e9258c7d5adaddbb5c22434aa0dd365bb5af98"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7177,
-          "head_cosine": 0.7178,
-          "full_cosine": 0.7177,
-          "robust_z": 0.368,
-          "norm_ratio": 0.7544,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "00013485b59fb9c17cca3972045bcd4582b3c45cf4068f4b95e7b4f05fc44aa0"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6863,
-          "head_cosine": 0.6858,
-          "full_cosine": 0.6872,
-          "robust_z": 0.011,
-          "norm_ratio": 0.8988,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "caa32fb7c08cce6c9107e60cfc86096c94ab4cd1751314c6a7a9e09abc024323"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Rejected",
-          "reason_text": "Update pointed opposite to the group (similarity -0.27).",
-          "cosine_similarity": -0.2709,
-          "head_cosine": -0.2891,
-          "full_cosine": -0.2284,
-          "robust_z": -10.867,
-          "norm_ratio": 1.1476,
-          "trust_before": 100,
-          "trust_after": 70,
-          "update_hash": "024dda4451f3e850d4a1c421ed6f82f54f5e79cd26c952cc05cfbaa0bd60329e"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7799,
-          "head_cosine": 0.7787,
-          "full_cosine": 0.7828,
-          "robust_z": 1.075,
-          "norm_ratio": 1.1385,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "21578f8f3f6bc62973df329cf404b5c43d19601ef3170ba1e6add7db40829254"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6896,
-          "head_cosine": 0.6884,
-          "full_cosine": 0.6923,
-          "robust_z": 0.048,
-          "norm_ratio": 1.1012,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9b22faf70f6beff2ba22ba26293eaeaff7086bac3c75759b299f85ae6ba5d677"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6844,
-          "head_cosine": 0.6831,
-          "full_cosine": 0.6874,
-          "robust_z": -0.011,
-          "norm_ratio": 1.2365,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "d6a7c99919724b9af5435649a5eb50e247923c429512c0d41bbd80354555c82b"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 1,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Rejected",
-          "reason_text": "Update pointed opposite to the group (similarity -0.39).",
-          "cosine_similarity": -0.3938,
-          "head_cosine": -0.4077,
-          "full_cosine": -0.3613,
-          "robust_z": -12.264,
-          "norm_ratio": 0.6388,
-          "trust_before": 100,
-          "trust_after": 70,
-          "update_hash": "2becfb25ea57bb7d6e2b9bdf7468161d2559ede2b986903d5a7fe0ab3cdcdc90"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 1,
-      "model_version": 1,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.855,
-      "loss": 0.5595,
-      "metrics": {
-        "loss": 0.5595,
-        "accuracy": 0.855,
-        "balanced_accuracy": 0.7258,
-        "precision": 0.841,
-        "recall": 0.9923,
-        "specificity": 0.4593,
-        "auc": 0.9289,
-        "f1": 0.9104,
-        "confusion_matrix": [
-          [
-            62,
-            73
-          ],
-          [
-            3,
-            386
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 1,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 1,
-      "record": {
-        "round": 1,
-        "accuracy": 0.855,
-        "loss": 0.5595,
-        "precision": 0.841,
-        "recall": 0.9923,
-        "f1": 0.9104,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 36.12
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 2,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 2,
-      "model_version": 1,
-      "message": "Server sends global model v1 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.3428,
-      "update_norm": 1.3862,
-      "message": "H1 trained on 559 images, local loss 0.3428"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.4349,
-      "update_norm": 1.1491,
-      "message": "H2 trained on 342 images, local loss 0.4349"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.3936,
-      "update_norm": 1.5215,
-      "message": "H3 trained on 547 images, local loss 0.3936"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.4238,
-      "update_norm": 2.2668,
-      "message": "H4 trained on 921 images, local loss 0.4238"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.3667,
-      "update_norm": 1.8085,
-      "message": "H5 trained on 797 images, local loss 0.3667"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.4059,
-      "update_norm": 1.5927,
-      "message": "H6 trained on 590 images, local loss 0.4059"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.3972,
-      "update_norm": 1.72,
-      "message": "H7 trained on 658 images, local loss 0.3972"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 2,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 0.7503,
-      "update_norm": 1.4314,
-      "message": "H8 trained on 294 images, local loss 0.7503"
-    }
-  },
-  {
     "type": "client_update_sent",
     "data": {
       "round": 2,
       "client_id": 0,
       "hospital_id": "H1",
       "n_samples": 559,
-      "local_loss": 0.3428,
-      "update_norm": 1.3862,
-      "message": "H1 sent update (size 1.3862)"
+      "local_loss": 0.3251,
+      "update_norm": 1.5433,
+      "message": "H1 sent update (size 1.5433)"
     }
   },
   {
@@ -661,9 +18,9 @@
       "client_id": 1,
       "hospital_id": "H2",
       "n_samples": 342,
-      "local_loss": 0.4349,
-      "update_norm": 1.1491,
-      "message": "H2 sent update (size 1.1491)"
+      "local_loss": 0.4339,
+      "update_norm": 1.1055,
+      "message": "H2 sent update (size 1.1055)"
     }
   },
   {
@@ -673,9 +30,9 @@
       "client_id": 2,
       "hospital_id": "H3",
       "n_samples": 547,
-      "local_loss": 0.3936,
-      "update_norm": 1.5215,
-      "message": "H3 sent update (size 1.5215)"
+      "local_loss": 0.3671,
+      "update_norm": 1.4462,
+      "message": "H3 sent update (size 1.4462)"
     }
   },
   {
@@ -685,9 +42,9 @@
       "client_id": 3,
       "hospital_id": "H4",
       "n_samples": 921,
-      "local_loss": 0.4238,
-      "update_norm": 2.2668,
-      "message": "H4 sent update (size 2.2668)"
+      "local_loss": 0.3485,
+      "update_norm": 1.9359,
+      "message": "H4 sent update (size 1.9359)"
     }
   },
   {
@@ -697,9 +54,9 @@
       "client_id": 4,
       "hospital_id": "H5",
       "n_samples": 797,
-      "local_loss": 0.3667,
-      "update_norm": 1.8085,
-      "message": "H5 sent update (size 1.8085)"
+      "local_loss": 0.3796,
+      "update_norm": 1.6459,
+      "message": "H5 sent update (size 1.6459)"
     }
   },
   {
@@ -709,9 +66,9 @@
       "client_id": 5,
       "hospital_id": "H6",
       "n_samples": 590,
-      "local_loss": 0.4059,
-      "update_norm": 1.5927,
-      "message": "H6 sent update (size 1.5927)"
+      "local_loss": 0.3476,
+      "update_norm": 1.6552,
+      "message": "H6 sent update (size 1.6552)"
     }
   },
   {
@@ -721,9 +78,9 @@
       "client_id": 6,
       "hospital_id": "H7",
       "n_samples": 658,
-      "local_loss": 0.3972,
-      "update_norm": 1.72,
-      "message": "H7 sent update (size 1.7200)"
+      "local_loss": 0.3356,
+      "update_norm": 1.7738,
+      "message": "H7 sent update (size 1.7738)"
     }
   },
   {
@@ -733,9 +90,105 @@
       "client_id": 7,
       "hospital_id": "H8",
       "n_samples": 294,
-      "local_loss": 0.7503,
-      "update_norm": 1.4314,
-      "message": "H8 sent update (size 1.4314)"
+      "local_loss": 0.4193,
+      "update_norm": 1.2127,
+      "message": "H8 sent update (size 1.2127)"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 0,
+      "hospital_id": "H1",
+      "n_samples": 559,
+      "local_loss": 0.1936,
+      "update_norm": 1.0733,
+      "message": "H1 trained on 559 images, local loss 0.1936"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 1,
+      "hospital_id": "H2",
+      "n_samples": 342,
+      "local_loss": 0.2289,
+      "update_norm": 0.8287,
+      "message": "H2 trained on 342 images, local loss 0.2289"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 2,
+      "hospital_id": "H3",
+      "n_samples": 547,
+      "local_loss": 0.2535,
+      "update_norm": 0.9762,
+      "message": "H3 trained on 547 images, local loss 0.2535"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 3,
+      "hospital_id": "H4",
+      "n_samples": 921,
+      "local_loss": 0.5442,
+      "update_norm": 2.514,
+      "message": "H4 trained on 921 images, local loss 0.5442"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 4,
+      "hospital_id": "H5",
+      "n_samples": 797,
+      "local_loss": 0.2662,
+      "update_norm": 1.2353,
+      "message": "H5 trained on 797 images, local loss 0.2662"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 5,
+      "hospital_id": "H6",
+      "n_samples": 590,
+      "local_loss": 0.2435,
+      "update_norm": 1.1037,
+      "message": "H6 trained on 590 images, local loss 0.2435"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 6,
+      "hospital_id": "H7",
+      "n_samples": 658,
+      "local_loss": 0.2357,
+      "update_norm": 1.0352,
+      "message": "H7 trained on 658 images, local loss 0.2357"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 7,
+      "hospital_id": "H8",
+      "n_samples": 294,
+      "local_loss": 1.4466,
+      "update_norm": 1.4988,
+      "message": "H8 trained on 294 images, local loss 1.4466"
     }
   },
   {
@@ -744,264 +197,360 @@
       "round": 2,
       "records": [
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H1",
           "client_id": 0,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8885,
-          "head_cosine": 0.8873,
-          "full_cosine": 0.8912,
-          "robust_z": 0.831,
-          "norm_ratio": 0.8903,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.8514,
+          "head_cosine": 0.8485,
+          "full_cosine": 0.8581,
+          "robust_z": -1.358,
+          "norm_ratio": 0.9679,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "4d84ab3a719ae8f7c6293f86ec4df8c3ab01c2aac4629de3fff2e0d9ac8a93bb"
+          "update_hash": "132a4a4f13fecc85201711874f42d5dfe70ebc39b2d5e319beeaa086300c283b"
         },
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H2",
           "client_id": 1,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8831,
-          "head_cosine": 0.8826,
-          "full_cosine": 0.8843,
-          "robust_z": 0.518,
-          "norm_ratio": 0.738,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.8871,
+          "head_cosine": 0.887,
+          "full_cosine": 0.8875,
+          "robust_z": -0.251,
+          "norm_ratio": 0.6933,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "b1ff4edf40627637e9ef551084cf8ae8209cdbaddd202b3bd5eb9e2fb2c71471"
+          "update_hash": "038e962386702ab9eafe4455a033c172eae8e855a5152081315870d6c92554a7"
         },
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H3",
           "client_id": 2,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8801,
-          "head_cosine": 0.8787,
-          "full_cosine": 0.8835,
-          "robust_z": 0.344,
-          "norm_ratio": 0.9771,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9228,
+          "head_cosine": 0.9224,
+          "full_cosine": 0.9237,
+          "robust_z": 0.856,
+          "norm_ratio": 0.9069,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "e68831b88dc1420f38b5cd6a7ea55de8fb5a092cfd8182cf13abfb46b27ead00"
+          "update_hash": "c36987b188c22ae502f12816b683e2f0f3782304d2cc42016a9a91c6c210680d"
         },
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H4",
           "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are no longer used.",
-          "cosine_similarity": -0.132,
-          "head_cosine": -0.1339,
-          "full_cosine": -0.1276,
-          "robust_z": -58.252,
-          "norm_ratio": 1.4558,
-          "trust_before": 70,
-          "trust_after": 40,
-          "update_hash": "9da8bf2d83887a3ca77687e79012f061b36e76fb6a0ef189286ba47de5855cc5"
+          "status": "Accepted",
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9033,
+          "head_cosine": 0.9024,
+          "full_cosine": 0.9054,
+          "robust_z": 0.251,
+          "norm_ratio": 1.2141,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "7689d5a56c8c7ec0d9417b1647418d3a67d980a5bd9ad0485f73599d653aad98"
         },
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H5",
           "client_id": 4,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8796,
-          "head_cosine": 0.8788,
-          "full_cosine": 0.8814,
-          "robust_z": 0.316,
-          "norm_ratio": 1.1615,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.8586,
+          "head_cosine": 0.8568,
+          "full_cosine": 0.8627,
+          "robust_z": -1.135,
+          "norm_ratio": 1.0321,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "ee0b7cba96deca4b144647fc914f11e05cf173ab69d8e829955d0b9a6d920b61"
+          "update_hash": "7483afe8bb837be5771784f6764396c508d8549f01e4185af5f7ef9faad6172c"
         },
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H6",
           "client_id": 5,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8687,
-          "head_cosine": 0.8673,
-          "full_cosine": 0.872,
-          "robust_z": -0.316,
-          "norm_ratio": 1.0229,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9111,
+          "head_cosine": 0.9107,
+          "full_cosine": 0.912,
+          "robust_z": 0.493,
+          "norm_ratio": 1.038,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "09ac3c8cbb44017dc5eebdea954eb4180483de1510908c6b1b6083e15efed8fa"
+          "update_hash": "c18ca8778cd9142e03d20a40f01883bee486e8d309d48c3ff5e087f8888e5d24"
         },
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H7",
           "client_id": 6,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8553,
-          "head_cosine": 0.8543,
-          "full_cosine": 0.8578,
-          "robust_z": -1.091,
-          "norm_ratio": 1.1047,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9049,
+          "head_cosine": 0.9037,
+          "full_cosine": 0.9077,
+          "robust_z": 0.301,
+          "norm_ratio": 1.1124,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "3c917ba22b2c1caeb6e0853166f983d55a9b285a5fabef750701cde357d66a03"
+          "update_hash": "923ddabdc22cce3061d50a770b74eeba3aa6efa2de0239765787c95c6aef919b"
         },
         {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H8",
           "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are no longer used.",
-          "cosine_similarity": -0.4145,
-          "head_cosine": -0.417,
-          "full_cosine": -0.4087,
-          "robust_z": -74.608,
-          "norm_ratio": 0.9193,
-          "trust_before": 70,
-          "trust_after": 40,
-          "update_hash": "112d194b8a449afcc12b1495b7ec71dc60f2c830373d4ba7925c8ae6f85ceca3"
+          "status": "Accepted",
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.3668,
+          "head_cosine": 0.3607,
+          "full_cosine": 0.3811,
+          "robust_z": -16.386,
+          "norm_ratio": 0.7605,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "ecd1be5eb8e57489b482d61d20fae6186a65829527275989a9c8af245601a0e6"
         }
       ],
       "records_by_client": {
         "0": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H1",
           "client_id": 0,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8885,
-          "head_cosine": 0.8873,
-          "full_cosine": 0.8912,
-          "robust_z": 0.831,
-          "norm_ratio": 0.8903,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.8514,
+          "head_cosine": 0.8485,
+          "full_cosine": 0.8581,
+          "robust_z": -1.358,
+          "norm_ratio": 0.9679,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "4d84ab3a719ae8f7c6293f86ec4df8c3ab01c2aac4629de3fff2e0d9ac8a93bb"
+          "update_hash": "132a4a4f13fecc85201711874f42d5dfe70ebc39b2d5e319beeaa086300c283b"
         },
         "1": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H2",
           "client_id": 1,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8831,
-          "head_cosine": 0.8826,
-          "full_cosine": 0.8843,
-          "robust_z": 0.518,
-          "norm_ratio": 0.738,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.8871,
+          "head_cosine": 0.887,
+          "full_cosine": 0.8875,
+          "robust_z": -0.251,
+          "norm_ratio": 0.6933,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "b1ff4edf40627637e9ef551084cf8ae8209cdbaddd202b3bd5eb9e2fb2c71471"
+          "update_hash": "038e962386702ab9eafe4455a033c172eae8e855a5152081315870d6c92554a7"
         },
         "2": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H3",
           "client_id": 2,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8801,
-          "head_cosine": 0.8787,
-          "full_cosine": 0.8835,
-          "robust_z": 0.344,
-          "norm_ratio": 0.9771,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9228,
+          "head_cosine": 0.9224,
+          "full_cosine": 0.9237,
+          "robust_z": 0.856,
+          "norm_ratio": 0.9069,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "e68831b88dc1420f38b5cd6a7ea55de8fb5a092cfd8182cf13abfb46b27ead00"
+          "update_hash": "c36987b188c22ae502f12816b683e2f0f3782304d2cc42016a9a91c6c210680d"
         },
         "3": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H4",
           "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are no longer used.",
-          "cosine_similarity": -0.132,
-          "head_cosine": -0.1339,
-          "full_cosine": -0.1276,
-          "robust_z": -58.252,
-          "norm_ratio": 1.4558,
-          "trust_before": 70,
-          "trust_after": 40,
-          "update_hash": "9da8bf2d83887a3ca77687e79012f061b36e76fb6a0ef189286ba47de5855cc5"
+          "status": "Accepted",
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9033,
+          "head_cosine": 0.9024,
+          "full_cosine": 0.9054,
+          "robust_z": 0.251,
+          "norm_ratio": 1.2141,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "7689d5a56c8c7ec0d9417b1647418d3a67d980a5bd9ad0485f73599d653aad98"
         },
         "4": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H5",
           "client_id": 4,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8796,
-          "head_cosine": 0.8788,
-          "full_cosine": 0.8814,
-          "robust_z": 0.316,
-          "norm_ratio": 1.1615,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.8586,
+          "head_cosine": 0.8568,
+          "full_cosine": 0.8627,
+          "robust_z": -1.135,
+          "norm_ratio": 1.0321,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "ee0b7cba96deca4b144647fc914f11e05cf173ab69d8e829955d0b9a6d920b61"
+          "update_hash": "7483afe8bb837be5771784f6764396c508d8549f01e4185af5f7ef9faad6172c"
         },
         "5": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H6",
           "client_id": 5,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8687,
-          "head_cosine": 0.8673,
-          "full_cosine": 0.872,
-          "robust_z": -0.316,
-          "norm_ratio": 1.0229,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9111,
+          "head_cosine": 0.9107,
+          "full_cosine": 0.912,
+          "robust_z": 0.493,
+          "norm_ratio": 1.038,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "09ac3c8cbb44017dc5eebdea954eb4180483de1510908c6b1b6083e15efed8fa"
+          "update_hash": "c18ca8778cd9142e03d20a40f01883bee486e8d309d48c3ff5e087f8888e5d24"
         },
         "6": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H7",
           "client_id": 6,
           "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.8553,
-          "head_cosine": 0.8543,
-          "full_cosine": 0.8578,
-          "robust_z": -1.091,
-          "norm_ratio": 1.1047,
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.9049,
+          "head_cosine": 0.9037,
+          "full_cosine": 0.9077,
+          "robust_z": 0.301,
+          "norm_ratio": 1.1124,
           "trust_before": 100,
           "trust_after": 100,
-          "update_hash": "3c917ba22b2c1caeb6e0853166f983d55a9b285a5fabef750701cde357d66a03"
+          "update_hash": "923ddabdc22cce3061d50a770b74eeba3aa6efa2de0239765787c95c6aef919b"
         },
         "7": {
-          "run_id": "defended",
+          "run_id": "clean",
           "round": 2,
           "hospital_id": "H8",
           "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are no longer used.",
-          "cosine_similarity": -0.4145,
-          "head_cosine": -0.417,
-          "full_cosine": -0.4087,
-          "robust_z": -74.608,
-          "norm_ratio": 0.9193,
-          "trust_before": 70,
-          "trust_after": 40,
-          "update_hash": "112d194b8a449afcc12b1495b7ec71dc60f2c830373d4ba7925c8ae6f85ceca3"
+          "status": "Accepted",
+          "reason_text": "Update consistent with group (defense disabled).",
+          "cosine_similarity": 0.3668,
+          "head_cosine": 0.3607,
+          "full_cosine": 0.3811,
+          "robust_z": -16.386,
+          "norm_ratio": 0.7605,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "ecd1be5eb8e57489b482d61d20fae6186a65829527275989a9c8af245601a0e6"
         }
       }
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 0,
+      "hospital_id": "H1",
+      "n_samples": 559,
+      "local_loss": 0.1936,
+      "update_norm": 1.0733,
+      "message": "H1 sent update (size 1.0733)"
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 1,
+      "hospital_id": "H2",
+      "n_samples": 342,
+      "local_loss": 0.2289,
+      "update_norm": 0.8287,
+      "message": "H2 sent update (size 0.8287)"
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 2,
+      "hospital_id": "H3",
+      "n_samples": 547,
+      "local_loss": 0.2535,
+      "update_norm": 0.9762,
+      "message": "H3 sent update (size 0.9762)"
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 3,
+      "hospital_id": "H4",
+      "n_samples": 921,
+      "local_loss": 0.5442,
+      "update_norm": 2.514,
+      "message": "H4 sent update (size 2.5140)"
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 4,
+      "hospital_id": "H5",
+      "n_samples": 797,
+      "local_loss": 0.2662,
+      "update_norm": 1.2353,
+      "message": "H5 sent update (size 1.2353)"
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 5,
+      "hospital_id": "H6",
+      "n_samples": 590,
+      "local_loss": 0.2435,
+      "update_norm": 1.1037,
+      "message": "H6 sent update (size 1.1037)"
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 6,
+      "hospital_id": "H7",
+      "n_samples": 658,
+      "local_loss": 0.2357,
+      "update_norm": 1.0352,
+      "message": "H7 sent update (size 1.0352)"
+    }
+  },
+  {
+    "type": "client_update_sent",
+    "data": {
+      "round": 3,
+      "client_id": 7,
+      "hospital_id": "H8",
+      "n_samples": 294,
+      "local_loss": 1.4466,
+      "update_norm": 1.4988,
+      "message": "H8 sent update (size 1.4988)"
     }
   },
   {
@@ -1010,29 +559,295 @@
       "round": 2,
       "model_version": 2,
       "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.9179,
-      "loss": 0.2569,
+      "trusted_count": 8,
+      "excluded_count": 0,
+      "accuracy": 0.8511,
+      "loss": 0.2822,
       "metrics": {
-        "loss": 0.2569,
-        "accuracy": 0.9179,
-        "balanced_accuracy": 0.9085,
-        "precision": 0.9601,
-        "recall": 0.928,
-        "specificity": 0.8889,
-        "auc": 0.97,
-        "f1": 0.9438,
+        "loss": 0.2822,
+        "accuracy": 0.8511,
+        "balanced_accuracy": 0.8877,
+        "precision": 0.9844,
+        "recall": 0.8123,
+        "specificity": 0.963,
+        "auc": 0.9704,
+        "f1": 0.8901,
         "confusion_matrix": [
           [
-            120,
-            15
+            130,
+            5
           ],
           [
-            28,
-            361
+            73,
+            316
           ]
         ]
+      }
+    }
+  },
+  {
+    "type": "detection_complete",
+    "data": {
+      "round": 3,
+      "records": [
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H1",
+          "client_id": 0,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.6465,
+          "head_cosine": 0.6452,
+          "full_cosine": 0.6496,
+          "robust_z": -0.889,
+          "norm_ratio": 0.9861,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "871c81ff5db934fc739b7a304671fe2d65423dcb71960e7bac8f4f8e4079ce42"
+        },
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H2",
+          "client_id": 1,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.7236,
+          "head_cosine": 0.7224,
+          "full_cosine": 0.7262,
+          "robust_z": 0.326,
+          "norm_ratio": 0.7613,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "4fc39ff8ebbbd469c27855abf609b77035ac2cc3e1487a89375f56a469072233"
+        },
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H3",
+          "client_id": 2,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.7334,
+          "head_cosine": 0.7319,
+          "full_cosine": 0.7369,
+          "robust_z": 0.481,
+          "norm_ratio": 0.8969,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "6aaa67aaf07a2ca5d71477bff5bde6c8fd2d22d5409ed0b9e89b025f271de354"
+        },
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H4",
+          "client_id": 3,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.0354,
+          "head_cosine": 0.0327,
+          "full_cosine": 0.0415,
+          "robust_z": -10.519,
+          "norm_ratio": 2.3096,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "62667f1f8d71f140d023669777ad111060608c897d15721648a2ae06462b2d75"
+        },
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H5",
+          "client_id": 4,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.7333,
+          "head_cosine": 0.7304,
+          "full_cosine": 0.7402,
+          "robust_z": 0.479,
+          "norm_ratio": 1.1349,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "a22369051c12355c8bba9df6889eadd7602c1dc6a5f782b738e031eebc978127"
+        },
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H6",
+          "client_id": 5,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.6822,
+          "head_cosine": 0.6796,
+          "full_cosine": 0.6884,
+          "robust_z": -0.326,
+          "norm_ratio": 1.0139,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "a92473d34adc7ed11376ff69fbb3949d1b108837b12440fbfbc18edbd270c7ef"
+        },
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H7",
+          "client_id": 6,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.758,
+          "head_cosine": 0.7571,
+          "full_cosine": 0.7603,
+          "robust_z": 0.868,
+          "norm_ratio": 0.951,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "f587f171d2209eb89ab118246c44aecfb5c5de5acd4bfda3ce5cf1da985ae1d8"
+        },
+        {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H8",
+          "client_id": 7,
+          "status": "Rejected",
+          "reason_text": "Update pointed opposite to the group (similarity -0.22).",
+          "cosine_similarity": -0.2226,
+          "head_cosine": -0.2225,
+          "full_cosine": -0.2229,
+          "robust_z": -14.585,
+          "norm_ratio": 1.3769,
+          "trust_before": 100,
+          "trust_after": 70,
+          "update_hash": "2647008cd7df8a10b45cf1a7b6d2506f7e0410a9ac9a64be80da95ee84d616c4"
+        }
+      ],
+      "records_by_client": {
+        "0": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H1",
+          "client_id": 0,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.6465,
+          "head_cosine": 0.6452,
+          "full_cosine": 0.6496,
+          "robust_z": -0.889,
+          "norm_ratio": 0.9861,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "871c81ff5db934fc739b7a304671fe2d65423dcb71960e7bac8f4f8e4079ce42"
+        },
+        "1": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H2",
+          "client_id": 1,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.7236,
+          "head_cosine": 0.7224,
+          "full_cosine": 0.7262,
+          "robust_z": 0.326,
+          "norm_ratio": 0.7613,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "4fc39ff8ebbbd469c27855abf609b77035ac2cc3e1487a89375f56a469072233"
+        },
+        "2": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H3",
+          "client_id": 2,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.7334,
+          "head_cosine": 0.7319,
+          "full_cosine": 0.7369,
+          "robust_z": 0.481,
+          "norm_ratio": 0.8969,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "6aaa67aaf07a2ca5d71477bff5bde6c8fd2d22d5409ed0b9e89b025f271de354"
+        },
+        "3": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H4",
+          "client_id": 3,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.0354,
+          "head_cosine": 0.0327,
+          "full_cosine": 0.0415,
+          "robust_z": -10.519,
+          "norm_ratio": 2.3096,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "62667f1f8d71f140d023669777ad111060608c897d15721648a2ae06462b2d75"
+        },
+        "4": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H5",
+          "client_id": 4,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.7333,
+          "head_cosine": 0.7304,
+          "full_cosine": 0.7402,
+          "robust_z": 0.479,
+          "norm_ratio": 1.1349,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "a22369051c12355c8bba9df6889eadd7602c1dc6a5f782b738e031eebc978127"
+        },
+        "5": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H6",
+          "client_id": 5,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.6822,
+          "head_cosine": 0.6796,
+          "full_cosine": 0.6884,
+          "robust_z": -0.326,
+          "norm_ratio": 1.0139,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "a92473d34adc7ed11376ff69fbb3949d1b108837b12440fbfbc18edbd270c7ef"
+        },
+        "6": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H7",
+          "client_id": 6,
+          "status": "Accepted",
+          "reason_text": "Update consistent with the group.",
+          "cosine_similarity": 0.758,
+          "head_cosine": 0.7571,
+          "full_cosine": 0.7603,
+          "robust_z": 0.868,
+          "norm_ratio": 0.951,
+          "trust_before": 100,
+          "trust_after": 100,
+          "update_hash": "f587f171d2209eb89ab118246c44aecfb5c5de5acd4bfda3ce5cf1da985ae1d8"
+        },
+        "7": {
+          "run_id": "defended",
+          "round": 3,
+          "hospital_id": "H8",
+          "client_id": 7,
+          "status": "Rejected",
+          "reason_text": "Update pointed opposite to the group (similarity -0.22).",
+          "cosine_similarity": -0.2226,
+          "head_cosine": -0.2225,
+          "full_cosine": -0.2229,
+          "robust_z": -14.585,
+          "norm_ratio": 1.3769,
+          "trust_before": 100,
+          "trust_after": 70,
+          "update_hash": "2647008cd7df8a10b45cf1a7b6d2506f7e0410a9ac9a64be80da95ee84d616c4"
+        }
       }
     }
   },
@@ -1050,488 +865,14 @@
       "round": 2,
       "record": {
         "round": 2,
-        "accuracy": 0.9179,
-        "loss": 0.2569,
-        "precision": 0.9601,
-        "recall": 0.928,
-        "f1": 0.9438,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 62.44
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 3,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 3,
-      "model_version": 2,
-      "message": "Server sends global model v2 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.2128,
-      "update_norm": 1.0658,
-      "message": "H1 trained on 559 images, local loss 0.2128"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.2453,
-      "update_norm": 0.9419,
-      "message": "H2 trained on 342 images, local loss 0.2453"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2393,
-      "update_norm": 1.1261,
-      "message": "H3 trained on 547 images, local loss 0.2393"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.5518,
-      "update_norm": 2.4354,
-      "message": "H4 trained on 921 images, local loss 0.5518"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2917,
-      "update_norm": 1.1342,
-      "message": "H5 trained on 797 images, local loss 0.2917"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2524,
-      "update_norm": 1.147,
-      "message": "H6 trained on 590 images, local loss 0.2524"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.2281,
-      "update_norm": 1.0837,
-      "message": "H7 trained on 658 images, local loss 0.2281"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 3,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.5165,
-      "update_norm": 1.3455,
-      "message": "H8 trained on 294 images, local loss 1.5165"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.2128,
-      "update_norm": 1.0658,
-      "message": "H1 sent update (size 1.0658)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.2453,
-      "update_norm": 0.9419,
-      "message": "H2 sent update (size 0.9419)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2393,
-      "update_norm": 1.1261,
-      "message": "H3 sent update (size 1.1261)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.5518,
-      "update_norm": 2.4354,
-      "message": "H4 sent update (size 2.4354)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2917,
-      "update_norm": 1.1342,
-      "message": "H5 sent update (size 1.1342)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2524,
-      "update_norm": 1.147,
-      "message": "H6 sent update (size 1.1470)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.2281,
-      "update_norm": 1.0837,
-      "message": "H7 sent update (size 1.0837)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 3,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.5165,
-      "update_norm": 1.3455,
-      "message": "H8 sent update (size 1.3455)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 3,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5759,
-          "head_cosine": 0.5706,
-          "full_cosine": 0.5881,
-          "robust_z": -0.677,
-          "norm_ratio": 0.9431,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "11513806c25bc54341dcb188cbc7db2cbfbf0c30d6bdbe291243f445097a7f7a"
-        },
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6214,
-          "head_cosine": 0.6205,
-          "full_cosine": 0.6235,
-          "robust_z": -0.211,
-          "norm_ratio": 0.8335,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "192ed3803a77e49f89cdf39aebe357aa16e9f58228f4953e74e41eeb6d069443"
-        },
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7076,
-          "head_cosine": 0.709,
-          "full_cosine": 0.7044,
-          "robust_z": 0.672,
-          "norm_ratio": 0.9964,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "1c6a4348e76894e19583eb466adfa23065c0c2b23adb36333ec7dbcd0358fc0f"
-        },
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.149,
-          "head_cosine": 0.1494,
-          "full_cosine": 0.148,
-          "robust_z": -5.05,
-          "norm_ratio": 2.155,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "2ad66de5966f27e7eb3b69bd9a504a645955c63fab035d92d5cbd567d4994ada"
-        },
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7049,
-          "head_cosine": 0.7034,
-          "full_cosine": 0.7084,
-          "robust_z": 0.644,
-          "norm_ratio": 1.0036,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "0b0432a6b03b927526cc79a050cf1e1fbd61cc92a0106a4b55b513b503e709e7"
-        },
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6626,
-          "head_cosine": 0.6597,
-          "full_cosine": 0.6694,
-          "robust_z": 0.211,
-          "norm_ratio": 1.0149,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b64920780f4207014769dab9837cd94b6cab4101ef6ef764aaf9ff3f237dda54"
-        },
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.777,
-          "head_cosine": 0.7766,
-          "full_cosine": 0.7779,
-          "robust_z": 1.383,
-          "norm_ratio": 0.9589,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "17de64f57066f7aaec0476f05489cb15de340b92d08a694de91c8919c24f0466"
-        },
-        {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": -0.2512,
-          "head_cosine": -0.2542,
-          "full_cosine": -0.2444,
-          "robust_z": -9.149,
-          "norm_ratio": 1.1905,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "9eecd0f1779ed8d289a22309aeaca20aacd63a597a3bbf595413dd5c7c0e1061"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5759,
-          "head_cosine": 0.5706,
-          "full_cosine": 0.5881,
-          "robust_z": -0.677,
-          "norm_ratio": 0.9431,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "11513806c25bc54341dcb188cbc7db2cbfbf0c30d6bdbe291243f445097a7f7a"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6214,
-          "head_cosine": 0.6205,
-          "full_cosine": 0.6235,
-          "robust_z": -0.211,
-          "norm_ratio": 0.8335,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "192ed3803a77e49f89cdf39aebe357aa16e9f58228f4953e74e41eeb6d069443"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7076,
-          "head_cosine": 0.709,
-          "full_cosine": 0.7044,
-          "robust_z": 0.672,
-          "norm_ratio": 0.9964,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "1c6a4348e76894e19583eb466adfa23065c0c2b23adb36333ec7dbcd0358fc0f"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.149,
-          "head_cosine": 0.1494,
-          "full_cosine": 0.148,
-          "robust_z": -5.05,
-          "norm_ratio": 2.155,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "2ad66de5966f27e7eb3b69bd9a504a645955c63fab035d92d5cbd567d4994ada"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.7049,
-          "head_cosine": 0.7034,
-          "full_cosine": 0.7084,
-          "robust_z": 0.644,
-          "norm_ratio": 1.0036,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "0b0432a6b03b927526cc79a050cf1e1fbd61cc92a0106a4b55b513b503e709e7"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.6626,
-          "head_cosine": 0.6597,
-          "full_cosine": 0.6694,
-          "robust_z": 0.211,
-          "norm_ratio": 1.0149,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b64920780f4207014769dab9837cd94b6cab4101ef6ef764aaf9ff3f237dda54"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.777,
-          "head_cosine": 0.7766,
-          "full_cosine": 0.7779,
-          "robust_z": 1.383,
-          "norm_ratio": 0.9589,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "17de64f57066f7aaec0476f05489cb15de340b92d08a694de91c8919c24f0466"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 3,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": -0.2512,
-          "head_cosine": -0.2542,
-          "full_cosine": -0.2444,
-          "robust_z": -9.149,
-          "norm_ratio": 1.1905,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "9eecd0f1779ed8d289a22309aeaca20aacd63a597a3bbf595413dd5c7c0e1061"
-        }
+        "accuracy": 0.8511,
+        "loss": 0.2822,
+        "precision": 0.9844,
+        "recall": 0.8123,
+        "f1": 0.8901,
+        "trusted_clients": 8,
+        "excluded_clients": 0,
+        "blockchain_ms": 15.84
       }
     }
   },
@@ -1541,30 +882,38 @@
       "round": 3,
       "model_version": 3,
       "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.8664,
-      "loss": 0.2339,
+      "trusted_count": 7,
+      "excluded_count": 1,
+      "accuracy": 0.5687,
+      "loss": 0.6083,
       "metrics": {
-        "loss": 0.2339,
-        "accuracy": 0.8664,
-        "balanced_accuracy": 0.8979,
-        "precision": 0.9848,
-        "recall": 0.8329,
-        "specificity": 0.963,
-        "auc": 0.9785,
-        "f1": 0.9025,
+        "loss": 0.6083,
+        "accuracy": 0.5687,
+        "balanced_accuracy": 0.7095,
+        "precision": 1.0,
+        "recall": 0.419,
+        "specificity": 1.0,
+        "auc": 0.973,
+        "f1": 0.5906,
         "confusion_matrix": [
           [
-            130,
-            5
+            135,
+            0
           ],
           [
-            65,
-            324
+            226,
+            163
           ]
         ]
       }
+    }
+  },
+  {
+    "type": "round_started",
+    "data": {
+      "round": 3,
+      "total_rounds": 10,
+      "scenario": "clean"
     }
   },
   {
@@ -1581,15 +930,23 @@
       "round": 3,
       "record": {
         "round": 3,
-        "accuracy": 0.8664,
-        "loss": 0.2339,
-        "precision": 0.9848,
-        "recall": 0.8329,
-        "f1": 0.9025,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 83.41
+        "accuracy": 0.5687,
+        "loss": 0.6083,
+        "precision": 1.0,
+        "recall": 0.419,
+        "f1": 0.5906,
+        "trusted_clients": 7,
+        "excluded_clients": 1,
+        "blockchain_ms": 43.08
       }
+    }
+  },
+  {
+    "type": "global_model_broadcast",
+    "data": {
+      "round": 3,
+      "model_version": 2,
+      "message": "Server sends global model v2 to H1 ... H8"
     }
   },
   {
@@ -1598,6 +955,102 @@
       "round": 4,
       "total_rounds": 10,
       "scenario": "defended"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 0,
+      "hospital_id": "H1",
+      "n_samples": 559,
+      "local_loss": 0.2477,
+      "update_norm": 0.9958,
+      "message": "H1 trained on 559 images, local loss 0.2477"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 1,
+      "hospital_id": "H2",
+      "n_samples": 342,
+      "local_loss": 0.2877,
+      "update_norm": 0.705,
+      "message": "H2 trained on 342 images, local loss 0.2877"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 2,
+      "hospital_id": "H3",
+      "n_samples": 547,
+      "local_loss": 0.2667,
+      "update_norm": 1.0113,
+      "message": "H3 trained on 547 images, local loss 0.2667"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 3,
+      "hospital_id": "H4",
+      "n_samples": 921,
+      "local_loss": 0.2458,
+      "update_norm": 1.3236,
+      "message": "H4 trained on 921 images, local loss 0.2458"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 4,
+      "hospital_id": "H5",
+      "n_samples": 797,
+      "local_loss": 0.2586,
+      "update_norm": 1.3297,
+      "message": "H5 trained on 797 images, local loss 0.2586"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 5,
+      "hospital_id": "H6",
+      "n_samples": 590,
+      "local_loss": 0.2807,
+      "update_norm": 0.9824,
+      "message": "H6 trained on 590 images, local loss 0.2807"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 6,
+      "hospital_id": "H7",
+      "n_samples": 658,
+      "local_loss": 0.2524,
+      "update_norm": 0.9569,
+      "message": "H7 trained on 658 images, local loss 0.2524"
+    }
+  },
+  {
+    "type": "client_training",
+    "data": {
+      "round": 3,
+      "client_id": 7,
+      "hospital_id": "H8",
+      "n_samples": 294,
+      "local_loss": 0.1702,
+      "update_norm": 0.7013,
+      "message": "H8 trained on 294 images, local loss 0.1702"
     }
   },
   {
@@ -1609,3704 +1062,21 @@
     }
   },
   {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1956,
-      "update_norm": 0.827,
-      "message": "H1 trained on 559 images, local loss 0.1956"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.2271,
-      "update_norm": 0.7687,
-      "message": "H2 trained on 342 images, local loss 0.2271"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2252,
-      "update_norm": 0.876,
-      "message": "H3 trained on 547 images, local loss 0.2252"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.5781,
-      "update_norm": 2.4293,
-      "message": "H4 trained on 921 images, local loss 0.5781"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2576,
-      "update_norm": 1.0431,
-      "message": "H5 trained on 797 images, local loss 0.2576"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2372,
-      "update_norm": 0.8491,
-      "message": "H6 trained on 590 images, local loss 0.2372"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.207,
-      "update_norm": 0.8028,
-      "message": "H7 trained on 658 images, local loss 0.2070"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 4,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.5648,
-      "update_norm": 1.8192,
-      "message": "H8 trained on 294 images, local loss 1.5648"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1956,
-      "update_norm": 0.827,
-      "message": "H1 sent update (size 0.8270)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.2271,
-      "update_norm": 0.7687,
-      "message": "H2 sent update (size 0.7687)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2252,
-      "update_norm": 0.876,
-      "message": "H3 sent update (size 0.8760)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.5781,
-      "update_norm": 2.4293,
-      "message": "H4 sent update (size 2.4293)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2576,
-      "update_norm": 1.0431,
-      "message": "H5 sent update (size 1.0431)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2372,
-      "update_norm": 0.8491,
-      "message": "H6 sent update (size 0.8491)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.207,
-      "update_norm": 0.8028,
-      "message": "H7 sent update (size 0.8028)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 4,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.5648,
-      "update_norm": 1.8192,
-      "message": "H8 sent update (size 1.8192)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 4,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5281,
-          "head_cosine": 0.5297,
-          "full_cosine": 0.5242,
-          "robust_z": -0.137,
-          "norm_ratio": 0.9587,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "bd9b8a159e64135d6586dc7b6ffaec9b6bffa6a1697f261580c77712fabbdab1"
-        },
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4591,
-          "head_cosine": 0.4581,
-          "full_cosine": 0.4613,
-          "robust_z": -1.164,
-          "norm_ratio": 0.8912,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5c95334e37b5fd494b45b1addbc9bf38ca5978152869d0f8cc3199ad617d49ca"
-        },
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5958,
-          "head_cosine": 0.595,
-          "full_cosine": 0.5979,
-          "robust_z": 0.871,
-          "norm_ratio": 1.0156,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "d2ca4e68f24d9e18a1029b3dfdf13d6f8958aea68254f51e73e72f2c47480e65"
-        },
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": -0.0423,
-          "head_cosine": -0.0653,
-          "full_cosine": 0.0114,
-          "robust_z": -8.63,
-          "norm_ratio": 2.8163,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "19a772f0a1a6e4103a061cecd349386b15b510437b0c24fa5abfafd2ffe2a770"
-        },
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5694,
-          "head_cosine": 0.5631,
-          "full_cosine": 0.5841,
-          "robust_z": 0.478,
-          "norm_ratio": 1.2092,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "8386a86ee463ce1c3daf643d14e41e6e91601acfaa3cadaf93095a8724d282ad"
-        },
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.566,
-          "head_cosine": 0.5664,
-          "full_cosine": 0.5651,
-          "robust_z": 0.427,
-          "norm_ratio": 0.9844,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "e9cbc143313a01b5fad9bbd39c122c3b2e4b441152a6f3d95710272278da6a1f"
-        },
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5465,
-          "head_cosine": 0.5459,
-          "full_cosine": 0.5481,
-          "robust_z": 0.137,
-          "norm_ratio": 0.9307,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5ef1842418e035b9970c1d04a492e4aace4361f2e4e756a062d54290d487e562"
-        },
-        {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.1302,
-          "head_cosine": 0.1196,
-          "full_cosine": 0.1547,
-          "robust_z": -6.061,
-          "norm_ratio": 2.109,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "ef9d1384e725dfb432fadaa3252c4651aa4ca38378707d583f0c357248a639f5"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5281,
-          "head_cosine": 0.5297,
-          "full_cosine": 0.5242,
-          "robust_z": -0.137,
-          "norm_ratio": 0.9587,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "bd9b8a159e64135d6586dc7b6ffaec9b6bffa6a1697f261580c77712fabbdab1"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4591,
-          "head_cosine": 0.4581,
-          "full_cosine": 0.4613,
-          "robust_z": -1.164,
-          "norm_ratio": 0.8912,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5c95334e37b5fd494b45b1addbc9bf38ca5978152869d0f8cc3199ad617d49ca"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5958,
-          "head_cosine": 0.595,
-          "full_cosine": 0.5979,
-          "robust_z": 0.871,
-          "norm_ratio": 1.0156,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "d2ca4e68f24d9e18a1029b3dfdf13d6f8958aea68254f51e73e72f2c47480e65"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": -0.0423,
-          "head_cosine": -0.0653,
-          "full_cosine": 0.0114,
-          "robust_z": -8.63,
-          "norm_ratio": 2.8163,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "19a772f0a1a6e4103a061cecd349386b15b510437b0c24fa5abfafd2ffe2a770"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5694,
-          "head_cosine": 0.5631,
-          "full_cosine": 0.5841,
-          "robust_z": 0.478,
-          "norm_ratio": 1.2092,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "8386a86ee463ce1c3daf643d14e41e6e91601acfaa3cadaf93095a8724d282ad"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.566,
-          "head_cosine": 0.5664,
-          "full_cosine": 0.5651,
-          "robust_z": 0.427,
-          "norm_ratio": 0.9844,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "e9cbc143313a01b5fad9bbd39c122c3b2e4b441152a6f3d95710272278da6a1f"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5465,
-          "head_cosine": 0.5459,
-          "full_cosine": 0.5481,
-          "robust_z": 0.137,
-          "norm_ratio": 0.9307,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5ef1842418e035b9970c1d04a492e4aace4361f2e4e756a062d54290d487e562"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 4,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.1302,
-          "head_cosine": 0.1196,
-          "full_cosine": 0.1547,
-          "robust_z": -6.061,
-          "norm_ratio": 2.109,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "ef9d1384e725dfb432fadaa3252c4651aa4ca38378707d583f0c357248a639f5"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 4,
-      "model_version": 4,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.9332,
-      "loss": 0.1832,
-      "metrics": {
-        "loss": 0.1832,
-        "accuracy": 0.9332,
-        "balanced_accuracy": 0.9284,
-        "precision": 0.9707,
-        "recall": 0.9383,
-        "specificity": 0.9185,
-        "auc": 0.9813,
-        "f1": 0.9542,
-        "confusion_matrix": [
-          [
-            124,
-            11
-          ],
-          [
-            24,
-            365
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 4,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 4,
-      "record": {
-        "round": 4,
-        "accuracy": 0.9332,
-        "loss": 0.1832,
-        "precision": 0.9707,
-        "recall": 0.9383,
-        "f1": 0.9542,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 41.74
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 5,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 5,
-      "model_version": 4,
-      "message": "Server sends global model v4 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1797,
-      "update_norm": 1.0125,
-      "message": "H1 trained on 559 images, local loss 0.1797"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.2165,
-      "update_norm": 0.6911,
-      "message": "H2 trained on 342 images, local loss 0.2165"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2326,
-      "update_norm": 1.0226,
-      "message": "H3 trained on 547 images, local loss 0.2326"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.653,
-      "update_norm": 2.7882,
-      "message": "H4 trained on 921 images, local loss 0.6530"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2452,
-      "update_norm": 0.9985,
-      "message": "H5 trained on 797 images, local loss 0.2452"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2323,
-      "update_norm": 0.8852,
-      "message": "H6 trained on 590 images, local loss 0.2323"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.232,
-      "update_norm": 0.8256,
-      "message": "H7 trained on 658 images, local loss 0.2320"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 5,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.5494,
-      "update_norm": 1.9081,
-      "message": "H8 trained on 294 images, local loss 1.5494"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1797,
-      "update_norm": 1.0125,
-      "message": "H1 sent update (size 1.0125)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.2165,
-      "update_norm": 0.6911,
-      "message": "H2 sent update (size 0.6911)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2326,
-      "update_norm": 1.0226,
-      "message": "H3 sent update (size 1.0226)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.653,
-      "update_norm": 2.7882,
-      "message": "H4 sent update (size 2.7882)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2452,
-      "update_norm": 0.9985,
-      "message": "H5 sent update (size 0.9985)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2323,
-      "update_norm": 0.8852,
-      "message": "H6 sent update (size 0.8852)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.232,
-      "update_norm": 0.8256,
-      "message": "H7 sent update (size 0.8256)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 5,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.5494,
-      "update_norm": 1.9081,
-      "message": "H8 sent update (size 1.9081)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 5,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4834,
-          "head_cosine": 0.4863,
-          "full_cosine": 0.4765,
-          "robust_z": 0.522,
-          "norm_ratio": 1.007,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "ec84710007b26378ed9026a68403f9f308cf2aaf3ba066820986c486df500f39"
-        },
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4053,
-          "head_cosine": 0.4013,
-          "full_cosine": 0.4146,
-          "robust_z": -0.254,
-          "norm_ratio": 0.6873,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "22927540bffd63968a5ddd44d5d1dbc261b59314c2aa2f0426f2117fa484cf2a"
-        },
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3601,
-          "head_cosine": 0.3561,
-          "full_cosine": 0.3692,
-          "robust_z": -0.704,
-          "norm_ratio": 1.017,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "aa03b259aa9c4083ff0bb78d48f8554cfe0dcf7034115db5961bf08f21deb07d"
-        },
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2559,
-          "head_cosine": 0.243,
-          "full_cosine": 0.286,
-          "robust_z": -1.74,
-          "norm_ratio": 2.7729,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "0a4eaecd4478f70ef6bfc7fc662d84ec7e58ba26abbe2e01046f7c90ca04dae1"
-        },
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4565,
-          "head_cosine": 0.4544,
-          "full_cosine": 0.4616,
-          "robust_z": 0.254,
-          "norm_ratio": 0.993,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9a93ac0e8d350c0bbe33f5dd7e08e3b86a7317233c6fd766297057f3b6587f92"
-        },
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5068,
-          "head_cosine": 0.5052,
-          "full_cosine": 0.5105,
-          "robust_z": 0.755,
-          "norm_ratio": 0.8804,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "ec078609f97256dd7add88c6a886b64be6a0b8bfc18411d014f181b214f187cc"
-        },
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4958,
-          "head_cosine": 0.4871,
-          "full_cosine": 0.5161,
-          "robust_z": 0.645,
-          "norm_ratio": 0.8211,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5db05c28bfe1351c9f0cb1ceb278cb6800bf51f44a374a19fd318b7f2e1952a6"
-        },
-        {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.18,
-          "head_cosine": 0.1696,
-          "full_cosine": 0.2045,
-          "robust_z": -2.494,
-          "norm_ratio": 1.8977,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "26d7dc50b87c0e2b769f2aac6a24e54c4d64ee141c6709846019db376db6052e"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4834,
-          "head_cosine": 0.4863,
-          "full_cosine": 0.4765,
-          "robust_z": 0.522,
-          "norm_ratio": 1.007,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "ec84710007b26378ed9026a68403f9f308cf2aaf3ba066820986c486df500f39"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4053,
-          "head_cosine": 0.4013,
-          "full_cosine": 0.4146,
-          "robust_z": -0.254,
-          "norm_ratio": 0.6873,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "22927540bffd63968a5ddd44d5d1dbc261b59314c2aa2f0426f2117fa484cf2a"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3601,
-          "head_cosine": 0.3561,
-          "full_cosine": 0.3692,
-          "robust_z": -0.704,
-          "norm_ratio": 1.017,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "aa03b259aa9c4083ff0bb78d48f8554cfe0dcf7034115db5961bf08f21deb07d"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2559,
-          "head_cosine": 0.243,
-          "full_cosine": 0.286,
-          "robust_z": -1.74,
-          "norm_ratio": 2.7729,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "0a4eaecd4478f70ef6bfc7fc662d84ec7e58ba26abbe2e01046f7c90ca04dae1"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4565,
-          "head_cosine": 0.4544,
-          "full_cosine": 0.4616,
-          "robust_z": 0.254,
-          "norm_ratio": 0.993,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9a93ac0e8d350c0bbe33f5dd7e08e3b86a7317233c6fd766297057f3b6587f92"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5068,
-          "head_cosine": 0.5052,
-          "full_cosine": 0.5105,
-          "robust_z": 0.755,
-          "norm_ratio": 0.8804,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "ec078609f97256dd7add88c6a886b64be6a0b8bfc18411d014f181b214f187cc"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4958,
-          "head_cosine": 0.4871,
-          "full_cosine": 0.5161,
-          "robust_z": 0.645,
-          "norm_ratio": 0.8211,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5db05c28bfe1351c9f0cb1ceb278cb6800bf51f44a374a19fd318b7f2e1952a6"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 5,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.18,
-          "head_cosine": 0.1696,
-          "full_cosine": 0.2045,
-          "robust_z": -2.494,
-          "norm_ratio": 1.8977,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "26d7dc50b87c0e2b769f2aac6a24e54c4d64ee141c6709846019db376db6052e"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 5,
-      "model_version": 5,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.9275,
-      "loss": 0.1821,
-      "metrics": {
-        "loss": 0.1821,
-        "accuracy": 0.9275,
-        "balanced_accuracy": 0.927,
-        "precision": 0.973,
-        "recall": 0.928,
-        "specificity": 0.9259,
-        "auc": 0.9813,
-        "f1": 0.95,
-        "confusion_matrix": [
-          [
-            125,
-            10
-          ],
-          [
-            28,
-            361
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 5,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 5,
-      "record": {
-        "round": 5,
-        "accuracy": 0.9275,
-        "loss": 0.1821,
-        "precision": 0.973,
-        "recall": 0.928,
-        "f1": 0.95,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 42.46
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 6,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 6,
-      "model_version": 5,
-      "message": "Server sends global model v5 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1716,
-      "update_norm": 0.8732,
-      "message": "H1 trained on 559 images, local loss 0.1716"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1629,
-      "update_norm": 0.9125,
-      "message": "H2 trained on 342 images, local loss 0.1629"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2005,
-      "update_norm": 0.8806,
-      "message": "H3 trained on 547 images, local loss 0.2005"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.6603,
-      "update_norm": 2.9562,
-      "message": "H4 trained on 921 images, local loss 0.6603"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2265,
-      "update_norm": 1.1245,
-      "message": "H5 trained on 797 images, local loss 0.2265"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2065,
-      "update_norm": 0.9665,
-      "message": "H6 trained on 590 images, local loss 0.2065"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1669,
-      "update_norm": 1.0249,
-      "message": "H7 trained on 658 images, local loss 0.1669"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 6,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.7676,
-      "update_norm": 1.6933,
-      "message": "H8 trained on 294 images, local loss 1.7676"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1716,
-      "update_norm": 0.8732,
-      "message": "H1 sent update (size 0.8732)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1629,
-      "update_norm": 0.9125,
-      "message": "H2 sent update (size 0.9125)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.2005,
-      "update_norm": 0.8806,
-      "message": "H3 sent update (size 0.8806)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.6603,
-      "update_norm": 2.9562,
-      "message": "H4 sent update (size 2.9562)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2265,
-      "update_norm": 1.1245,
-      "message": "H5 sent update (size 1.1245)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.2065,
-      "update_norm": 0.9665,
-      "message": "H6 sent update (size 0.9665)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1669,
-      "update_norm": 1.0249,
-      "message": "H7 sent update (size 1.0249)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 6,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.7676,
-      "update_norm": 1.6933,
-      "message": "H8 sent update (size 1.6933)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 6,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3771,
-          "head_cosine": 0.3788,
-          "full_cosine": 0.3732,
-          "robust_z": -0.522,
-          "norm_ratio": 0.877,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "8709110d83231607f2cf441220873886b57114841639429889f3c55f98259059"
-        },
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4265,
-          "head_cosine": 0.4282,
-          "full_cosine": 0.4225,
-          "robust_z": 0.014,
-          "norm_ratio": 0.9165,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "1307d12e7edb654acc138c8d48a9521c67d51b42bca7abc86f3504915f275fc1"
-        },
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5014,
-          "head_cosine": 0.4999,
-          "full_cosine": 0.5047,
-          "robust_z": 0.827,
-          "norm_ratio": 0.8844,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "4b37ace4c18aabe13f98fb8eed2c5eeaae0d70168afcf1929214b327e0bf9eaa"
-        },
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2629,
-          "head_cosine": 0.2616,
-          "full_cosine": 0.2659,
-          "robust_z": -1.761,
-          "norm_ratio": 2.969,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "8f1f7da3ee5cf892cfc9cf5a2f3b346d93d294600ddb96e47d4715760c6383ff"
-        },
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4362,
-          "head_cosine": 0.432,
-          "full_cosine": 0.446,
-          "robust_z": 0.119,
-          "norm_ratio": 1.1294,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "ef6ee292e15bcf32a896ff484135564b0249c893f7abc3992cd44b7d550b5284"
-        },
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4239,
-          "head_cosine": 0.4202,
-          "full_cosine": 0.4324,
-          "robust_z": -0.014,
-          "norm_ratio": 0.9706,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "2237c02419c9058b314b63ba73e7f7cfcb8751d9b200332e30cbe53b51de5c6b"
-        },
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5218,
-          "head_cosine": 0.5253,
-          "full_cosine": 0.5137,
-          "robust_z": 1.048,
-          "norm_ratio": 1.0294,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "4ee18a64c6e69b44abc52c364c422914ff90d18667b56cd3d6d3e6c6ee7fa902"
-        },
-        {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": -0.0436,
-          "head_cosine": -0.048,
-          "full_cosine": -0.0334,
-          "robust_z": -5.088,
-          "norm_ratio": 1.7006,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "6dac2f6ee4cdec5ef841152d2d50aadd02ce6caa67c58b7660605c3447df6583"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3771,
-          "head_cosine": 0.3788,
-          "full_cosine": 0.3732,
-          "robust_z": -0.522,
-          "norm_ratio": 0.877,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "8709110d83231607f2cf441220873886b57114841639429889f3c55f98259059"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4265,
-          "head_cosine": 0.4282,
-          "full_cosine": 0.4225,
-          "robust_z": 0.014,
-          "norm_ratio": 0.9165,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "1307d12e7edb654acc138c8d48a9521c67d51b42bca7abc86f3504915f275fc1"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5014,
-          "head_cosine": 0.4999,
-          "full_cosine": 0.5047,
-          "robust_z": 0.827,
-          "norm_ratio": 0.8844,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "4b37ace4c18aabe13f98fb8eed2c5eeaae0d70168afcf1929214b327e0bf9eaa"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2629,
-          "head_cosine": 0.2616,
-          "full_cosine": 0.2659,
-          "robust_z": -1.761,
-          "norm_ratio": 2.969,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "8f1f7da3ee5cf892cfc9cf5a2f3b346d93d294600ddb96e47d4715760c6383ff"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4362,
-          "head_cosine": 0.432,
-          "full_cosine": 0.446,
-          "robust_z": 0.119,
-          "norm_ratio": 1.1294,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "ef6ee292e15bcf32a896ff484135564b0249c893f7abc3992cd44b7d550b5284"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4239,
-          "head_cosine": 0.4202,
-          "full_cosine": 0.4324,
-          "robust_z": -0.014,
-          "norm_ratio": 0.9706,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "2237c02419c9058b314b63ba73e7f7cfcb8751d9b200332e30cbe53b51de5c6b"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5218,
-          "head_cosine": 0.5253,
-          "full_cosine": 0.5137,
-          "robust_z": 1.048,
-          "norm_ratio": 1.0294,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "4ee18a64c6e69b44abc52c364c422914ff90d18667b56cd3d6d3e6c6ee7fa902"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 6,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": -0.0436,
-          "head_cosine": -0.048,
-          "full_cosine": -0.0334,
-          "robust_z": -5.088,
-          "norm_ratio": 1.7006,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "6dac2f6ee4cdec5ef841152d2d50aadd02ce6caa67c58b7660605c3447df6583"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 6,
-      "model_version": 6,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.9122,
-      "loss": 0.1779,
-      "metrics": {
-        "loss": 0.1779,
-        "accuracy": 0.9122,
-        "balanced_accuracy": 0.9239,
-        "precision": 0.9804,
-        "recall": 0.8997,
-        "specificity": 0.9481,
-        "auc": 0.9832,
-        "f1": 0.9383,
-        "confusion_matrix": [
-          [
-            128,
-            7
-          ],
-          [
-            39,
-            350
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 6,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 6,
-      "record": {
-        "round": 6,
-        "accuracy": 0.9122,
-        "loss": 0.1779,
-        "precision": 0.9804,
-        "recall": 0.8997,
-        "f1": 0.9383,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 48.51
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 7,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 7,
-      "model_version": 6,
-      "message": "Server sends global model v6 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1663,
-      "update_norm": 0.8571,
-      "message": "H1 trained on 559 images, local loss 0.1663"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.172,
-      "update_norm": 0.8538,
-      "message": "H2 trained on 342 images, local loss 0.1720"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1789,
-      "update_norm": 1.0394,
-      "message": "H3 trained on 547 images, local loss 0.1789"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.717,
-      "update_norm": 2.9163,
-      "message": "H4 trained on 921 images, local loss 0.7170"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2103,
-      "update_norm": 1.0542,
-      "message": "H5 trained on 797 images, local loss 0.2103"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.1817,
-      "update_norm": 1.1286,
-      "message": "H6 trained on 590 images, local loss 0.1817"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1718,
-      "update_norm": 1.1831,
-      "message": "H7 trained on 658 images, local loss 0.1718"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 7,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.8391,
-      "update_norm": 1.9852,
-      "message": "H8 trained on 294 images, local loss 1.8391"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1663,
-      "update_norm": 0.8571,
-      "message": "H1 sent update (size 0.8571)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.172,
-      "update_norm": 0.8538,
-      "message": "H2 sent update (size 0.8538)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1789,
-      "update_norm": 1.0394,
-      "message": "H3 sent update (size 1.0394)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.717,
-      "update_norm": 2.9163,
-      "message": "H4 sent update (size 2.9163)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2103,
-      "update_norm": 1.0542,
-      "message": "H5 sent update (size 1.0542)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.1817,
-      "update_norm": 1.1286,
-      "message": "H6 sent update (size 1.1286)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1718,
-      "update_norm": 1.1831,
-      "message": "H7 sent update (size 1.1831)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 7,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.8391,
-      "update_norm": 1.9852,
-      "message": "H8 sent update (size 1.9852)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 7,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3417,
-          "head_cosine": 0.3386,
-          "full_cosine": 0.3487,
-          "robust_z": -0.125,
-          "norm_ratio": 0.7853,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5b4d3953e8c9dc940e597ecf3d2f6cbbad511417e6209b3328677f4d799745c8"
-        },
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3494,
-          "head_cosine": 0.3494,
-          "full_cosine": 0.3495,
-          "robust_z": 0.125,
-          "norm_ratio": 0.7823,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "2fd6ae6bfbc66949c5c642cbb9ba4b1bd41edb89f9ea65b7879bbad2578d2ca0"
-        },
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3546,
-          "head_cosine": 0.354,
-          "full_cosine": 0.3558,
-          "robust_z": 0.295,
-          "norm_ratio": 0.9524,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b824e8855f97c276497cc701976a0691c7840f57ec1a51d1d3daa4e5ed213dd7"
-        },
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2527,
-          "head_cosine": 0.2429,
-          "full_cosine": 0.2757,
-          "robust_z": -3.025,
-          "norm_ratio": 2.672,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "28fed4b2c6747bd722bbe6b611e80e383c46af800fa9269b6ca1b9cb3cc85445"
-        },
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4608,
-          "head_cosine": 0.4554,
-          "full_cosine": 0.4736,
-          "robust_z": 3.755,
-          "norm_ratio": 0.9659,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "e44f1dcffc84df6fb793fe4ae17a509d9b00d8bc7749d1415a15883fe0a7c1e6"
-        },
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2927,
-          "head_cosine": 0.2907,
-          "full_cosine": 0.2974,
-          "robust_z": -1.722,
-          "norm_ratio": 1.0341,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "0490ed5fd8214dd7bd30a18a998b230e2146e240d47d3909928edcc5c291ff17"
-        },
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3703,
-          "head_cosine": 0.3734,
-          "full_cosine": 0.363,
-          "robust_z": 0.806,
-          "norm_ratio": 1.084,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "cfafdd603a3a3920b0d8f3b9191213a8839997b9940169a96d33f293755cbf5d"
-        },
-        {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3289,
-          "head_cosine": 0.3237,
-          "full_cosine": 0.3409,
-          "robust_z": -0.543,
-          "norm_ratio": 1.819,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "262ffa539d201a2bed0420463a72ebbb1b434ae79a4429b105ce2f5e086ed4f9"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3417,
-          "head_cosine": 0.3386,
-          "full_cosine": 0.3487,
-          "robust_z": -0.125,
-          "norm_ratio": 0.7853,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "5b4d3953e8c9dc940e597ecf3d2f6cbbad511417e6209b3328677f4d799745c8"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3494,
-          "head_cosine": 0.3494,
-          "full_cosine": 0.3495,
-          "robust_z": 0.125,
-          "norm_ratio": 0.7823,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "2fd6ae6bfbc66949c5c642cbb9ba4b1bd41edb89f9ea65b7879bbad2578d2ca0"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3546,
-          "head_cosine": 0.354,
-          "full_cosine": 0.3558,
-          "robust_z": 0.295,
-          "norm_ratio": 0.9524,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b824e8855f97c276497cc701976a0691c7840f57ec1a51d1d3daa4e5ed213dd7"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2527,
-          "head_cosine": 0.2429,
-          "full_cosine": 0.2757,
-          "robust_z": -3.025,
-          "norm_ratio": 2.672,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "28fed4b2c6747bd722bbe6b611e80e383c46af800fa9269b6ca1b9cb3cc85445"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4608,
-          "head_cosine": 0.4554,
-          "full_cosine": 0.4736,
-          "robust_z": 3.755,
-          "norm_ratio": 0.9659,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "e44f1dcffc84df6fb793fe4ae17a509d9b00d8bc7749d1415a15883fe0a7c1e6"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2927,
-          "head_cosine": 0.2907,
-          "full_cosine": 0.2974,
-          "robust_z": -1.722,
-          "norm_ratio": 1.0341,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "0490ed5fd8214dd7bd30a18a998b230e2146e240d47d3909928edcc5c291ff17"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3703,
-          "head_cosine": 0.3734,
-          "full_cosine": 0.363,
-          "robust_z": 0.806,
-          "norm_ratio": 1.084,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "cfafdd603a3a3920b0d8f3b9191213a8839997b9940169a96d33f293755cbf5d"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 7,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3289,
-          "head_cosine": 0.3237,
-          "full_cosine": 0.3409,
-          "robust_z": -0.543,
-          "norm_ratio": 1.819,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "262ffa539d201a2bed0420463a72ebbb1b434ae79a4429b105ce2f5e086ed4f9"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 7,
-      "model_version": 7,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.9389,
-      "loss": 0.1612,
-      "metrics": {
-        "loss": 0.1612,
-        "accuracy": 0.9389,
-        "balanced_accuracy": 0.9347,
-        "precision": 0.9735,
-        "recall": 0.9434,
-        "specificity": 0.9259,
-        "auc": 0.9843,
-        "f1": 0.9582,
-        "confusion_matrix": [
-          [
-            125,
-            10
-          ],
-          [
-            22,
-            367
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 7,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 7,
-      "record": {
-        "round": 7,
-        "accuracy": 0.9389,
-        "loss": 0.1612,
-        "precision": 0.9735,
-        "recall": 0.9434,
-        "f1": 0.9582,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 120.22
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 8,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 8,
-      "model_version": 7,
-      "message": "Server sends global model v7 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1601,
-      "update_norm": 0.92,
-      "message": "H1 trained on 559 images, local loss 0.1601"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1919,
-      "update_norm": 0.9246,
-      "message": "H2 trained on 342 images, local loss 0.1919"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1885,
-      "update_norm": 0.9274,
-      "message": "H3 trained on 547 images, local loss 0.1885"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.7899,
-      "update_norm": 3.0038,
-      "message": "H4 trained on 921 images, local loss 0.7899"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2266,
-      "update_norm": 1.0144,
-      "message": "H5 trained on 797 images, local loss 0.2266"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.1944,
-      "update_norm": 0.9619,
-      "message": "H6 trained on 590 images, local loss 0.1944"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.2087,
-      "update_norm": 0.9142,
-      "message": "H7 trained on 658 images, local loss 0.2087"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 8,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.7125,
-      "update_norm": 1.9511,
-      "message": "H8 trained on 294 images, local loss 1.7125"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1601,
-      "update_norm": 0.92,
-      "message": "H1 sent update (size 0.9200)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1919,
-      "update_norm": 0.9246,
-      "message": "H2 sent update (size 0.9246)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1885,
-      "update_norm": 0.9274,
-      "message": "H3 sent update (size 0.9274)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.7899,
-      "update_norm": 3.0038,
-      "message": "H4 sent update (size 3.0038)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2266,
-      "update_norm": 1.0144,
-      "message": "H5 sent update (size 1.0144)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.1944,
-      "update_norm": 0.9619,
-      "message": "H6 sent update (size 0.9619)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.2087,
-      "update_norm": 0.9142,
-      "message": "H7 sent update (size 0.9142)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 8,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.7125,
-      "update_norm": 1.9511,
-      "message": "H8 sent update (size 1.9511)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 8,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2987,
-          "head_cosine": 0.2988,
-          "full_cosine": 0.2985,
-          "robust_z": -0.588,
-          "norm_ratio": 0.9739,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "48c6ddb9ae2a7247783f9cee043ee7cc073ea760e320b6532331c0bc4865f960"
-        },
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3016,
-          "head_cosine": 0.3066,
-          "full_cosine": 0.2898,
-          "robust_z": -0.549,
-          "norm_ratio": 0.9788,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "2c815ca7f77a478f3802044f769f75914871314aeff7f8fbf350674066ef6d8f"
-        },
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3991,
-          "head_cosine": 0.3973,
-          "full_cosine": 0.4033,
-          "robust_z": 0.761,
-          "norm_ratio": 0.9818,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "58379406dcbc93f97400a094dd258e47df3fc05ac7b756d2e84af43c79d2a278"
-        },
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.276,
-          "head_cosine": 0.2619,
-          "full_cosine": 0.3088,
-          "robust_z": -0.893,
-          "norm_ratio": 3.1798,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "4e5121da12070d30ce13b069c9b1a5a4c7084c8e513c9480bb0d69cf745b140f"
-        },
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4393,
-          "head_cosine": 0.4335,
-          "full_cosine": 0.4527,
-          "robust_z": 1.301,
-          "norm_ratio": 1.0738,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "37ce0ebe1d6377b10d6db335993a8c79693b77e9d00592cb374f51dcea30d16a"
-        },
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3256,
-          "head_cosine": 0.3198,
-          "full_cosine": 0.3393,
-          "robust_z": -0.226,
-          "norm_ratio": 1.0182,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "0f8f58be6ac8b72716aac9ebacda916eae7c43c222d036e272a80e8db3309789"
-        },
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5193,
-          "head_cosine": 0.518,
-          "full_cosine": 0.5222,
-          "robust_z": 2.376,
-          "norm_ratio": 0.9677,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "aead97c4f33392aafe42836f1167c9f162916fd2b0d8f5b7ace6aeff65f10ed2"
-        },
-        {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3593,
-          "head_cosine": 0.35,
-          "full_cosine": 0.381,
-          "robust_z": 0.226,
-          "norm_ratio": 2.0654,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "b0470fd47b8908f846f37bb4e39c119c9924eb5f87c729357d8f7975e989bb60"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2987,
-          "head_cosine": 0.2988,
-          "full_cosine": 0.2985,
-          "robust_z": -0.588,
-          "norm_ratio": 0.9739,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "48c6ddb9ae2a7247783f9cee043ee7cc073ea760e320b6532331c0bc4865f960"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3016,
-          "head_cosine": 0.3066,
-          "full_cosine": 0.2898,
-          "robust_z": -0.549,
-          "norm_ratio": 0.9788,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "2c815ca7f77a478f3802044f769f75914871314aeff7f8fbf350674066ef6d8f"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3991,
-          "head_cosine": 0.3973,
-          "full_cosine": 0.4033,
-          "robust_z": 0.761,
-          "norm_ratio": 0.9818,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "58379406dcbc93f97400a094dd258e47df3fc05ac7b756d2e84af43c79d2a278"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.276,
-          "head_cosine": 0.2619,
-          "full_cosine": 0.3088,
-          "robust_z": -0.893,
-          "norm_ratio": 3.1798,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "4e5121da12070d30ce13b069c9b1a5a4c7084c8e513c9480bb0d69cf745b140f"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4393,
-          "head_cosine": 0.4335,
-          "full_cosine": 0.4527,
-          "robust_z": 1.301,
-          "norm_ratio": 1.0738,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "37ce0ebe1d6377b10d6db335993a8c79693b77e9d00592cb374f51dcea30d16a"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3256,
-          "head_cosine": 0.3198,
-          "full_cosine": 0.3393,
-          "robust_z": -0.226,
-          "norm_ratio": 1.0182,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "0f8f58be6ac8b72716aac9ebacda916eae7c43c222d036e272a80e8db3309789"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5193,
-          "head_cosine": 0.518,
-          "full_cosine": 0.5222,
-          "robust_z": 2.376,
-          "norm_ratio": 0.9677,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "aead97c4f33392aafe42836f1167c9f162916fd2b0d8f5b7ace6aeff65f10ed2"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 8,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3593,
-          "head_cosine": 0.35,
-          "full_cosine": 0.381,
-          "robust_z": 0.226,
-          "norm_ratio": 2.0654,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "b0470fd47b8908f846f37bb4e39c119c9924eb5f87c729357d8f7975e989bb60"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 8,
-      "model_version": 8,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.937,
-      "loss": 0.1653,
-      "metrics": {
-        "loss": 0.1653,
-        "accuracy": 0.937,
-        "balanced_accuracy": 0.9334,
-        "precision": 0.9734,
-        "recall": 0.9409,
-        "specificity": 0.9259,
-        "auc": 0.9843,
-        "f1": 0.9569,
-        "confusion_matrix": [
-          [
-            125,
-            10
-          ],
-          [
-            23,
-            366
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 8,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 8,
-      "record": {
-        "round": 8,
-        "accuracy": 0.937,
-        "loss": 0.1653,
-        "precision": 0.9734,
-        "recall": 0.9409,
-        "f1": 0.9569,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 86.94
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 9,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 9,
-      "model_version": 8,
-      "message": "Server sends global model v8 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1706,
-      "update_norm": 1.0509,
-      "message": "H1 trained on 559 images, local loss 0.1706"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1864,
-      "update_norm": 0.7561,
-      "message": "H2 trained on 342 images, local loss 0.1864"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1755,
-      "update_norm": 1.0681,
-      "message": "H3 trained on 547 images, local loss 0.1755"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.7673,
-      "update_norm": 3.216,
-      "message": "H4 trained on 921 images, local loss 0.7673"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2207,
-      "update_norm": 1.0973,
-      "message": "H5 trained on 797 images, local loss 0.2207"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.1714,
-      "update_norm": 1.1666,
-      "message": "H6 trained on 590 images, local loss 0.1714"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1536,
-      "update_norm": 1.1567,
-      "message": "H7 trained on 658 images, local loss 0.1536"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 9,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.6348,
-      "update_norm": 1.9823,
-      "message": "H8 trained on 294 images, local loss 1.6348"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1706,
-      "update_norm": 1.0509,
-      "message": "H1 sent update (size 1.0509)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1864,
-      "update_norm": 0.7561,
-      "message": "H2 sent update (size 0.7561)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1755,
-      "update_norm": 1.0681,
-      "message": "H3 sent update (size 1.0681)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.7673,
-      "update_norm": 3.216,
-      "message": "H4 sent update (size 3.2160)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.2207,
-      "update_norm": 1.0973,
-      "message": "H5 sent update (size 1.0973)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.1714,
-      "update_norm": 1.1666,
-      "message": "H6 sent update (size 1.1666)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1536,
-      "update_norm": 1.1567,
-      "message": "H7 sent update (size 1.1567)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 9,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.6348,
-      "update_norm": 1.9823,
-      "message": "H8 sent update (size 1.9823)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 9,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2601,
-          "head_cosine": 0.2561,
-          "full_cosine": 0.2696,
-          "robust_z": -1.333,
-          "norm_ratio": 0.9325,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "efed2cc88ea31bb5a484f624603f0e2529e3b08fca7e3f66105ec6e3bdf6ac6c"
-        },
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4217,
-          "head_cosine": 0.4237,
-          "full_cosine": 0.4171,
-          "robust_z": 0.481,
-          "norm_ratio": 0.6709,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "610b0e3d503325dd64e400445393997cc0c80f94aa6800b0eb786ad2ced19c45"
-        },
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4142,
-          "head_cosine": 0.4157,
-          "full_cosine": 0.4106,
-          "robust_z": 0.397,
-          "norm_ratio": 0.9477,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "176ec940fd1e9a20dc0eab5a91c6a6adbf2e8895c1c66035d84626c4c38bd563"
-        },
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3015,
-          "head_cosine": 0.2949,
-          "full_cosine": 0.317,
-          "robust_z": -0.868,
-          "norm_ratio": 2.8536,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "d2bfc8ad1fe2a0f5cb0968667082b693866f4756da4004feb4d5dbd3236c5a2f"
-        },
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5135,
-          "head_cosine": 0.5099,
-          "full_cosine": 0.522,
-          "robust_z": 1.511,
-          "norm_ratio": 0.9737,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b5bc4f07c29ea8787f77020368165363108557af3469196218870e33a6310366"
-        },
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3678,
-          "head_cosine": 0.366,
-          "full_cosine": 0.3722,
-          "robust_z": -0.124,
-          "norm_ratio": 1.0351,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9c33d3adbba5e411cd0cfb23659791c7f41cf3d2a215097f89e50c47cf5ed7d0"
-        },
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3899,
-          "head_cosine": 0.3934,
-          "full_cosine": 0.3818,
-          "robust_z": 0.124,
-          "norm_ratio": 1.0263,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "c13daa5730b95eedc83b12e7daf46705aa653199e48af3887cb6e20757de5064"
-        },
-        {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2014,
-          "head_cosine": 0.196,
-          "full_cosine": 0.214,
-          "robust_z": -1.991,
-          "norm_ratio": 1.7589,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "5b821afa251ac24e2f1fa082fbafda0835fafce65766297f7213a7e483040d5b"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2601,
-          "head_cosine": 0.2561,
-          "full_cosine": 0.2696,
-          "robust_z": -1.333,
-          "norm_ratio": 0.9325,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "efed2cc88ea31bb5a484f624603f0e2529e3b08fca7e3f66105ec6e3bdf6ac6c"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4217,
-          "head_cosine": 0.4237,
-          "full_cosine": 0.4171,
-          "robust_z": 0.481,
-          "norm_ratio": 0.6709,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "610b0e3d503325dd64e400445393997cc0c80f94aa6800b0eb786ad2ced19c45"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4142,
-          "head_cosine": 0.4157,
-          "full_cosine": 0.4106,
-          "robust_z": 0.397,
-          "norm_ratio": 0.9477,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "176ec940fd1e9a20dc0eab5a91c6a6adbf2e8895c1c66035d84626c4c38bd563"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3015,
-          "head_cosine": 0.2949,
-          "full_cosine": 0.317,
-          "robust_z": -0.868,
-          "norm_ratio": 2.8536,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "d2bfc8ad1fe2a0f5cb0968667082b693866f4756da4004feb4d5dbd3236c5a2f"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.5135,
-          "head_cosine": 0.5099,
-          "full_cosine": 0.522,
-          "robust_z": 1.511,
-          "norm_ratio": 0.9737,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b5bc4f07c29ea8787f77020368165363108557af3469196218870e33a6310366"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3678,
-          "head_cosine": 0.366,
-          "full_cosine": 0.3722,
-          "robust_z": -0.124,
-          "norm_ratio": 1.0351,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9c33d3adbba5e411cd0cfb23659791c7f41cf3d2a215097f89e50c47cf5ed7d0"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3899,
-          "head_cosine": 0.3934,
-          "full_cosine": 0.3818,
-          "robust_z": 0.124,
-          "norm_ratio": 1.0263,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "c13daa5730b95eedc83b12e7daf46705aa653199e48af3887cb6e20757de5064"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 9,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2014,
-          "head_cosine": 0.196,
-          "full_cosine": 0.214,
-          "robust_z": -1.991,
-          "norm_ratio": 1.7589,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "5b821afa251ac24e2f1fa082fbafda0835fafce65766297f7213a7e483040d5b"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 9,
-      "model_version": 9,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.9237,
-      "loss": 0.1617,
-      "metrics": {
-        "loss": 0.1617,
-        "accuracy": 0.9237,
-        "balanced_accuracy": 0.9317,
-        "precision": 0.9807,
-        "recall": 0.9152,
-        "specificity": 0.9481,
-        "auc": 0.9849,
-        "f1": 0.9468,
-        "confusion_matrix": [
-          [
-            128,
-            7
-          ],
-          [
-            33,
-            356
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 9,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 9,
-      "record": {
-        "round": 9,
-        "accuracy": 0.9237,
-        "loss": 0.1617,
-        "precision": 0.9807,
-        "recall": 0.9152,
-        "f1": 0.9468,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 125.02
-      }
-    }
-  },
-  {
-    "type": "round_started",
-    "data": {
-      "round": 10,
-      "total_rounds": 10,
-      "scenario": "defended"
-    }
-  },
-  {
-    "type": "global_model_broadcast",
-    "data": {
-      "round": 10,
-      "model_version": 9,
-      "message": "Server sends global model v9 to H1 ... H8"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1502,
-      "update_norm": 1.2447,
-      "message": "H1 trained on 559 images, local loss 0.1502"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1493,
-      "update_norm": 0.8001,
-      "message": "H2 trained on 342 images, local loss 0.1493"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1941,
-      "update_norm": 1.0228,
-      "message": "H3 trained on 547 images, local loss 0.1941"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.7692,
-      "update_norm": 3.2439,
-      "message": "H4 trained on 921 images, local loss 0.7692"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.1926,
-      "update_norm": 1.2224,
-      "message": "H5 trained on 797 images, local loss 0.1926"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.174,
-      "update_norm": 1.1944,
-      "message": "H6 trained on 590 images, local loss 0.1740"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1709,
-      "update_norm": 1.0507,
-      "message": "H7 trained on 658 images, local loss 0.1709"
-    }
-  },
-  {
-    "type": "client_training",
-    "data": {
-      "round": 10,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.7876,
-      "update_norm": 2.0703,
-      "message": "H8 trained on 294 images, local loss 1.7876"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 0,
-      "hospital_id": "H1",
-      "n_samples": 559,
-      "local_loss": 0.1502,
-      "update_norm": 1.2447,
-      "message": "H1 sent update (size 1.2447)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 1,
-      "hospital_id": "H2",
-      "n_samples": 342,
-      "local_loss": 0.1493,
-      "update_norm": 0.8001,
-      "message": "H2 sent update (size 0.8001)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 2,
-      "hospital_id": "H3",
-      "n_samples": 547,
-      "local_loss": 0.1941,
-      "update_norm": 1.0228,
-      "message": "H3 sent update (size 1.0228)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 3,
-      "hospital_id": "H4",
-      "n_samples": 921,
-      "local_loss": 0.7692,
-      "update_norm": 3.2439,
-      "message": "H4 sent update (size 3.2439)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 4,
-      "hospital_id": "H5",
-      "n_samples": 797,
-      "local_loss": 0.1926,
-      "update_norm": 1.2224,
-      "message": "H5 sent update (size 1.2224)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 5,
-      "hospital_id": "H6",
-      "n_samples": 590,
-      "local_loss": 0.174,
-      "update_norm": 1.1944,
-      "message": "H6 sent update (size 1.1944)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 6,
-      "hospital_id": "H7",
-      "n_samples": 658,
-      "local_loss": 0.1709,
-      "update_norm": 1.0507,
-      "message": "H7 sent update (size 1.0507)"
-    }
-  },
-  {
-    "type": "client_update_sent",
-    "data": {
-      "round": 10,
-      "client_id": 7,
-      "hospital_id": "H8",
-      "n_samples": 294,
-      "local_loss": 1.7876,
-      "update_norm": 2.0703,
-      "message": "H8 sent update (size 2.0703)"
-    }
-  },
-  {
-    "type": "detection_complete",
-    "data": {
-      "round": 10,
-      "records": [
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4002,
-          "head_cosine": 0.4019,
-          "full_cosine": 0.3964,
-          "robust_z": 1.251,
-          "norm_ratio": 1.03,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "495d20621398e9ee47935a99c286e521906936a1ce34208aca3d61b57abddbef"
-        },
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2994,
-          "head_cosine": 0.3011,
-          "full_cosine": 0.2954,
-          "robust_z": -0.728,
-          "norm_ratio": 0.6622,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "f390badf484afde059f94eefa445bf63b9b19c898e82f490e861133201e40715"
-        },
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3272,
-          "head_cosine": 0.3279,
-          "full_cosine": 0.3257,
-          "robust_z": -0.183,
-          "norm_ratio": 0.8464,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9e79e17e71ed40c9cfa02ef402195e4c2cdedb031ca428bd6ceffdf59c20ce98"
-        },
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2486,
-          "head_cosine": 0.2418,
-          "full_cosine": 0.2644,
-          "robust_z": -1.726,
-          "norm_ratio": 2.6845,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "5e76bd183afe4bbb9efd446142ebb2269bb120cb19cb9874fa83bf3fb095818c"
-        },
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3425,
-          "head_cosine": 0.3401,
-          "full_cosine": 0.3479,
-          "robust_z": 0.118,
-          "norm_ratio": 1.0116,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "d981ead3e9dc0f306aba60d0a97789ee9d31e6e78c9286224260ee21ce92fbc6"
-        },
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3681,
-          "head_cosine": 0.3676,
-          "full_cosine": 0.3692,
-          "robust_z": 0.62,
-          "norm_ratio": 0.9884,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b554593f9ea26b45af177e8a3322ee4d229b2fb5b4df7c19472b5727be279ac2"
-        },
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4601,
-          "head_cosine": 0.4609,
-          "full_cosine": 0.4582,
-          "robust_z": 2.427,
-          "norm_ratio": 0.8695,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "f62baac0f95b9dbc282becaa79c4a920abea8d8477df166f169d09229a85427e"
-        },
-        {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3305,
-          "head_cosine": 0.326,
-          "full_cosine": 0.341,
-          "robust_z": -0.118,
-          "norm_ratio": 1.7133,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "b7ca3b284f5bbd932d7919d9eed1deaa42842a2092d23a22329a8cd660cb7bce"
-        }
-      ],
-      "records_by_client": {
-        "0": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H1",
-          "client_id": 0,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4002,
-          "head_cosine": 0.4019,
-          "full_cosine": 0.3964,
-          "robust_z": 1.251,
-          "norm_ratio": 1.03,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "495d20621398e9ee47935a99c286e521906936a1ce34208aca3d61b57abddbef"
-        },
-        "1": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H2",
-          "client_id": 1,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.2994,
-          "head_cosine": 0.3011,
-          "full_cosine": 0.2954,
-          "robust_z": -0.728,
-          "norm_ratio": 0.6622,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "f390badf484afde059f94eefa445bf63b9b19c898e82f490e861133201e40715"
-        },
-        "2": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H3",
-          "client_id": 2,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3272,
-          "head_cosine": 0.3279,
-          "full_cosine": 0.3257,
-          "robust_z": -0.183,
-          "norm_ratio": 0.8464,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "9e79e17e71ed40c9cfa02ef402195e4c2cdedb031ca428bd6ceffdf59c20ce98"
-        },
-        "3": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H4",
-          "client_id": 3,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.2486,
-          "head_cosine": 0.2418,
-          "full_cosine": 0.2644,
-          "robust_z": -1.726,
-          "norm_ratio": 2.6845,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "5e76bd183afe4bbb9efd446142ebb2269bb120cb19cb9874fa83bf3fb095818c"
-        },
-        "4": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H5",
-          "client_id": 4,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3425,
-          "head_cosine": 0.3401,
-          "full_cosine": 0.3479,
-          "robust_z": 0.118,
-          "norm_ratio": 1.0116,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "d981ead3e9dc0f306aba60d0a97789ee9d31e6e78c9286224260ee21ce92fbc6"
-        },
-        "5": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H6",
-          "client_id": 5,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.3681,
-          "head_cosine": 0.3676,
-          "full_cosine": 0.3692,
-          "robust_z": 0.62,
-          "norm_ratio": 0.9884,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "b554593f9ea26b45af177e8a3322ee4d229b2fb5b4df7c19472b5727be279ac2"
-        },
-        "6": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H7",
-          "client_id": 6,
-          "status": "Accepted",
-          "reason_text": "Update consistent with the group.",
-          "cosine_similarity": 0.4601,
-          "head_cosine": 0.4609,
-          "full_cosine": 0.4582,
-          "robust_z": 2.427,
-          "norm_ratio": 0.8695,
-          "trust_before": 100,
-          "trust_after": 100,
-          "update_hash": "f62baac0f95b9dbc282becaa79c4a920abea8d8477df166f169d09229a85427e"
-        },
-        "7": {
-          "run_id": "defended",
-          "round": 10,
-          "hospital_id": "H8",
-          "client_id": 7,
-          "status": "Excluded",
-          "reason_text": "Rejected repeatedly; trust score 40 is below the limit. Updates are permanently quarantined.",
-          "cosine_similarity": 0.3305,
-          "head_cosine": 0.326,
-          "full_cosine": 0.341,
-          "robust_z": -0.118,
-          "norm_ratio": 1.7133,
-          "trust_before": 40,
-          "trust_after": 40,
-          "update_hash": "b7ca3b284f5bbd932d7919d9eed1deaa42842a2092d23a22329a8cd660cb7bce"
-        }
-      }
-    }
-  },
-  {
-    "type": "aggregation_complete",
-    "data": {
-      "round": 10,
-      "model_version": 10,
-      "status": "success",
-      "trusted_count": 6,
-      "excluded_count": 2,
-      "accuracy": 0.9313,
-      "loss": 0.1554,
-      "metrics": {
-        "loss": 0.1554,
-        "accuracy": 0.9313,
-        "balanced_accuracy": 0.9344,
-        "precision": 0.9783,
-        "recall": 0.928,
-        "specificity": 0.9407,
-        "auc": 0.9856,
-        "f1": 0.9525,
-        "confusion_matrix": [
-          [
-            127,
-            8
-          ],
-          [
-            28,
-            361
-          ]
-        ]
-      }
-    }
-  },
-  {
-    "type": "ledger_written",
-    "data": {
-      "round": 10,
-      "entries_count": 8,
-      "mode": "mock"
-    }
-  },
-  {
-    "type": "round_completed",
-    "data": {
-      "round": 10,
-      "record": {
-        "round": 10,
-        "accuracy": 0.9313,
-        "loss": 0.1554,
-        "precision": 0.9783,
-        "recall": 0.928,
-        "f1": 0.9525,
-        "trusted_clients": 6,
-        "excluded_clients": 2,
-        "blockchain_ms": 83.45
-      }
+    "type": "run_completed",
+    "data": {
+      "scenario": "clean",
+      "total_rounds": 2,
+      "final_accuracy": 0.8397,
+      "final_val_accuracy": 0.8511,
+      "best_val_accuracy": 0.8779,
+      "best_accuracy": 0.8779,
+      "detection_report": {
+        "actual_attackers": [],
+        "caught_attackers": {},
+        "honest_wrongly_flagged_or_excluded": [],
+        "honest_wrongly_flagged_count": 0
+      },
+      "elapsed_seconds": 40.45
     }
   }
 ]

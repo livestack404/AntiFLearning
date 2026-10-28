@@ -6,8 +6,11 @@ This document records the architectural assumptions, implementation interpretati
 
 ### 1. Dataset & Resolution
 - **Dataset**: MedMNIST v2 PneumoniaMNIST (pediatric chest radiographs, binary classification: Normal vs. Pneumonia).
-- **Demo Resolution**: 28x28 grayscale images are used exclusively for the 10-round interactive live simulation to ensure near-instantaneous client training in the browser.
-- **Production Models**: Higher-resolution models (64x64 and 128x128) and `scripts/train_final.py` are not yet trained; only demo resolution models currently exist.
+- **Demo Resolution**: 28x28 grayscale images are used for the 10-round interactive live simulation to ensure near-instantaneous client training in the browser.
+- **Production Models**: Higher-resolution models are fully trained and stored in `models/`:
+  - `final_model_64.pth` (validation accuracy 96.37%, test accuracy 85.10%, best round 30).
+  - `final_model_128.pth` (validation accuracy 96.56%, test accuracy 89.42%, sensitivity 97.44%, best round 9).
+  - The inference engine (`/api/predict`) dynamically selects the highest validation accuracy production model (defaulting to 128x128).
 
 ---
 
@@ -21,9 +24,12 @@ This document records the architectural assumptions, implementation interpretati
 - **Adversarial Setup**: Hospitals H4 (client 3) and H8 (client 7) act as compromised nodes in attacked and defended scenarios.
 - **Attack Vector**: Label-flipping is the primary active attack mode; sign-flipping updates are supported in configuration.
 - **Detector Consensus**:
-  - Distance metric: Coordinate-wise median delta vector as the honest consensus reference.
-  - Anomaly scoring: Median cosine similarity paired with MAD-scaled robust Z-scores (Z < -2.5).
-  - Warm-up: In rounds 1 and 2, updates are rejected only if cosine similarity is strictly negative.
+  - Distance metric: Coordinate-wise median delta vector across all clients as the honest consensus reference.
+  - Anomaly scoring: Head-Weighted Cosine Similarity combining the FC classification subnet and full parameter vector (`blended_cos = 0.70 * head_cos + 0.30 * full_cos`).
+  - Robust Z-score: MAD-scaled Z-score computed on blended cosine for telemetry and UI visualization.
+  - Rejection gating:
+    - Warm-up (rounds 1 and 2): updates rejected if `blended_cos < -0.10`.
+    - Round 3 onward: updates rejected if `blended_cos < 0.0` (honest non-IID updates maintain positive head cosine; label-flipping attackers invert head direction).
   - Cap: At most 3 updates are rejected in any single round (prioritizing lowest cosine similarity).
   - Quorum: Aggregation requires at least 3 accepted hospital updates.
   - Ground Truth Isolation: The detector receives zero information regarding client identities or adversarial status during evaluation. Ground truth is used strictly for post-run reporting.
@@ -34,7 +40,7 @@ This document records the architectural assumptions, implementation interpretati
 - **Trust Parameters**: Initialized at 100 points for all hospitals.
 - **Penalties & Rewards**: Rejection deducts 30 points; acceptance restores 10 points (capped at 100).
 - **Exclusion Threshold**: A hospital is excluded if its trust drops below 50 OR if it was rejected in 2 of the last 3 rounds.
-- **Reinstatement**: Excluded hospitals continue to be evaluated; after passing 3 consecutive rounds, they are reinstated with a trust score of 60.
+- **Permanent Quarantine (Zero-Tolerance Policy)**: Once excluded, a hospital remains permanently quarantined for the remainder of the session (`status = "Excluded"`). Its updates are evaluated for telemetry but are strictly excluded from FedAvg aggregation, and its trust score is frozen. Active reinstatement was evaluated and permanently deprecated to prevent stealth oscillation attacks.
 
 ---
 
