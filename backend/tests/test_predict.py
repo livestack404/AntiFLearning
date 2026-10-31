@@ -68,23 +68,23 @@ def test_predict_503_without_model_file(monkeypatch):
 
 def test_two_different_samples_give_different_probabilities():
     """
-    POST /api/predict/sample/sample_01  (Normal ground-truth)
+    POST /api/predict/sample/sample_03  (Normal ground-truth)
     POST /api/predict/sample/sample_02  (Pneumonia ground-truth)
 
     Both must return status='accepted' and their probability dicts must differ.
     This proves the model is not producing constant outputs.
     """
-    r1 = client.post("/api/predict/sample/sample_01")
+    r1 = client.post("/api/predict/sample/sample_03")
     r2 = client.post("/api/predict/sample/sample_02")
 
-    assert r1.status_code == 200, f"sample_01 returned {r1.status_code}"
+    assert r1.status_code == 200, f"sample_03 returned {r1.status_code}"
     assert r2.status_code == 200, f"sample_02 returned {r2.status_code}"
 
     d1 = r1.json()
     d2 = r2.json()
 
     assert d1.get("status") == "accepted", (
-        f"sample_01 was rejected: {d1.get('reason')}"
+        f"sample_03 was rejected: {d1.get('reason')}"
     )
     assert d2.get("status") == "accepted", (
         f"sample_02 was rejected: {d2.get('reason')}"

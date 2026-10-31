@@ -1,12 +1,5 @@
 [
   {
-    "id": "sample_01",
-    "filename": "sample_01.png",
-    "label": "Normal",
-    "label_idx": 0,
-    "resolution": 128
-  },
-  {
     "id": "sample_02",
     "filename": "sample_02.png",
     "label": "Pneumonia",

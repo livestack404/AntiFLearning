@@ -338,14 +338,15 @@ async def get_sample_images():
     for s in manifest:
         filename = s.get("filename", "")
         img_path = config.SAMPLES_DIR / filename
+        if not img_path.exists():
+            continue
         data_url = None
-        if img_path.exists():
-            try:
-                with open(img_path, "rb") as f:
-                    b64 = base64.b64encode(f.read()).decode("utf-8")
-                    data_url = f"data:image/png;base64,{b64}"
-            except Exception:
-                pass
+        try:
+            with open(img_path, "rb") as f:
+                b64 = base64.b64encode(f.read()).decode("utf-8")
+                data_url = f"data:image/png;base64,{b64}"
+        except Exception:
+            pass
         results.append({
             "id": s.get("id", filename),
             "filename": filename,

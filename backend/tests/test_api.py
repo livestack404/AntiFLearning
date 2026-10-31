@@ -33,7 +33,7 @@ def test_api_samples():
     response = client.get("/api/samples")
     assert response.status_code == 200
     samples = response.json()
-    assert len(samples) == 16
+    assert len(samples) == 15
     assert all("id" in s and "image_data_url" in s for s in samples)
 
 
@@ -64,7 +64,7 @@ def test_api_predict_sample_invalid():
 
 def test_smoke_trained_model_different_probabilities():
     """Verify smoke-trained model loads and two different sample images give different probabilities."""
-    res1 = client.post("/api/predict/sample/sample_01")
+    res1 = client.post("/api/predict/sample/sample_03")
     res2 = client.post("/api/predict/sample/sample_02")
     assert res1.status_code == 200
     assert res2.status_code == 200

@@ -237,7 +237,7 @@ export const PredictPage: React.FC = () => {
                 Or try a sample
               </h3>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                16 benchmark cases (128×128)
+                {samples.length > 0 ? `${samples.length} benchmark cases (128×128)` : 'Benchmark cases (128×128)'}
               </span>
             </div>
 
