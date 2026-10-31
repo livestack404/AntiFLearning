@@ -179,8 +179,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Lock size={13} />
             <span>
               {blockchainMode === 'ganache'
-                ? 'Ganache EVM (local blockchain)'
-                : 'SHA-256 Hash-Chain (mock ledger)'}
+                ? 'Ganache Blockchain'
+                : 'Local Hash-Chain'}
             </span>
           </div>
 

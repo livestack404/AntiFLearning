@@ -56,7 +56,7 @@ export const CheckTable: React.FC<CheckTableProps> = ({
             </h3>
           </div>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: '0.2rem 0 0 0' }}>
-            Multi-stage defense check: Cosine similarity thresholding, MAD relative outlier scoring, and sliding-window persistence.
+            Evaluates incoming hospital updates against group consensus to detect and exclude poisoned updates.
           </p>
         </div>
         {!isChecked && (
@@ -121,7 +121,7 @@ export const CheckTable: React.FC<CheckTableProps> = ({
                   {/* Similarity */}
                   <td style={{ padding: '0.65rem 0.75rem', fontFamily: 'var(--font-mono)' }}>
                     {isChecked ? (
-                      <span style={{ color: sim < 0.5 ? '#f87171' : 'var(--cyan-bright)', fontWeight: 600 }}>
+                      <span style={{ color: (status === 'REJECTED' || status === 'EXCLUDED' || sim < 0.0) ? '#f87171' : 'var(--cyan-bright)', fontWeight: 600 }}>
                         {sim.toFixed(4)}
                       </span>
                     ) : (

@@ -188,7 +188,7 @@ export const LedgerPage: React.FC = () => {
             <span
               className={mode === 'ganache' ? 'badge badge-green' : 'badge badge-purple'}
             >
-              {mode === 'ganache' ? 'GANACHE EVM' : 'SHA-256 HASH-CHAIN'}
+              {mode === 'ganache' ? 'Ganache Blockchain' : 'Local Hash-Chain'}
             </span>
           </div>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
@@ -324,40 +324,50 @@ export const LedgerPage: React.FC = () => {
           </p>
 
           {!verification.valid && (
-            <div
-              style={{
-                background: 'rgba(9, 14, 24, 0.9)',
-                padding: '0.9rem',
-                borderRadius: '8px',
-                border: '1px solid var(--border-subtle)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.75rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.3rem',
-              }}
-            >
-              <div>
-                Tampered Block Index:{' '}
-                <strong style={{ color: '#ef4444' }}>#{verification.tampered_index}</strong>
-              </div>
-              <div>
-                Violation Type:{' '}
-                <strong style={{ color: '#f59e0b' }}>{verification.reason}</strong>
-              </div>
-              {verification.expected_block_hash && (
-                <div>
-                  Expected Hash:{' '}
-                  <span style={{ color: '#10b981' }}>{verification.expected_block_hash}</span>
+            (() => {
+              const mismatch = verification.mismatches?.[0];
+              const tamperedIndex = mismatch?.index ?? verification.tampered_index ?? 0;
+              const reason = mismatch?.reason ?? verification.reason ?? 'Local record does not match blockchain';
+              const expectedHash = mismatch?.expected_blockchain_fingerprint ?? verification.expected_block_hash;
+              const actualHash = mismatch?.actual_local_fingerprint ?? verification.actual_block_hash;
+
+              return (
+                <div
+                  style={{
+                    background: 'rgba(9, 14, 24, 0.9)',
+                    padding: '0.9rem',
+                    borderRadius: '8px',
+                    border: '1px solid var(--border-subtle)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.75rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.3rem',
+                  }}
+                >
+                  <div>
+                    Tampered Block Index:{' '}
+                    <strong style={{ color: '#ef4444' }}>#{tamperedIndex}</strong>
+                  </div>
+                  <div>
+                    Violation Type:{' '}
+                    <strong style={{ color: '#f59e0b' }}>{reason}</strong>
+                  </div>
+                  {expectedHash && (
+                    <div style={{ wordBreak: 'break-all' }}>
+                      Expected Fingerprint:{' '}
+                      <span style={{ color: '#10b981' }}>{expectedHash}</span>
+                    </div>
+                  )}
+                  {actualHash && (
+                    <div style={{ wordBreak: 'break-all' }}>
+                      Actual Local Fingerprint:{' '}
+                      <span style={{ color: '#ef4444' }}>{actualHash}</span>
+                    </div>
+                  )}
                 </div>
-              )}
-              {verification.actual_block_hash && (
-                <div>
-                  Actual Hash:{' '}
-                  <span style={{ color: '#ef4444' }}>{verification.actual_block_hash}</span>
-                </div>
-              )}
-            </div>
+              );
+            })()
           )}
 
           {verification.valid && verification.latest_block_hash && (

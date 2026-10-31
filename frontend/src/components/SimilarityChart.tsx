@@ -4,19 +4,25 @@ import { ClientNodeState } from '../types';
 
 interface SimilarityChartProps {
   clients: ClientNodeState[];
+  currentRound?: number;
   threshold?: number;
 }
 
-export const SimilarityChart: React.FC<SimilarityChartProps> = ({ clients, threshold = 0.50 }) => {
+export const SimilarityChart: React.FC<SimilarityChartProps> = ({ clients, currentRound }) => {
+  const isWarmup = !currentRound || currentRound <= 2;
+  const realCutoff = isWarmup ? -0.10 : 0.00;
+  const cutoffLabel = isWarmup ? 'Cutoff: -0.10 (Warm-up)' : 'Cutoff: 0.00';
+  const markerPct = Math.max(0, Math.min(100, ((realCutoff + 0.5) / 1.5) * 100));
+
   return (
     <div className="glass-panel" style={{ padding: '1.25rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <div>
           <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1rem', color: 'var(--text-main)' }}>
-            Consensus Cosine Similarity & MAD Outlier Scoring
+            Model Update Similarity
           </h3>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            Coordinate-wise median direction comparison. Red threshold line at cosine = 0.50.
+            Compares each hospital's update direction against group consensus. Inverted updates are rejected.
           </p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', fontSize: '0.75rem', color: 'var(--text-muted)', flexWrap: 'wrap' }}>
@@ -25,7 +31,7 @@ export const SimilarityChart: React.FC<SimilarityChartProps> = ({ clients, thres
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
             <span style={{ width: '12px', height: '2px', background: '#ef4444' }} />
-            <span>Cutoff: {threshold.toFixed(2)}</span>
+            <span>{cutoffLabel}</span>
           </span>
         </div>
       </div>
@@ -67,11 +73,11 @@ export const SimilarityChart: React.FC<SimilarityChartProps> = ({ clients, thres
 
               {/* Progress bar with threshold guide */}
               <div style={{ position: 'relative', width: '100%', height: '14px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', overflow: 'hidden' }}>
-                {/* 0.50 Threshold Marker (mapped to ~66.6% in [-0.5..1.0]) */}
+                {/* Real Threshold Marker */}
                 <div
                   style={{
                     position: 'absolute',
-                    left: `${((0.50 + 0.5) / 1.5) * 100}%`,
+                    left: `${markerPct}%`,
                     top: 0,
                     bottom: 0,
                     width: '2px',

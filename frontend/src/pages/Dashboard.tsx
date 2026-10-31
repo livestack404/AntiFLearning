@@ -119,7 +119,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             currentRound={currentRound}
             totalRounds={totalRounds || 10}
           />
-          <SimilarityChart clients={clients} />
+          <SimilarityChart clients={clients} currentRound={currentRound} />
         </div>
       </div>
 

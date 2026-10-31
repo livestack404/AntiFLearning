@@ -139,10 +139,10 @@ export const PredictPage: React.FC = () => {
       <div>
         <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.5rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
           <Sparkles size={24} color="var(--cyan-bright)" />
-          Clinical Predict &amp; Explainability Studio (XAI)
+          Pneumonia Prediction &amp; Visual Heatmaps
         </h2>
         <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-          Powered by the defended global model with 5-stage Out-Of-Distribution (OOD) guardrails &amp; localized PyTorch Grad-CAM saliency.
+          Run chest X-ray predictions using the trained global model with 4 image sanity checks and Grad-CAM visual heatmaps.
         </p>
       </div>
 
@@ -336,14 +336,13 @@ export const PredictPage: React.FC = () => {
           <div className="glass-panel" style={{ padding: '1rem', background: 'rgba(13, 21, 37, 0.7)' }}>
             <h4 style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--cyan-bright)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <ShieldCheck size={16} />
-              5-Stage Zero-Trust OOD Guardrails
+              4 Image Sanity Guardrails
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.35rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-              <li>✓ <strong>Format &amp; Dimension:</strong> Non-corrupt decodable image with min dimension ≥ 32 px.</li>
-              <li>✓ <strong>Aspect Ratio &amp; Blank:</strong> Aspect ratio ∈ [0.4, 2.5], Pixel STD ≥ 8 (grayscale).</li>
-              <li>✓ <strong>Color Rejection:</strong> Mean channel divergence ≤ 20/255 (rejects color photos).</li>
-              <li>✓ <strong>Softmax Floor:</strong> Probability ≥ 70 % to accept; below ⟹ uncertain flag.</li>
-              <li>✓ <strong>Model Guard:</strong> 503 returned if the model checkpoint is absent.</li>
+              <li>✓ <strong>File &amp; Dimension:</strong> Valid decodable image with minimum size ≥ 32 px.</li>
+              <li>✓ <strong>Aspect Ratio:</strong> Ratio between 0.4 and 2.5 (rejects extreme panoramas or strips).</li>
+              <li>✓ <strong>Color &amp; Contrast:</strong> Grayscale variance std ≥ 8 and channel difference ≤ 20 (rejects color photos and blank images).</li>
+              <li>✓ <strong>Soft Uncertainty Floor:</strong> Soft warning banner displayed for predictions with confidence &lt; 70%.</li>
             </ul>
           </div>
         </div>

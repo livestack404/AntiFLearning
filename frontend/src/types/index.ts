@@ -62,18 +62,29 @@ export interface LedgerEntry {
   timestamp?: number;
 }
 
+export interface LedgerMismatch {
+  index: number;
+  reason: string;
+  expected_blockchain_fingerprint?: string;
+  actual_local_fingerprint?: string;
+  local_record?: any;
+}
+
 export interface VerificationResult {
   valid: boolean;
   message?: string;
   reason?: string;
+  total_entries: number;
+  mismatch_count?: number;
+  mismatches?: LedgerMismatch[];
   tampered_index?: number;
   expected_prev_hash?: string;
   actual_prev_hash?: string;
   expected_block_hash?: string;
   actual_block_hash?: string;
-  total_entries: number;
   latest_block_hash?: string;
   mode?: string;
+  mode_badge?: string;
   mode_display?: string;
 }
 

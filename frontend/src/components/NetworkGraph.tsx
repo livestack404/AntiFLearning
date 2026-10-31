@@ -111,10 +111,10 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
           <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-main)', margin: 0 }}>
-            Decentralized Healthcare Topology
+            Hospital Network Simulation
           </h3>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: '0.2rem 0 0 0' }}>
-            Real-time weight transmission, poisoning flags, and dynamic consensus filtering
+            Live model updates between the central server and 8 simulated hospital nodes
           </p>
         </div>
 
